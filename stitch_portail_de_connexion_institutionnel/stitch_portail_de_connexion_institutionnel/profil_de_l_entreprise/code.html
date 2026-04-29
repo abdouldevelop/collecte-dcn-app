@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#2e1412",
+                        "tertiary-fixed-dim": "#ebbbb7",
+                        "primary-fixed-dim": "#afcdbf",
+                        "surface-tint": "#486458",
+                        "surface-container-high": "#e0e9f2",
+                        "surface-container-low": "#ecf5fe",
+                        "secondary": "#54615b",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#bccac2",
+                        "background": "#f6faff",
+                        "primary": "#324d42",
+                        "surface-variant": "#dbe4ed",
+                        "surface-dim": "#d2dbe4",
+                        "primary-fixed": "#caeada",
+                        "surface-container-highest": "#dbe4ed",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#613f3c",
+                        "primary-container": "#496559",
+                        "surface-container": "#e6eff8",
+                        "secondary-container": "#d8e6de",
+                        "secondary-fixed": "#d8e6de",
+                        "on-background": "#141d23",
+                        "tertiary-container": "#7b5653",
+                        "on-primary-container": "#c2e1d2",
+                        "surface": "#f6faff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#141d23",
+                        "on-secondary-fixed": "#121e19",
+                        "on-primary-fixed": "#042017",
+                        "on-primary-fixed-variant": "#314c41",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c1c8c3",
+                        "on-surface-variant": "#424845",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f6faff",
+                        "on-secondary-fixed-variant": "#3d4944",
+                        "inverse-surface": "#293138",
+                        "on-tertiary-container": "#ffcfca",
+                        "on-tertiary-fixed-variant": "#603e3b",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#727974",
+                        "tertiary-fixed": "#ffdad7",
+                        "on-secondary-container": "#5a6761",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#afcdbf",
+                        "inverse-on-surface": "#e9f2fb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "stack-sm": "8px",
+                        "margin": "32px",
+                        "gutter": "24px",
+                        "container-max-width": "1280px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Public Sans"],
+                        "headline-md": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "headline-xl": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "label-md": ["Public Sans"],
+                        "body-sm": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #F8F9FA;
+        }
+        .card-shadow {
+            box-shadow: 0px 4px 20px rgba(73, 101, 89, 0.08);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen w-64 border-r fixed left-0 top-0 bg-[#F8F9FA] dark:bg-slate-950 border-[#E9ECEF] dark:border-slate-800 p-4 gap-2 z-50">
+<div class="px-2 py-6 mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="domain">domain</span>
+</div>
+<div>
+<h1 class="text-xl font-black text-[#496559] font-headline-md tracking-tight">Global Registry</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Institutional Access</p>
+</div>
+</div>
+</div>
+<nav class="flex-grow flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 font-normal hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 font-normal hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-label-md">Registry</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 font-normal hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#496559] font-semibold bg-[#496559]/10 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="domain" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="font-label-md">Company Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 font-normal hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-[#E9ECEF] dark:border-slate-800 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 font-normal hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 font-normal hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center h-16 px-6 w-full sticky top-0 z-40 bg-white dark:bg-slate-900 border-b border-[#E9ECEF] dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-4">
+<span class="md:hidden material-symbols-outlined text-slate-600">menu</span>
+<h2 class="font-headline-md text-primary tracking-tight">Profil de l'Entreprise</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex items-center bg-slate-50 dark:bg-slate-800 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-slate-400 text-lg" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-slate-600" placeholder="Rechercher..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-slate-500">
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Professional business executive portrait for user profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrkNcz4q-P9BlRcwuFG-dH9mO85PNA1vu56rgtmscAG6llT20JnC9GNHITq5AsIs9Ix2H-NxB62uRNpJO_2ef1hQc9V7wq1KieOBTq4Yz3NPjfYc_uoVjaiqOd0t9XXoQQCCvTkVslL5fRknRtZge6PKuGnJY7UiriVU-tkFU2mL3JN-Fo3GFqjyH1j7tlH_6vdu2JfdTdEzQ_CVNJlwQYbuqmVFmTR6C54MtODqvJ5gFh-_91B_MF4ozMwE8KoYlmpdCV2KK_HrT9"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-8 max-w-[1280px] mx-auto">
+<!-- Metadata Header Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 p-4 bg-surface-container-low rounded-xl border border-outline-variant/30">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 text-slate-500 font-label-sm">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span>
+<span>Date de création du compte : <span class="text-on-surface font-semibold">12 Janvier 2023</span></span>
+</div>
+<div class="flex items-center gap-2 text-slate-500 font-label-sm">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+<span>Dernier accès : <span class="text-on-surface font-semibold">Aujourd'hui à 09:45</span></span>
+</div>
+</div>
+<div class="mt-4 md:mt-0 flex gap-3">
+<button class="px-6 py-2 border-[1.5px] border-primary-container text-primary-container font-label-md rounded-full hover:bg-black/10 active:bg-black/20 transition-all">
+                        Modifier
+                    </button>
+<button class="px-6 py-2 bg-primary-container text-white font-label-md rounded-full hover:bg-black/10 transition-all shadow-sm">
+                        Enregistrer les modifications
+                    </button>
+</div>
+</div>
+<!-- Bento-style Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Card 1: Identity (Large Column) -->
+<div class="lg:col-span-7 bg-white p-margin rounded-xl border border-[#E9ECEF] card-shadow">
+<div class="flex items-center justify-between mb-stack-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="badge">badge</span>
+<h3 class="font-headline-md text-on-surface">Identité de l'Entreprise</h3>
+</div>
+<span class="px-3 py-1 bg-primary/10 text-primary-container rounded-full text-[10px] font-bold uppercase tracking-wider">Vérifié</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<div class="space-y-unit">
+<label class="font-label-md text-slate-600 block">Nom de l'entreprise</label>
+<input class="w-full bg-white border-[#DEE2E6] border px-4 py-3 rounded-xl focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 transition-all font-body-md" type="text" value="Société Générale de Données"/>
+</div>
+<div class="space-y-unit">
+<label class="font-label-md text-slate-600 block">Sigle</label>
+<input class="w-full bg-white border-[#DEE2E6] border px-4 py-3 rounded-xl focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 transition-all font-body-md" type="text" value="SGD-REG"/>
+</div>
+<div class="space-y-unit">
+<label class="font-label-md text-slate-600 block">RCCM</label>
+<input class="w-full bg-white border-[#DEE2E6] border px-4 py-3 rounded-xl focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 transition-all font-body-md" type="text" value="RC/DLA/2023/B/1452"/>
+</div>
+<div class="space-y-unit">
+<label class="font-label-md text-slate-600 block">NCC</label>
+<input class="w-full bg-white border-[#DEE2E6] border px-4 py-3 rounded-xl focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 transition-all font-body-md" type="text" value="001245789-Z"/>
+</div>
+</div>
+<div class="mt-10 p-6 bg-slate-50 rounded-xl border border-dashed border-slate-300 flex items-center gap-6">
+<div class="w-20 h-20 bg-white rounded-lg border border-slate-200 flex items-center justify-center p-2">
+<img alt="Institution Logo" class="max-w-full h-auto grayscale opacity-80" data-alt="Minimalist corporate logo design on white background with clean geometric shapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbr11iwNtuwf7A-YRB6cTuiIdwvvIYa0ijzmcfozvx6GAtrQ0odLtVxOBe9w8KyTIdBXzuOkpWu8Im0YxK-vrW6oMrZKCEs3K5_2OErthhCHrVRtvc3B_-Z02pHWhnyC1CYuJz04gcVU7w2_HR510QyZNaM6ukC1S0vwtmG2cx4nifXDF_8NbBTF3AEfVMHC8MUkK4Qo1az9YSgHS71sKFv5PZeKn542gL8OVKBi1E-WiGdeM5elVdnszKD4HRcrqCJRqU5MOiY2gZ"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-md text-on-surface">Logo de l'institution</h4>
+<p class="text-sm text-slate-500 mb-3">Format recommandé : PNG ou SVG, min. 400x400px.</p>
+<button class="text-primary-container font-semibold text-sm hover:underline">Remplacer le logo</button>
+</div>
+</div>
+</div>
+<!-- Right Column Stack -->
+<div class="lg:col-span-5 flex flex-col gap-gutter">
+<!-- Card 2: Contact -->
+<div class="bg-white p-margin rounded-xl border border-[#E9ECEF] card-shadow">
+<div class="flex items-center gap-3 mb-stack-lg">
+<span class="material-symbols-outlined text-primary-container" data-icon="contact_page">contact_page</span>
+<h3 class="font-headline-md text-on-surface">Coordonnées de Contact</h3>
+</div>
+<div class="space-y-stack-md">
+<div class="space-y-unit">
+<label class="font-label-md text-slate-600 block">Email institutionnel</label>
+<div class="relative">
+<span class="absolute left-4 top-3.5 material-symbols-outlined text-slate-400 text-lg" data-icon="mail">mail</span>
+<input class="w-full bg-white border-[#DEE2E6] border pl-11 pr-4 py-3 rounded-xl focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 transition-all font-body-md" type="email" value="contact@sgd-registry.com"/>
+</div>
+</div>
+<div class="space-y-unit">
+<label class="font-label-md text-slate-600 block">Téléphone</label>
+<div class="relative">
+<span class="absolute left-4 top-3.5 material-symbols-outlined text-slate-400 text-lg" data-icon="call">call</span>
+<input class="w-full bg-white border-[#DEE2E6] border pl-11 pr-4 py-3 rounded-xl focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 transition-all font-body-md" type="tel" value="+225 07 45 88 99 01"/>
+</div>
+</div>
+<div class="space-y-unit">
+<label class="font-label-md text-slate-600 block">Adresse du siège social</label>
+<div class="relative">
+<span class="absolute left-4 top-3.5 material-symbols-outlined text-slate-400 text-lg" data-icon="location_on">location_on</span>
+<textarea class="w-full bg-white border-[#DEE2E6] border pl-11 pr-4 py-3 rounded-xl focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 transition-all font-body-md" rows="2">Immeuble Le Plateaux, Avenue des Institutions, Abidjan, Côte d'Ivoire</textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: Security -->
+<div class="bg-white p-margin rounded-xl border border-[#E9ECEF] card-shadow">
+<div class="flex items-center gap-3 mb-stack-lg">
+<span class="material-symbols-outlined text-primary-container" data-icon="shield">shield</span>
+<h3 class="font-headline-md text-on-surface">Sécurité du Compte</h3>
+</div>
+<div class="space-y-stack-md">
+<div class="space-y-unit">
+<label class="font-label-md text-slate-600 block">Mot de passe actuel</label>
+<input class="w-full bg-white border-[#DEE2E6] border px-4 py-3 rounded-xl focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 transition-all font-body-md" type="password" value="********"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="space-y-unit">
+<label class="font-label-md text-slate-600 block">Nouveau mot de passe</label>
+<input class="w-full bg-white border-[#DEE2E6] border px-4 py-3 rounded-xl focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 transition-all font-body-md" type="password"/>
+</div>
+<div class="space-y-unit">
+<label class="font-label-md text-slate-600 block">Confirmer</label>
+<input class="w-full bg-white border-[#DEE2E6] border px-4 py-3 rounded-xl focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 transition-all font-body-md" type="password"/>
+</div>
+</div>
+<div class="pt-2">
+<p class="text-[11px] text-slate-500 flex items-start gap-2">
+<span class="material-symbols-outlined text-sm mt-0.5" data-icon="info">info</span>
+                                    Le mot de passe doit contenir au moins 12 caractères, incluant des majuscules, des chiffres et des symboles.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Section Actions (Mobile) -->
+<div class="mt-8 flex md:hidden flex-col gap-4">
+<button class="w-full py-4 bg-primary-container text-white font-label-md rounded-xl shadow-md">
+                    Enregistrer les modifications
+                </button>
+<button class="w-full py-4 border-[1.5px] border-primary-container text-primary-container font-label-md rounded-xl">
+                    Annuler
+                </button>
+</div>
+<!-- Decorative Visual (Institutional Feel) -->
+<div class="mt-12 opacity-50">
+<div class="h-1 bg-gradient-to-r from-transparent via-primary-container/20 to-transparent"></div>
+<div class="flex justify-center mt-4">
+<span class="material-symbols-outlined text-4xl text-slate-200" data-icon="account_balance">account_balance</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 h-16 flex items-center justify-around z-50">
+<a class="flex flex-col items-center text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-medium">Dashboard</span>
+</a>
+<a class="flex flex-col items-center text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="text-[10px] font-medium">Registry</span>
+</a>
+<a class="flex flex-col items-center text-[#496559]" href="#">
+<span class="material-symbols-outlined" data-icon="domain" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="text-[10px] font-bold">Profil</span>
+</a>
+<a class="flex flex-col items-center text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</a>
+</nav>
+</body></html>

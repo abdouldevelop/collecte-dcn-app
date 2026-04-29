@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "pack_17_interfaces_md_collecte_secondaire",
+			"path": "../../../Downloads/pack_17_interfaces_md_collecte_secondaire"
+		},
+		{
+			"name": "collecte_dcn_app",
+			"path": ".."
+		},
+		{
+			"name": "stitch_portail_de_connexion_institutionnel",
+			"path": "../../../Downloads/stitch_portail_de_connexion_institutionnel/stitch_portail_de_connexion_institutionnel"
+		}
+	],
+	"settings": {}
+}

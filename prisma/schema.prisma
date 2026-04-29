@@ -1,0 +1,311 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id              String              @id @default(cuid())
+  email           String              @unique
+  passwordHash    String
+  firstName       String
+  lastName        String
+  role            Role                @default(ADMIN)
+  isActive        Boolean             @default(true)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  auditLogs       AuditLog[]
+  invitationsSent CompanyInvitation[]
+  notifications   Notification[]
+
+  @@map("admins")
+}
+
+model Company {
+  id                 String              @id @default(cuid())
+  name               String
+  email              String              @unique
+  passwordHash       String
+  rccm               String?
+  ncc                String?
+  phone              String?
+  address            String?
+  sector             String?
+  isActive           Boolean             @default(true)
+  isOnboarded        Boolean             @default(false)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  auditLogs          AuditLog[]
+  invitation         CompanyInvitation?
+  companyProducts    CompanyProduct[]
+  exportDeclarations ExportDeclaration[]
+  focalPoint         FocalPoint?
+  importDeclarations ImportDeclaration[]
+  notifications      Notification[]
+  supportTickets     SupportTicket[]
+
+  @@map("companies")
+}
+
+model CompanyInvitation {
+  id          String           @id @default(cuid())
+  token       String           @unique @default(cuid())
+  companyName String
+  email       String
+  rccm        String?
+  ncc         String?
+  status      InvitationStatus @default(PENDING)
+  expiresAt   DateTime
+  usedAt      DateTime?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  adminId     String
+  companyId   String?          @unique
+  sentBy      Admin            @relation(fields: [adminId], references: [id])
+  company     Company?         @relation(fields: [companyId], references: [id])
+
+  @@map("company_invitations")
+}
+
+model FocalPoint {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String
+  phone     String?
+  position  String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  companyId String   @unique
+  company   Company  @relation(fields: [companyId], references: [id])
+
+  @@map("focal_points")
+}
+
+model Unit {
+  id                     String                  @id @default(cuid())
+  code                   String                  @unique
+  label                  String
+  isActive               Boolean                 @default(true)
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
+  exportDeclarationLines ExportDeclarationLine[]
+  importDeclarationLines ImportDeclarationLine[]
+
+  @@map("units")
+}
+
+model Product {
+  id              String           @id @default(cuid())
+  code            String           @unique
+  designation     String
+  type            ProductType      @default(IMPORT_EXPORT)
+  source          ProductSource    @default(ADMIN)
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  companyProducts CompanyProduct[]
+
+  @@map("products")
+}
+
+model CompanyProduct {
+  id                     String                  @id @default(cuid())
+  observation            String?
+  isActive               Boolean                 @default(true)
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
+  companyId              String
+  productId              String
+  company                Company                 @relation(fields: [companyId], references: [id])
+  product                Product                 @relation(fields: [productId], references: [id])
+  exportDeclarationLines ExportDeclarationLine[]
+  importDeclarationLines ImportDeclarationLine[]
+
+  @@unique([companyId, productId])
+  @@map("company_products")
+}
+
+model Period {
+  id                 String              @id @default(cuid())
+  year               Int
+  month              Int
+  label              String
+  isActive           Boolean             @default(false)
+  dueDate            DateTime?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  exportDeclarations ExportDeclaration[]
+  importDeclarations ImportDeclaration[]
+
+  @@unique([year, month])
+  @@map("periods")
+}
+
+model ImportDeclaration {
+  id          String                  @id @default(cuid())
+  status      DeclarationStatus       @default(NOT_STARTED)
+  submittedAt DateTime?
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+  companyId   String
+  periodId    String
+  lines       ImportDeclarationLine[]
+  company     Company                 @relation(fields: [companyId], references: [id])
+  period      Period                  @relation(fields: [periodId], references: [id])
+
+  @@unique([companyId, periodId])
+  @@map("import_declarations")
+}
+
+model ImportDeclarationLine {
+  id               String            @id @default(cuid())
+  priceMin         Decimal?          @db.Decimal(15, 2)
+  priceMax         Decimal?          @db.Decimal(15, 2)
+  quantity         Decimal?          @db.Decimal(15, 3)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  declarationId    String
+  companyProductId String
+  unitId           String?
+  companyProduct   CompanyProduct    @relation(fields: [companyProductId], references: [id])
+  declaration      ImportDeclaration @relation(fields: [declarationId], references: [id], onDelete: Cascade)
+  unit             Unit?             @relation(fields: [unitId], references: [id])
+
+  @@unique([declarationId, companyProductId])
+  @@map("import_declaration_lines")
+}
+
+model ExportDeclaration {
+  id          String                  @id @default(cuid())
+  status      DeclarationStatus       @default(NOT_STARTED)
+  submittedAt DateTime?
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+  companyId   String
+  periodId    String
+  lines       ExportDeclarationLine[]
+  company     Company                 @relation(fields: [companyId], references: [id])
+  period      Period                  @relation(fields: [periodId], references: [id])
+
+  @@unique([companyId, periodId])
+  @@map("export_declarations")
+}
+
+model ExportDeclarationLine {
+  id               String            @id @default(cuid())
+  priceMin         Decimal?          @db.Decimal(15, 2)
+  priceMax         Decimal?          @db.Decimal(15, 2)
+  quantity         Decimal?          @db.Decimal(15, 3)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  declarationId    String
+  companyProductId String
+  unitId           String?
+  companyProduct   CompanyProduct    @relation(fields: [companyProductId], references: [id])
+  declaration      ExportDeclaration @relation(fields: [declarationId], references: [id], onDelete: Cascade)
+  unit             Unit?             @relation(fields: [unitId], references: [id])
+
+  @@unique([declarationId, companyProductId])
+  @@map("export_declaration_lines")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  type      String   @default("INFO")
+  createdAt DateTime @default(now())
+  companyId String?
+  adminId   String?
+  admin     Admin?   @relation(fields: [adminId], references: [id])
+  company   Company? @relation(fields: [companyId], references: [id])
+
+  @@map("notifications")
+}
+
+model SupportTicket {
+  id        String         @id @default(cuid())
+  subject   String
+  message   String
+  status    TicketStatus   @default(OPEN)
+  priority  TicketPriority @default(MEDIUM)
+  response  String?
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  companyId String
+  company   Company        @relation(fields: [companyId], references: [id])
+
+  @@map("support_tickets")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  entity    String
+  entityId  String?
+  details   Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  companyId String?
+  adminId   String?
+  admin     Admin?   @relation(fields: [adminId], references: [id])
+  company   Company? @relation(fields: [companyId], references: [id])
+
+  @@map("audit_logs")
+}
+
+enum Role {
+  COMPANY
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum InvitationStatus {
+  PENDING
+  USED
+  EXPIRED
+  CANCELLED
+}
+
+enum ProductType {
+  IMPORT
+  EXPORT
+  IMPORT_EXPORT
+}
+
+enum ProductSource {
+  ADMIN
+  COMPANY
+}
+
+enum DeclarationStatus {
+  NOT_STARTED
+  DRAFT
+  SUBMITTED
+}
+
+enum DeclarationType {
+  IMPORT
+  EXPORT
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}

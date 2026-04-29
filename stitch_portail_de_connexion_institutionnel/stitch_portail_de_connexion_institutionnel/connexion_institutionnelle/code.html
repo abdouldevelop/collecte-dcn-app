@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DataRegistry - Connexion</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error": "#ba1a1a",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-container": "#c2e1d2",
+                "on-tertiary": "#ffffff",
+                "outline-variant": "#c1c8c3",
+                "surface-container-highest": "#dbe4ed",
+                "on-primary": "#ffffff",
+                "surface-container": "#e6eff8",
+                "error-container": "#ffdad6",
+                "on-secondary-fixed-variant": "#3d4944",
+                "surface": "#f6faff",
+                "on-primary-fixed-variant": "#314c41",
+                "on-secondary-container": "#5a6761",
+                "tertiary-fixed-dim": "#ebbbb7",
+                "on-background": "#141d23",
+                "secondary-fixed-dim": "#bccac2",
+                "tertiary-container": "#7b5653",
+                "surface-variant": "#dbe4ed",
+                "primary-container": "#496559",
+                "on-tertiary-container": "#ffcfca",
+                "inverse-on-surface": "#e9f2fb",
+                "on-surface-variant": "#424845",
+                "primary-fixed-dim": "#afcdbf",
+                "surface-container-low": "#ecf5fe",
+                "background": "#f6faff",
+                "on-surface": "#141d23",
+                "on-secondary-fixed": "#121e19",
+                "outline": "#727974",
+                "inverse-surface": "#293138",
+                "surface-bright": "#f6faff",
+                "surface-dim": "#d2dbe4",
+                "surface-tint": "#486458",
+                "secondary-container": "#d8e6de",
+                "on-tertiary-fixed": "#2e1412",
+                "on-tertiary-fixed-variant": "#603e3b",
+                "on-error": "#ffffff",
+                "on-error-container": "#93000a",
+                "secondary": "#54615b",
+                "surface-container-high": "#e0e9f2",
+                "on-secondary": "#ffffff",
+                "primary-fixed": "#caeada",
+                "on-primary-fixed": "#042017",
+                "primary": "#324d42",
+                "inverse-primary": "#afcdbf",
+                "secondary-fixed": "#d8e6de",
+                "tertiary-fixed": "#ffdad7",
+                "tertiary": "#613f3c"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "stack-md": "16px",
+                "gutter": "24px",
+                "stack-sm": "8px",
+                "margin": "32px",
+                "unit": "8px",
+                "container-max-width": "1280px",
+                "stack-lg": "32px"
+            },
+            "fontFamily": {
+                "label-sm": ["Public Sans"],
+                "body-sm": ["Public Sans"],
+                "headline-md": ["Public Sans"],
+                "body-md": ["Public Sans"],
+                "body-lg": ["Public Sans"],
+                "headline-xl": ["Public Sans"],
+                "headline-lg": ["Public Sans"],
+                "label-md": ["Public Sans"]
+            },
+            "fontSize": {
+                "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ambient-card-shadow {
+            box-shadow: 0px 4px 20px rgba(73, 101, 89, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-[#F8F9FA] font-body-md text-on-surface h-full flex flex-col">
+<main class="flex-grow flex items-center justify-center px-gutter py-margin">
+<div class="w-full max-w-[440px] bg-white rounded-xl ambient-card-shadow border border-[#E9ECEF] p-stack-lg md:p-12 overflow-hidden">
+<div class="flex flex-col items-center mb-stack-lg">
+<div class="mb-stack-md flex items-center justify-center bg-primary-container/5 w-16 h-16 rounded-full">
+<span class="material-symbols-outlined text-primary-container text-[32px]" data-icon="database">database</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Connexion</h1>
+<p class="font-body-sm text-body-sm text-outline mt-unit">Accédez à votre espace institutionnel</p>
+</div>
+<form class="space-y-stack-md">
+<div class="space-y-unit">
+<label class="font-label-md text-label-md text-on-surface" for="email">Adresse e-mail</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-[20px]" data-icon="mail">mail</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-4 focus:ring-primary-container/10 focus:border-primary-container outline-none transition-all font-body-md placeholder:text-outline-variant" id="email" name="email" placeholder="nom@institution.org" required="" type="email"/>
+</div>
+</div>
+<div class="space-y-unit">
+<label class="font-label-md text-label-md text-on-surface" for="password">Mot de passe</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-[20px]" data-icon="lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-4 focus:ring-primary-container/10 focus:border-primary-container outline-none transition-all font-body-md placeholder:text-outline-variant" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<div class="pt-unit">
+<button class="w-full bg-primary-container text-white font-label-md py-4 rounded-xl hover:bg-opacity-90 active:bg-opacity-80 transition-all duration-200 flex justify-center items-center gap-2 group" type="submit">
+                        Se connecter
+                        <span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+<div class="mt-stack-md flex justify-center">
+<a class="font-label-md text-label-md text-primary-container hover:underline transition-all" href="#">
+                    Mot de passe oublié ?
+                </a>
+</div>
+<div class="mt-stack-lg pt-stack-md border-t border-[#E9ECEF] flex items-start gap-3">
+<span class="material-symbols-outlined text-outline text-[18px] shrink-0" data-icon="verified_user">verified_user</span>
+<p class="font-body-sm text-body-sm text-outline leading-tight">
+                    Votre connexion est sécurisée par cryptage de bout en bout.
+                </p>
+</div>
+</div>
+</main>
+<footer class="w-full border-t border-[#E9ECEF] bg-white">
+<div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center px-8 py-8 gap-4">
+<p class="font-label-sm text-label-sm text-outline text-center md:text-left">
+                © 2024 Institutional Data Systems. All rights reserved. Precision &amp; Authority in Field Research.
+            </p>
+<div class="flex gap-6">
+<a class="font-label-sm text-label-sm text-outline hover:text-primary-container transition-colors" href="#">Security Protocol</a>
+<a class="font-label-sm text-label-sm text-outline hover:text-primary-container transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-outline hover:text-primary-container transition-colors" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</body></html>

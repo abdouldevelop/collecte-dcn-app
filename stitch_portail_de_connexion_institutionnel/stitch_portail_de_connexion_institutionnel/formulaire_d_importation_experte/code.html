@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .shadow-ambient {
+            box-shadow: 0px 4px 20px rgba(73, 101, 89, 0.08);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#141d23",
+                      "tertiary-container": "#7b5653",
+                      "surface-bright": "#f6faff",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed-dim": "#afcdbf",
+                      "primary": "#324d42",
+                      "on-tertiary-fixed-variant": "#603e3b",
+                      "inverse-primary": "#afcdbf",
+                      "surface-tint": "#486458",
+                      "on-primary-fixed-variant": "#314c41",
+                      "surface-container-low": "#ecf5fe",
+                      "secondary-fixed-dim": "#bccac2",
+                      "secondary-fixed": "#d8e6de",
+                      "primary-fixed": "#caeada",
+                      "on-tertiary-container": "#ffcfca",
+                      "on-secondary-fixed-variant": "#3d4944",
+                      "surface-container-highest": "#dbe4ed",
+                      "tertiary-fixed-dim": "#ebbbb7",
+                      "tertiary-fixed": "#ffdad7",
+                      "surface-container-high": "#e0e9f2",
+                      "on-primary-fixed": "#042017",
+                      "on-surface": "#141d23",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "tertiary": "#613f3c",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#e6eff8",
+                      "outline-variant": "#c1c8c3",
+                      "secondary-container": "#d8e6de",
+                      "on-tertiary": "#ffffff",
+                      "surface-dim": "#d2dbe4",
+                      "secondary": "#54615b",
+                      "on-secondary-container": "#5a6761",
+                      "surface-variant": "#dbe4ed",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#496559",
+                      "on-surface-variant": "#424845",
+                      "on-tertiary-fixed": "#2e1412",
+                      "outline": "#727974",
+                      "inverse-surface": "#293138",
+                      "on-primary-container": "#c2e1d2",
+                      "on-secondary-fixed": "#121e19",
+                      "inverse-on-surface": "#e9f2fb",
+                      "background": "#f6faff",
+                      "on-error": "#ffffff",
+                      "surface": "#f6faff",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "stack-lg": "32px",
+                      "container-max-width": "1280px",
+                      "gutter": "24px",
+                      "unit": "8px",
+                      "margin": "32px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Public Sans"],
+                      "label-sm": ["Public Sans"],
+                      "body-md": ["Public Sans"],
+                      "body-sm": ["Public Sans"],
+                      "headline-xl": ["Public Sans"],
+                      "body-lg": ["Public Sans"],
+                      "headline-lg": ["Public Sans"],
+                      "label-md": ["Public Sans"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full h-16 flex items-center justify-between px-6 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-4">
+<span class="text-lg font-bold text-emerald-900 dark:text-emerald-50 font-public-sans tracking-tight">Institutional Data Portal</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<input class="bg-slate-100 dark:bg-slate-800 border-none rounded-full px-4 py-1.5 text-sm w-64 focus:ring-2 focus:ring-primary-container" placeholder="Rechercher..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-slate-500">
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="Administrator Profile" data-alt="Professional portrait of a male administrator in a corporate setting with soft office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUvWXlIapwLDU7gF1hyUxJ00i3vcy03MvOP5RXmsk65o51DJUocnJGAPUZUBLNN4haNBPbu4hzZJPhYKRrN78M6775ko5bbCgJHMoQVewjSSPOUCfFLG_3fkcyc3SHik5jUmYvUV82Bn53BUI4_L7khrzWd-_GLhlrU_q3XFdx-qwNRvO5H1TX0KQWlGdHMYs8JPkHYPcweTPw12kUT0G0kmQ4gxWb8aSVkVqCO1k_mqapjBkYWskojDIuYtI3AFpFBi6OuxEqF0xx"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 flex flex-col py-4 z-40 bg-slate-50 dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800">
+<div class="px-6 mb-8">
+<h2 class="text-xl font-black text-emerald-900 dark:text-emerald-50 font-public-sans">Import Expert</h2>
+<p class="text-xs font-medium text-slate-500 uppercase tracking-widest">Institutional Division</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 transition-all font-public-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white dark:bg-slate-800 text-emerald-800 dark:text-emerald-200 shadow-sm border-r-4 border-emerald-800 font-public-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="upload_file">upload_file</span>
+<span>Import Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 transition-all font-public-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Product Registry</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 transition-all font-public-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 transition-all font-public-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span>System Audit</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<div class="bg-emerald-100 dark:bg-emerald-900/30 p-4 rounded-xl">
+<p class="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase mb-1">Quota Utilisé</p>
+<div class="h-1.5 w-full bg-emerald-200 dark:bg-emerald-800 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-600 w-3/4"></div>
+</div>
+<p class="text-[10px] text-emerald-700 dark:text-emerald-400 mt-2">750 / 1000 Unités</p>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 mt-16 p-8 min-h-screen">
+<div class="max-w-container-max-width mx-auto">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-outline mb-6">
+<span>Espace de Travail</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Nouvel Import Expert</span>
+</div>
+<!-- Sticky Header -->
+<div class="sticky top-16 bg-background/95 backdrop-blur-sm z-30 pb-6 mb-2">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-1">Formulaire d'Importation Institutionnelle</h1>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 py-1 px-3 bg-secondary-container text-on-secondary-container rounded-full text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                                Session: EXP-2024-08
+                            </span>
+<div class="flex items-center gap-1.5 text-slate-400 text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Enregistrement automatique...</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-6 py-2.5 rounded-full border-1.5 border-[#f39221] text-[#f39221] font-label-md text-label-md hover:bg-[#f39221]/5 transition-colors">
+<span class="material-symbols-outlined" data-icon="drafts">drafts</span>
+                            Enregistrer brouillon
+                        </button>
+<button class="flex items-center gap-2 px-8 py-2.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md shadow-lg hover:shadow-xl transition-all">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+                            Soumettre Import
+                        </button>
+</div>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Summary Card -->
+<div class="col-span-12 lg:col-span-4 space-y-stack-md">
+<div class="bg-white rounded-xl p-stack-lg shadow-ambient border border-outline-variant">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-wider">Résumé de la Cargaison</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center py-2 border-b border-slate-50">
+<span class="text-body-sm font-body-sm text-outline">Total Produits</span>
+<span class="font-headline-md text-headline-md text-primary">08</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-slate-50">
+<span class="text-body-sm font-body-sm text-outline">Poids Estimé</span>
+<span class="font-label-md text-label-md text-on-surface">1,240 kg</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-slate-50">
+<span class="text-body-sm font-body-sm text-outline">Valeur Déclarée</span>
+<span class="font-label-md text-label-md text-on-surface">12,450.00 €</span>
+</div>
+<div class="p-3 bg-error-container/20 rounded-lg border border-error-container mt-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-error text-[20px]">warning</span>
+<div>
+<p class="text-label-sm font-label-sm text-on-error-container">Erreurs de validation</p>
+<p class="text-[11px] text-error">2 lignes nécessitent votre attention avant soumission.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl p-stack-lg shadow-ambient border border-outline-variant">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-wider">Certifications Requises</h3>
+<div class="flex flex-wrap gap-2">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-label-sm font-label-sm border border-primary/20">ISO-9001</span>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-label-sm font-label-sm border border-primary/20">ECOLABEL</span>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-sm font-label-sm">+2 Certificats</span>
+</div>
+</div>
+</div>
+<!-- Table Section -->
+<div class="col-span-12 lg:col-span-8">
+<div class="bg-white rounded-xl shadow-ambient border border-outline-variant overflow-hidden">
+<div class="p-6 border-b border-slate-100 flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-primary">Détails des Produits</h3>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                                Ajouter un produit
+                            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-slate-50">
+<tr>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline uppercase tracking-wider">Produit</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline uppercase tracking-wider text-right">Prix Min (€)</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline uppercase tracking-wider text-right">Prix Max (€)</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline uppercase tracking-wider text-center">Quantité</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline uppercase tracking-wider">Unité</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline uppercase tracking-wider"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1: Healthy -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Composants Silicium S-12</span>
+<span class="text-[11px] text-slate-400">ID: 8842-XJ</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<input class="w-24 text-right border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="124.50"/>
+</td>
+<td class="px-6 py-4 text-right">
+<input class="w-24 text-right border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="150.00"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input class="w-20 text-center border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="500"/>
+</td>
+<td class="px-6 py-4">
+<span class="text-body-sm text-on-surface">Unité</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete_outline</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Error (Quantity 0) -->
+<tr class="bg-error-container/5 hover:bg-error-container/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Filtres HEPA Industriels</span>
+<span class="text-[11px] text-slate-400">ID: 9901-ZZ</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<input class="w-24 text-right border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="45.00"/>
+</td>
+<td class="px-6 py-4 text-right">
+<input class="w-24 text-right border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="60.00"/>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="relative inline-block">
+<input class="w-20 text-center border-error rounded-lg text-body-sm focus:ring-error focus:border-error bg-white" type="number" value="0"/>
+<div class="absolute -bottom-5 left-0 whitespace-nowrap text-[10px] text-error font-semibold uppercase">Requis &gt; 0</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-body-sm text-on-surface">Lot</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete_outline</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Healthy -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Lubrifiant Bio-Synthétique</span>
+<span class="text-[11px] text-slate-400">ID: 4412-MK</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<input class="w-24 text-right border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="850.00"/>
+</td>
+<td class="px-6 py-4 text-right">
+<input class="w-24 text-right border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="920.00"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input class="w-20 text-center border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="12"/>
+</td>
+<td class="px-6 py-4">
+<span class="text-body-sm text-on-surface">Litre</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete_outline</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Error (Min > Max) -->
+<tr class="bg-error-container/5 hover:bg-error-container/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Câblage Cuivre Isolé</span>
+<span class="text-[11px] text-slate-400">ID: 1105-AC</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<input class="w-24 text-right border-error rounded-lg text-body-sm focus:ring-error focus:border-error bg-white" type="number" value="200.00"/>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="relative inline-block">
+<input class="w-24 text-right border-error rounded-lg text-body-sm focus:ring-error focus:border-error bg-white" type="number" value="180.00"/>
+<div class="absolute -bottom-5 right-0 whitespace-nowrap text-[10px] text-error font-semibold uppercase">Doit être &gt; Min</div>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<input class="w-20 text-center border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="1500"/>
+</td>
+<td class="px-6 py-4">
+<span class="text-body-sm text-on-surface">Mètre</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete_outline</span>
+</button>
+</td>
+</tr>
+<!-- Pre-filled Row 5 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Capteurs Thermiques T-4</span>
+<span class="text-[11px] text-slate-400">ID: 6672-PP</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<input class="w-24 text-right border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="15.20"/>
+</td>
+<td class="px-6 py-4 text-right">
+<input class="w-24 text-right border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="19.00"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input class="w-20 text-center border-slate-200 rounded-lg text-body-sm focus:ring-primary focus:border-primary" type="number" value="250"/>
+</td>
+<td class="px-6 py-4">
+<span class="text-body-sm text-on-surface">Unité</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete_outline</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 bg-slate-50 flex justify-center">
+<button class="px-4 py-2 text-slate-500 hover:text-primary transition-colors text-label-sm font-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
+                                Charger 20 lignes supplémentaires
+                            </button>
+</div>
+</div>
+<!-- Footer Info -->
+<div class="mt-stack-md grid grid-cols-2 gap-stack-md">
+<div class="bg-surface-container-low p-4 rounded-xl flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="info">info</span>
+<p class="text-body-sm text-on-surface-variant">
+                                Les prix sont automatiquement convertis à partir de l'indice journalier officiel de la Division Institutionnelle.
+                            </p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="shield">shield</span>
+<p class="text-body-sm text-on-surface-variant">
+                                Cette session d'importation est chiffrée et conforme aux protocoles de sécurité de niveau 4.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Toast (Hidden by default, for UI visual) -->
+<div class="fixed bottom-8 right-8 bg-primary text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-24 transition-transform invisible">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="font-label-md text-label-md">Brouillon enregistré avec succès</span>
+</div>
+</body></html>

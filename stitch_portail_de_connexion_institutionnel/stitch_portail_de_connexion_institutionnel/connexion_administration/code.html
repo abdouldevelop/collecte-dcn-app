@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Accès Administration - Institutional Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#042017",
+                        "on-tertiary-fixed": "#2e1412",
+                        "on-primary-fixed-variant": "#314c41",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#afcdbf",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#603e3b",
+                        "on-error-container": "#93000a",
+                        "on-background": "#141d23",
+                        "inverse-surface": "#293138",
+                        "primary-container": "#496559",
+                        "background": "#f6faff",
+                        "secondary-fixed-dim": "#bccac2",
+                        "surface-dim": "#d2dbe4",
+                        "primary-fixed-dim": "#afcdbf",
+                        "secondary": "#54615b",
+                        "on-secondary-fixed": "#121e19",
+                        "on-surface-variant": "#424845",
+                        "secondary-container": "#d8e6de",
+                        "tertiary-container": "#7b5653",
+                        "primary-fixed": "#caeada",
+                        "tertiary": "#613f3c",
+                        "surface-container-high": "#e0e9f2",
+                        "on-secondary-container": "#5a6761",
+                        "surface-tint": "#486458",
+                        "surface-container-low": "#ecf5fe",
+                        "error": "#ba1a1a",
+                        "primary": "#324d42",
+                        "on-secondary-fixed-variant": "#3d4944",
+                        "inverse-on-surface": "#e9f2fb",
+                        "surface": "#f6faff",
+                        "tertiary-fixed": "#ffdad7",
+                        "surface-container": "#e6eff8",
+                        "outline": "#727974",
+                        "tertiary-fixed-dim": "#ebbbb7",
+                        "surface-variant": "#dbe4ed",
+                        "surface-container-highest": "#dbe4ed",
+                        "on-tertiary-container": "#ffcfca",
+                        "on-surface": "#141d23",
+                        "secondary-fixed": "#d8e6de",
+                        "on-primary-container": "#c2e1d2",
+                        "outline-variant": "#c1c8c3",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f6faff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "headline-xl": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "headline-md": ["Public Sans"],
+                        "body-sm": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F1F5F9;
+        }
+        .login-card-shadow {
+            box-shadow: 0px 4px 20px rgba(73, 101, 89, 0.08);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-on-surface">
+<header class="bg-white dark:bg-slate-950 border-b border-gray-100 dark:border-slate-800 shadow-sm fixed top-0 w-full z-50">
+<div class="flex justify-between items-center h-16 px-6 w-full max-w-[1280px] mx-auto">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg">account_balance</span>
+</div>
+<span class="text-lg font-semibold tracking-tight text-emerald-900 dark:text-emerald-50 font-headline-md">Institutional Intelligence</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-gray-500 hover:bg-gray-50 p-2 rounded-full transition-colors">help_outline</button>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-6 pt-24 pb-16">
+<div class="w-full max-w-[440px]">
+<div class="bg-white rounded-xl p-8 login-card-shadow border border-gray-100">
+<div class="flex flex-col items-center mb-8">
+<div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mb-4 border border-gray-100">
+<span class="material-symbols-outlined text-gray-400 text-3xl">shield_lock</span>
+</div>
+<h1 class="font-headline-md text-emerald-900 text-center">Accès Administration</h1>
+<p class="font-body-sm text-outline mt-2">Veuillez vous authentifier pour continuer</p>
+</div>
+<form class="space-y-6">
+<div class="space-y-2">
+<label class="block font-label-md text-on-surface-variant" for="email">Adresse e-mail professionnelle</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">mail</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all font-body-md" id="email" name="email" placeholder="nom.prenom@institution.gov" required="" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between">
+<label class="block font-label-md text-on-surface-variant" for="password">Mot de passe</label>
+<a class="text-label-sm text-primary hover:underline" href="#">Oublié ?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">lock</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all font-body-md" id="password" name="password" placeholder="••••••••••••" required="" type="password"/>
+</div>
+</div>
+<div class="flex items-center gap-3 py-2">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" id="remember" type="checkbox"/>
+<label class="text-body-sm text-on-surface-variant" for="remember">Maintenir la session active (IP autorisée uniquement)</label>
+</div>
+<button class="w-full py-4 bg-primary-container text-white font-label-md rounded-xl hover:brightness-90 active:opacity-80 transition-all flex items-center justify-center gap-2" type="submit">
+                        Se connecter à l'administration
+                        <span class="material-symbols-outlined text-lg">login</span>
+</button>
+</form>
+<div class="mt-8 pt-6 border-t border-gray-100">
+<div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+<span class="material-symbols-outlined text-amber-600 text-xl mt-0.5" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="text-[11px] leading-relaxed text-gray-600 uppercase tracking-wider font-medium">
+                            Accès strictement réservé au personnel autorisé. Toute tentative d'accès non autorisé est enregistrée et pourra faire l'objet de poursuites.
+                        </p>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-center gap-6">
+<div class="flex items-center gap-2 text-gray-400 text-xs">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+                    Chiffrement AES-256
+                </div>
+<div class="flex items-center gap-2 text-gray-400 text-xs">
+<span class="material-symbols-outlined text-sm">security</span>
+                    Surveillance SOC 24/7
+                </div>
+</div>
+</div>
+</main>
+<footer class="bg-gray-50 dark:bg-slate-950 border-t border-gray-200 dark:border-slate-800">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-6 w-full max-w-[1280px] mx-auto gap-4">
+<div class="text-gray-500 dark:text-slate-500 font-label-sm">
+                © 2024 Institutional Administration. Restricted Access.
+            </div>
+<div class="flex gap-6">
+<a class="text-gray-500 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors font-label-sm" href="#">Privacy Policy</a>
+<a class="text-gray-500 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors font-label-sm" href="#">Terms of Service</a>
+<a class="text-gray-500 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors font-label-sm" href="#">Security Protocols</a>
+</div>
+</div>
+</footer>
+</body></html>

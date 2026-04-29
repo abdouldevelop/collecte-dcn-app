@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-shadow {
+            box-shadow: 0px 4px 20px rgba(73, 101, 89, 0.08);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#042017",
+                        "surface-container-high": "#e0e9f2",
+                        "tertiary-fixed": "#ffdad7",
+                        "surface-container-highest": "#dbe4ed",
+                        "tertiary-fixed-dim": "#ebbbb7",
+                        "primary-fixed": "#caeada",
+                        "on-tertiary-container": "#ffcfca",
+                        "on-secondary-fixed-variant": "#3d4944",
+                        "secondary-fixed-dim": "#bccac2",
+                        "secondary-fixed": "#d8e6de",
+                        "surface-container-low": "#ecf5fe",
+                        "on-primary-fixed-variant": "#314c41",
+                        "surface-tint": "#486458",
+                        "inverse-primary": "#afcdbf",
+                        "primary-fixed-dim": "#afcdbf",
+                        "primary": "#324d42",
+                        "on-tertiary-fixed-variant": "#603e3b",
+                        "tertiary-container": "#7b5653",
+                        "surface-bright": "#f6faff",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#141d23",
+                        "on-error": "#ffffff",
+                        "surface": "#f6faff",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#e9f2fb",
+                        "background": "#f6faff",
+                        "on-primary-container": "#c2e1d2",
+                        "on-secondary-fixed": "#121e19",
+                        "inverse-surface": "#293138",
+                        "on-tertiary-fixed": "#2e1412",
+                        "outline": "#727974",
+                        "on-surface-variant": "#424845",
+                        "primary-container": "#496559",
+                        "surface-variant": "#dbe4ed",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d2dbe4",
+                        "secondary": "#54615b",
+                        "on-secondary-container": "#5a6761",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#e6eff8",
+                        "outline-variant": "#c1c8c3",
+                        "secondary-container": "#d8e6de",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#613f3c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#141d23",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin": "32px",
+                        "unit": "8px",
+                        "container-max-width": "1280px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "headline-xl": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "body-sm": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "headline-md": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex">
+<!-- SideNavBar Component -->
+<aside class="hidden md:flex flex-col h-screen w-64 border-r border-outline-variant bg-surface-container-lowest sticky top-0 z-50">
+<div class="flex flex-col h-full py-6">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg">inventory_2</span>
+</div>
+<span class="text-xl font-black text-emerald-900 tracking-tighter">Registry Admin</span>
+</div>
+<p class="text-label-sm text-outline px-1">Institutional Access</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="pb-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all duration-200 rounded-xl cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:pl-1 transition-all">dashboard</span>
+<span class="font-label-md text-label-md">Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white text-emerald-900 border-r-4 border-primary shadow-sm transition-all duration-200 rounded-r-none rounded-xl cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-label-md text-label-md">Catalogue Produits</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all duration-200 rounded-xl cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:pl-1 transition-all">upload_file</span>
+<span class="font-label-md text-label-md">Importations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all duration-200 rounded-xl cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:pl-1 transition-all">download_for_offline</span>
+<span class="font-label-md text-label-md">Exportations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all duration-200 rounded-xl cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:pl-1 transition-all">admin_panel_settings</span>
+<span class="font-label-md text-label-md">Paramètres</span>
+</a>
+</div>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full bg-primary text-white py-3 px-4 rounded-xl font-label-md flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                    Nouvelle entrée
+                </button>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0">
+<!-- TopNavBar Component -->
+<header class="bg-white border-b border-outline-variant sticky top-0 z-40 shadow-sm w-full">
+<div class="flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-4 flex-1">
+<div class="md:hidden">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+</div>
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-body-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary focus:bg-white transition-all placeholder:text-slate-400" placeholder="Rechercher par code ou nom de produit..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2 mr-2">
+<button class="p-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant hidden sm:block"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden lg:block">
+<p class="text-label-md text-on-surface leading-none">Marc-Antoine Durand</p>
+<p class="text-label-sm text-outline">Directeur de Registre</p>
+</div>
+<img alt="User profile" class="w-10 h-10 rounded-full border-2 border-primary-fixed object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnNsa5er7Hjj_fH8Y6SkNtMKFk0kiTjEJD4MUjGf2uSzcR3_VjxyHamD9TSQujHqL7okLlqDQqOlJmHkzt2CUn-mgp5wZt14wnYjD8qClpth1hTOd60Hi1uA-8LIpjxdDvqTrhHnwODnVIfPJVcqiT9x4DsUbgnbnctSgrbfBk2Du-dVsML1Q4fUH_f6KE104WDGkZgO-0tVJXp6Hx9h26JoBHcl0m4eVy_ED_MrY435sc8FxWaJ4I_DHFsfXwIT69cd7IrtsbeUdQ"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background p-6 md:p-8">
+<div class="max-w-[1280px] mx-auto space-y-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Catalogue Produits</h1>
+<p class="text-body-md text-outline">Gérez et suivez l'intégrité de vos produits institutionnels</p>
+</div>
+<button class="bg-[#f39221] hover:bg-[#e68310] text-white font-label-md px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 shadow-[0_4px_14px_0_rgba(243,146,33,0.3)]">
+<span class="material-symbols-outlined text-xl">add</span>
+                        Ajouter produit
+                    </button>
+</div>
+<!-- Filters & Stats Bento Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<div class="lg:col-span-8 bg-white p-2 rounded-2xl border border-outline-variant custom-shadow">
+<div class="flex flex-wrap gap-2 p-1">
+<button class="px-6 py-2 rounded-xl bg-primary text-white font-label-md transition-all shadow-sm">Tous</button>
+<button class="px-6 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-label-md transition-all">Importation</button>
+<button class="px-6 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-label-md transition-all">Exportation</button>
+<button class="px-6 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-label-md transition-all">Mixte</button>
+</div>
+</div>
+<div class="lg:col-span-4 bg-primary-container p-5 rounded-2xl border border-outline-variant custom-shadow flex items-center justify-between overflow-hidden relative">
+<div class="relative z-10">
+<p class="text-on-primary-container font-label-sm font-bold opacity-90 uppercase tracking-widest mb-1">Total Produits</p>
+<p class="text-4xl font-bold text-white tracking-tight">1,284</p>
+</div>
+<div class="material-symbols-outlined text-white/10 text-8xl absolute -right-4 top-0 rotate-12 select-none">inventory_2</div>
+<div class="flex items-center gap-1.5 bg-emerald-400/20 px-3 py-1.5 rounded-full text-emerald-300 font-bold text-label-sm relative z-10 backdrop-blur-sm">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                            +12%
+                        </div>
+</div>
+</div>
+<!-- Main Data Table Container -->
+<div class="bg-white rounded-2xl border border-outline-variant custom-shadow overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50/80 border-b border-outline-variant">
+<th class="px-6 py-5 font-bold text-[11px] text-slate-700 uppercase tracking-widest">Code Produit</th>
+<th class="px-6 py-5 font-bold text-[11px] text-slate-700 uppercase tracking-widest">Nom du Produit</th>
+<th class="px-6 py-5 font-bold text-[11px] text-slate-700 uppercase tracking-widest">Type de Flux</th>
+<th class="px-6 py-5 font-bold text-[11px] text-slate-700 uppercase tracking-widest">Date d'ajout</th>
+<th class="px-6 py-5 font-bold text-[11px] text-slate-700 uppercase tracking-widest text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="group hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-6">
+<span class="font-label-md text-primary bg-primary-fixed/30 px-3 py-1.5 rounded-lg border border-primary/10">PRD-8821</span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface text-base">Acier Inoxydable 316L</span>
+<span class="text-body-sm text-outline">Composants Industriels</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/50 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Importation
+                                        </span>
+</td>
+<td class="px-6 py-6 font-body-sm text-on-surface/80">14 Oct 2023</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-2.5 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-xl transition-all" title="Modifier"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2.5 text-slate-400 hover:text-error hover:bg-error/5 rounded-xl transition-all" title="Supprimer"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-6">
+<span class="font-label-md text-primary bg-primary-fixed/30 px-3 py-1.5 rounded-lg border border-primary/10">PRD-4402</span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface text-base">Micro-processeurs ARM</span>
+<span class="text-body-sm text-outline">Electronique de pointe</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200/50 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                                            Exportation
+                                        </span>
+</td>
+<td class="px-6 py-6 font-body-sm text-on-surface/80">02 Nov 2023</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-2.5 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-xl transition-all"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2.5 text-slate-400 hover:text-error hover:bg-error/5 rounded-xl transition-all"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-6">
+<span class="font-label-md text-primary bg-primary-fixed/30 px-3 py-1.5 rounded-lg border border-primary/10">PRD-9105</span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface text-base">Lubrifiant Synthétique X2</span>
+<span class="text-body-sm text-outline">Produits Chimiques</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-purple-50 text-purple-700 border border-purple-200/50 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+                                            Mixte
+                                        </span>
+</td>
+<td class="px-6 py-6 font-body-sm text-on-surface/80">28 Oct 2023</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-2.5 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-xl transition-all"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2.5 text-slate-400 hover:text-error hover:bg-error/5 rounded-xl transition-all"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-6">
+<span class="font-label-md text-primary bg-primary-fixed/30 px-3 py-1.5 rounded-lg border border-primary/10">PRD-2219</span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface text-base">Capteurs Thermiques v4</span>
+<span class="text-body-sm text-outline">Equipements Mesure</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/50 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Importation
+                                        </span>
+</td>
+<td class="px-6 py-6 font-body-sm text-on-surface/80">15 Nov 2023</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-2.5 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-xl transition-all"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2.5 text-slate-400 hover:text-error hover:bg-error/5 rounded-xl transition-all"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-6">
+<span class="font-label-md text-primary bg-primary-fixed/30 px-3 py-1.5 rounded-lg border border-primary/10">PRD-5530</span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface text-base">Polypropylène Haute Densité</span>
+<span class="text-body-sm text-outline">Matières Premières</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200/50 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                                            Exportation
+                                        </span>
+</td>
+<td class="px-6 py-6 font-body-sm text-on-surface/80">21 Nov 2023</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-2.5 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-xl transition-all"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2.5 text-slate-400 hover:text-error hover:bg-error/5 rounded-xl transition-all"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50/50 border-t border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="text-label-sm text-slate-500 font-medium">Lignes par page :</span>
+<select class="bg-white border border-slate-200 rounded-lg text-label-sm px-3 py-1.5 focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none transition-all cursor-pointer">
+<option>10</option>
+<option>25</option>
+<option>50</option>
+</select>
+<span class="text-label-sm text-slate-400 ml-4">Affichage 1-5 sur 1,284 produits</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="w-9 h-9 flex items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-400 hover:text-primary hover:border-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-xl bg-primary text-white font-bold shadow-sm transition-all">1</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-xl border border-transparent hover:bg-white hover:border-slate-200 text-slate-500 transition-all font-medium">2</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-xl border border-transparent hover:bg-white hover:border-slate-200 text-slate-500 transition-all font-medium">3</button>
+<span class="px-1 text-slate-300">...</span>
+<button class="w-10 h-9 flex items-center justify-center rounded-xl border border-transparent hover:bg-white hover:border-slate-200 text-slate-500 transition-all font-medium">128</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-400 hover:text-primary hover:border-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Responsive Card View (Visible only on small screens) -->
+<div class="md:hidden space-y-4 pb-20">
+<!-- Example Mobile Card 1 -->
+<div class="bg-white p-5 rounded-2xl border border-outline-variant shadow-sm space-y-4">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-primary bg-primary-fixed/30 px-3 py-1 rounded-lg border border-primary/10">PRD-8821</span>
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 shadow-sm">Importation</span>
+</div>
+<div>
+<h3 class="font-label-md text-on-surface text-base">Acier Inoxydable 316L</h3>
+<p class="text-body-sm text-outline">Composants Industriels</p>
+</div>
+<div class="pt-4 border-t border-slate-50 flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Date d'ajout</span>
+<span class="text-label-sm text-on-surface">14 Oct 2023</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-slate-400 bg-slate-50 rounded-lg"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2 text-slate-400 bg-slate-50 rounded-lg"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar for Mobile (Visible only on small screens) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-outline-variant px-6 py-3 flex justify-between items-center z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="text-[10px] font-bold">Catalog</span>
+</button>
+<div class="relative -top-6">
+<button class="bg-[#f39221] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_4px_14px_rgba(243,146,33,0.4)] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">sync_alt</span>
+<span class="text-[10px] font-bold">Flux</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</button>
+</nav>
+</body></html>

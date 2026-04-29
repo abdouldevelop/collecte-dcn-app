@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Historique des Déclarations - Institutional Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#d2dbe4",
+                      "on-secondary-fixed-variant": "#3d4944",
+                      "inverse-surface": "#293138",
+                      "on-secondary-fixed": "#121e19",
+                      "on-error-container": "#93000a",
+                      "outline": "#727974",
+                      "surface": "#f6faff",
+                      "outline-variant": "#c1c8c3",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed-dim": "#ebbbb7",
+                      "surface-container": "#e6eff8",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#141d23",
+                      "surface-variant": "#dbe4ed",
+                      "on-primary-container": "#c2e1d2",
+                      "surface-container-high": "#e0e9f2",
+                      "secondary-fixed": "#d8e6de",
+                      "tertiary-fixed": "#ffdad7",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary": "#54615b",
+                      "inverse-primary": "#afcdbf",
+                      "surface-container-low": "#ecf5fe",
+                      "on-tertiary-fixed": "#2e1412",
+                      "on-surface-variant": "#424845",
+                      "surface-container-highest": "#dbe4ed",
+                      "on-primary-fixed-variant": "#314c41",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#bccac2",
+                      "surface-tint": "#486458",
+                      "primary-fixed-dim": "#afcdbf",
+                      "on-surface": "#141d23",
+                      "background": "#f6faff",
+                      "secondary-container": "#d8e6de",
+                      "on-primary": "#ffffff",
+                      "tertiary-container": "#7b5653",
+                      "surface-bright": "#f6faff",
+                      "on-tertiary-container": "#ffcfca",
+                      "on-secondary-container": "#5a6761",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#603e3b",
+                      "inverse-on-surface": "#e9f2fb",
+                      "primary-fixed": "#caeada",
+                      "error": "#ba1a1a",
+                      "primary-container": "#496559",
+                      "primary": "#324d42",
+                      "on-primary-fixed": "#042017",
+                      "tertiary": "#613f3c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "gutter": "24px",
+                      "stack-md": "16px",
+                      "unit": "8px",
+                      "margin": "32px",
+                      "stack-lg": "32px",
+                      "container-max-width": "1280px"
+              },
+              "fontFamily": {
+                      "body-sm": ["Public Sans"],
+                      "body-md": ["Public Sans"],
+                      "headline-xl": ["Public Sans"],
+                      "body-lg": ["Public Sans"],
+                      "headline-lg": ["Public Sans"],
+                      "label-md": ["Public Sans"],
+                      "label-sm": ["Public Sans"],
+                      "headline-md": ["Public Sans"]
+              },
+              "fontSize": {
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #F8F9FA; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .ambient-shadow { box-shadow: 0px 4px 20px rgba(73, 101, 89, 0.08); }
+    </style>
+</head>
+<body class="bg-[#F8F9FA] text-on-surface antialiased overflow-x-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full p-4 flex flex-col gap-2 h-screen w-64 border-r border-slate-200 bg-[#F8F9FA] z-50">
+<div class="mb-8 px-4 py-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h1 class="text-lg font-black text-[#496559]">Registry Admin</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Institutional Data</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#496559] text-white rounded-lg shadow-sm active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-md">Declarations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+<span class="font-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md">Archive</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-slate-100 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-6 h-16 bg-white docked full-width top-0 z-40 border-b border-slate-200 shadow-sm sticky top-0">
+<div class="flex items-center gap-2">
+<h2 class="text-xl font-bold tracking-tight text-emerald-900">Institutional Intelligence</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center bg-slate-50 rounded-full px-4 py-1.5 border border-slate-200 w-80">
+<span class="material-symbols-outlined text-slate-400 text-[20px] mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-400" placeholder="Rechercher une déclaration..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-50 transition-colors rounded-full relative cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 transition-colors rounded-full cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 mx-1"></div>
+<div class="flex items-center gap-3 cursor-pointer active:opacity-80">
+<div class="text-right">
+<p class="text-xs font-bold text-slate-900 leading-none">Utilisateur Admin</p>
+<p class="text-[10px] text-slate-500">Superviseur</p>
+</div>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-emerald-900/10" data-alt="professional portrait of a corporate executive with neutral background and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX8nJcsmCzkgAvEe_2765VLrFeTcKX1TCEnMOwWAAAMrfa4TBYS6PTiMvCQnxhePaMYd7h1SG7YKYESk6ytiR7cqL2vzJhKGjaGGocjEYOUS7qnJ7VOVqapIjy8C4e0DklSCsIIjdx0QfMVyjG1BaVi-NTdMLscsxKGNE9pxQoTF5P9ksGQ8mdRoOS2KRwM9BFHTiLl_yyPOn1r-OWNBLMdQHp0PuSIB211KUruLKBBBPLUTBfe9Cqie1vuUZPW601rGQ4pzqM86tm"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-8 max-w-[1280px] mx-auto w-full">
+<!-- Breadcrumb & Header -->
+<div class="mb-8">
+<nav class="flex items-center gap-2 text-slate-500 text-[13px] mb-2 font-medium">
+<span class="hover:text-primary transition-colors cursor-pointer">Tableau de bord</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-semibold">Historique</span>
+</nav>
+<div class="flex justify-between items-end">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Historique des Déclarations</h1>
+<p class="text-body-sm font-body-sm text-slate-500 mt-1">Gérez et suivez l'ensemble de vos flux institutionnels archivés.</p>
+</div>
+<button class="flex items-center gap-2 bg-[#496559] text-white px-5 py-2.5 rounded-2xl shadow-sm hover:brightness-90 transition-all font-label-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        Nouvelle Déclaration
+                    </button>
+</div>
+</div>
+<!-- Bento Layout Section -->
+<div class="grid grid-cols-12 gap-6 mb-8">
+<!-- Analytics Overview Card -->
+<div class="col-span-12 bg-white rounded-2xl p-6 ambient-shadow border border-[#E9ECEF]">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-label-md font-label-md text-slate-500 uppercase tracking-wider">Tendances Annuelles</h3>
+<p class="text-headline-md font-headline-md text-[#496559]">842 Déclarations traitées <span class="text-emerald-500 text-sm ml-2 font-medium">↑ 12%</span></p>
+</div>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 text-xs font-medium text-slate-400"><div class="w-2 h-2 rounded-full bg-emerald-500"></div> Importation</span>
+<span class="flex items-center gap-1 text-xs font-medium text-slate-400"><div class="w-2 h-2 rounded-full bg-blue-500"></div> Exportation</span>
+</div>
+</div>
+<!-- Miniature Sparkline representation -->
+<div class="h-32 w-full flex items-end gap-2 px-2">
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[40%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[60%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[55%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[40%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[45%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[70%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[70%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[50%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[85%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[60%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-[#496559]/10 hover:bg-emerald-100 transition-colors rounded-t-lg h-[65%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/40 h-[80%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[40%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[30%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[55%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[45%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[75%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[65%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[90%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[75%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[60%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[40%] rounded-t-sm"></div>
+</div>
+<div class="flex-1 bg-slate-50 hover:bg-emerald-100 transition-colors rounded-t-lg h-[80%] group relative">
+<div class="absolute inset-x-1 bottom-0 bg-emerald-500/20 h-[60%] rounded-t-sm"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 px-2 text-[11px] font-bold text-slate-400 uppercase tracking-tighter">
+<span>Juin</span><span>Juil</span><span>Août</span><span>Sept</span><span>Oct</span><span>Nov</span><span>Déc</span><span>Jan</span><span>Fév</span><span>Mar</span><span>Avr</span><span>Mai</span>
+</div>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="bg-white rounded-2xl p-3 ambient-shadow border border-[#E9ECEF] flex flex-wrap items-center gap-4 mb-6">
+<div class="flex-1 min-w-[120px]">
+<label class="block text-[10px] font-bold text-slate-400 uppercase ml-2 mb-1">Mois</label>
+<div class="relative">
+<select class="w-full bg-slate-50 border-slate-200 rounded-xl text-sm font-medium focus:ring-[#496559] focus:border-[#496559] py-2 px-3 appearance-none cursor-pointer">
+<option>Tous les mois</option>
+<option>Mai</option>
+<option>Avril</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex-1 min-w-[120px]">
+<label class="block text-[10px] font-bold text-slate-400 uppercase ml-2 mb-1">Année</label>
+<div class="relative">
+<select class="w-full bg-slate-50 border-slate-200 rounded-xl text-sm font-medium focus:ring-[#496559] focus:border-[#496559] py-2 px-3 appearance-none cursor-pointer">
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex-1 min-w-[120px]">
+<label class="block text-[10px] font-bold text-slate-400 uppercase ml-2 mb-1">Statut</label>
+<div class="relative">
+<select class="w-full bg-slate-50 border-slate-200 rounded-xl text-sm font-medium focus:ring-[#496559] focus:border-[#496559] py-2 px-3 appearance-none cursor-pointer">
+<option>Tous les statuts</option>
+<option>Validé</option>
+<option>En cours</option>
+<option>En retard</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex-1 min-w-[120px]">
+<label class="block text-[10px] font-bold text-slate-400 uppercase ml-2 mb-1">Type de flux</label>
+<div class="relative">
+<select class="w-full bg-slate-50 border-slate-200 rounded-xl text-sm font-medium focus:ring-[#496559] focus:border-[#496559] py-2 px-3 appearance-none cursor-pointer">
+<option>Tous les types</option>
+<option>Import</option>
+<option>Export</option>
+<option>Mixte</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-slate-400 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="pt-4">
+<button class="bg-slate-100 text-slate-600 px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-200 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">filter_alt</span>
+                        Réinitialiser
+                    </button>
+</div>
+</div>
+<!-- Data Table Section -->
+<div class="bg-white rounded-2xl ambient-shadow border border-[#E9ECEF] overflow-hidden">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-[#F1F3F5] text-label-sm font-label-sm text-slate-500 border-b border-[#E9ECEF]">
+<th class="py-4 px-6 text-left font-bold uppercase tracking-wider">Période</th>
+<th class="py-4 px-6 text-left font-bold uppercase tracking-wider">Flux d'Import</th>
+<th class="py-4 px-6 text-left font-bold uppercase tracking-wider">Flux d'Export</th>
+<th class="py-4 px-6 text-left font-bold uppercase tracking-wider">Date de Soumission</th>
+<th class="py-4 px-6 text-left font-bold uppercase tracking-wider">État Global</th>
+<th class="py-4 px-6 text-center font-bold uppercase tracking-wider">Actions</th>
+</tr>
+</thead>
+<tbody class="text-body-sm font-body-sm divide-y divide-[#E9ECEF]">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="py-4 px-6">
+<span class="font-bold text-on-surface">Mai 2024</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-medium">12 fichiers</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-medium">8 fichiers</span>
+</div>
+</td>
+<td class="py-4 px-6 text-slate-500">14/05/2024</td>
+<td class="py-4 px-6">
+<span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 text-[11px] font-bold uppercase tracking-tight">Complet</span>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="p-2 hover:bg-[#496559]/10 text-[#496559] rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="py-4 px-6">
+<span class="font-bold text-on-surface">Avril 2024</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-medium">15 fichiers</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span class="font-medium">3 fichiers</span>
+</div>
+</td>
+<td class="py-4 px-6 text-slate-500">12/04/2024</td>
+<td class="py-4 px-6">
+<span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-700 text-[11px] font-bold uppercase tracking-tight">Partiel</span>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="p-2 hover:bg-[#496559]/10 text-[#496559] rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="py-4 px-6">
+<span class="font-bold text-on-surface">Mars 2024</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<span class="font-medium">0 fichiers</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<span class="font-medium">0 fichiers</span>
+</div>
+</td>
+<td class="py-4 px-6 text-slate-500">—</td>
+<td class="py-4 px-6">
+<span class="px-3 py-1 rounded-full bg-slate-500/10 text-slate-700 text-[11px] font-bold uppercase tracking-tight">En attente</span>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="p-2 hover:bg-[#496559]/10 text-[#496559] rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="py-4 px-6">
+<span class="font-bold text-on-surface">Février 2024</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-medium">10 fichiers</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-medium">10 fichiers</span>
+</div>
+</td>
+<td class="py-4 px-6 text-slate-500">10/02/2024</td>
+<td class="py-4 px-6">
+<span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 text-[11px] font-bold uppercase tracking-tight">Complet</span>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="p-2 hover:bg-[#496559]/10 text-[#496559] rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="py-4 px-6">
+<span class="font-bold text-on-surface">Janvier 2024</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-medium">14 fichiers</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-medium">12 fichiers</span>
+</div>
+</td>
+<td class="py-4 px-6 text-slate-500">15/01/2024</td>
+<td class="py-4 px-6">
+<span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 text-[11px] font-bold uppercase tracking-tight">Complet</span>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="p-2 hover:bg-[#496559]/10 text-[#496559] rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 flex items-center justify-between border-t border-[#E9ECEF] bg-[#F1F3F5]">
+<p class="text-label-sm text-slate-500">Affichage de 1 à 5 sur 24 résultats</p>
+<div class="flex gap-2">
+<button class="p-1.5 rounded-lg border border-slate-300 text-slate-400 bg-white cursor-not-allowed">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded-lg border border-primary text-white bg-primary font-bold text-xs">1</button>
+<button class="px-3 py-1 rounded-lg border border-slate-300 text-slate-600 bg-white hover:bg-slate-50 text-xs">2</button>
+<button class="px-3 py-1 rounded-lg border border-slate-300 text-slate-600 bg-white hover:bg-slate-50 text-xs">3</button>
+<button class="p-1.5 rounded-lg border border-slate-300 text-slate-600 bg-white hover:bg-slate-50 active:scale-95">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<footer class="mt-auto py-8 text-center text-slate-400 text-xs">
+            © 2024 Institutional Intelligence - Système de Gestion de Données Sécurisé
+        </footer>
+</main>
+</body></html>

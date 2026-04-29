@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#d8e6de",
+                    "surface-tint": "#486458",
+                    "surface-dim": "#d2dbe4",
+                    "surface-bright": "#f6faff",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#603e3b",
+                    "on-tertiary-fixed": "#2e1412",
+                    "on-primary-fixed": "#042017",
+                    "primary-fixed": "#caeada",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#e0e9f2",
+                    "secondary": "#54615b",
+                    "tertiary": "#613f3c",
+                    "tertiary-fixed": "#ffdad7",
+                    "secondary-fixed": "#d8e6de",
+                    "inverse-primary": "#afcdbf",
+                    "primary": "#324d42",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface": "#f6faff",
+                    "on-secondary-container": "#5a6761",
+                    "on-primary-fixed-variant": "#314c41",
+                    "surface-container": "#e6eff8",
+                    "on-secondary-fixed-variant": "#3d4944",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#dbe4ed",
+                    "outline-variant": "#c1c8c3",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#c2e1d2",
+                    "secondary-fixed-dim": "#bccac2",
+                    "on-background": "#141d23",
+                    "tertiary-fixed-dim": "#ebbbb7",
+                    "outline": "#727974",
+                    "inverse-surface": "#293138",
+                    "on-surface": "#141d23",
+                    "on-secondary-fixed": "#121e19",
+                    "background": "#f6faff",
+                    "surface-container-low": "#ecf5fe",
+                    "primary-fixed-dim": "#afcdbf",
+                    "on-tertiary-container": "#ffcfca",
+                    "on-surface-variant": "#424845",
+                    "inverse-on-surface": "#e9f2fb",
+                    "surface-variant": "#dbe4ed",
+                    "primary-container": "#496559",
+                    "tertiary-container": "#7b5653"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "16px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "stack-lg": "32px",
+                    "container-max-width": "1280px",
+                    "stack-sm": "8px",
+                    "margin": "32px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Public Sans"],
+                    "body-lg": ["Public Sans"],
+                    "label-md": ["Public Sans"],
+                    "headline-lg": ["Public Sans"],
+                    "headline-md": ["Public Sans"],
+                    "body-sm": ["Public Sans"],
+                    "label-sm": ["Public Sans"],
+                    "body-md": ["Public Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Public Sans', sans-serif; background-color: #f6faff; }
+        .step-completed { color: #324d42; }
+        .step-active { color: #f39221; }
+        .step-upcoming { color: #94a3b8; }
+        .ambient-shadow { box-shadow: 0px 4px 20px rgba(73, 101, 89, 0.08); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar from Shared Components JSON -->
+<header class="bg-white dark:bg-slate-900 docked full-width top-0 z-50 border-b border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none flex justify-between items-center w-full px-8 h-16 max-w-full">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-emerald-900 dark:text-emerald-100">Institutional Registry</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-500 hover:bg-slate-50 p-2 rounded-full cursor-pointer transition-all">help_outline</span>
+<span class="material-symbols-outlined text-slate-500 hover:bg-slate-50 p-2 rounded-full cursor-pointer transition-all">language</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden border border-slate-300">
+<img alt="User help and settings" data-alt="Professional avatar of an institutional administrator in a clean minimalist style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUHTrl7-9qHL9fHQRXZ9b2i74SCKgSrKr1dNxEoWHWeEb8yhFZn_yoPVYIhtQ9-UOxiWNDX0-c5LOGLzw9dAaH2TB7Jxs-cqTEzye2vCyeu3gYWk2qbtQTPG8DKDHMPkmkJvyi_TQaApL57y5qVZ5N4xsIOvxekrg54eOi9RVR9FI52SEqbwPpI70C6YqnAKFCBzwvxHZFDMD87y-8oA6bYK17P5MO4q-eTotSOFx82Iqu_vYKrqLFXsE0WBZb9HL8jYxaDlaFrju7"/>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- SideNavBar from Shared Components JSON -->
+<aside class="hidden lg:flex flex-col h-screen pt-20 px-4 space-y-2 bg-slate-50 dark:bg-slate-950 fixed left-0 top-0 h-full w-72 border-r border-slate-200 dark:border-slate-800">
+<div class="px-4 mb-8">
+<h2 class="text-lg font-bold text-emerald-900 dark:text-emerald-100">Registration</h2>
+<p class="text-xs text-slate-500">Onboarding Progress</p>
+<div class="mt-4 h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-orange-500 w-2/3"></div>
+</div>
+</div>
+<nav class="space-y-1">
+<!-- Invitation - Completed -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300 cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-label-md text-label-md">Invitation</span>
+<span class="ml-auto material-symbols-outlined text-emerald-600 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</a>
+<!-- Company Info - Active -->
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-900 text-emerald-800 dark:text-emerald-100 border-l-4 border-orange-500 font-bold cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">business</span>
+<span class="font-label-md text-label-md">Company Info</span>
+</a>
+<!-- Security - Upcoming -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300 cursor-pointer transition-all duration-200 opacity-60">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-md text-label-md">Security</span>
+</a>
+</nav>
+<div class="mt-auto p-4 bg-emerald-50/50 rounded-xl mb-4">
+<p class="text-xs text-emerald-800 font-medium">Besoin d'aide ?</p>
+<p class="text-[11px] text-emerald-600 mt-1">Consultez notre documentation ou contactez le support technique.</p>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-72 pt-24 pb-12 px-8">
+<div class="max-w-[800px] mx-auto">
+<!-- Stepper Visualizer -->
+<div class="mb-12">
+<div class="flex items-center justify-between relative">
+<!-- Connector Lines -->
+<div class="absolute top-5 left-0 w-full h-[2px] bg-slate-200 -z-0">
+<div class="h-full bg-primary-container w-1/2"></div>
+</div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center gap-2 group">
+<div class="w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center font-bold shadow-md">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="text-label-sm font-label-sm text-primary">Invitation</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-white border-4 border-orange-500 text-orange-500 flex items-center justify-center font-bold shadow-lg">
+                                2
+                            </div>
+<span class="text-label-sm font-label-sm text-orange-600 font-bold">Informations Entreprise</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-white border-2 border-slate-200 text-slate-400 flex items-center justify-center font-bold">
+                                3
+                            </div>
+<span class="text-label-sm font-label-sm text-slate-400">Sécurité</span>
+</div>
+</div>
+</div>
+<!-- Registration Card -->
+<div class="bg-white rounded-2xl p-stack-lg ambient-shadow border border-slate-100">
+<div class="mb-8">
+<h1 class="font-headline-md text-headline-md text-primary mb-2">Informations Générales</h1>
+<p class="font-body-sm text-body-sm text-slate-500">Veuillez renseigner les détails officiels de votre institution pour vérification.</p>
+</div>
+<form class="space-y-stack-lg">
+<!-- Section 1: Identification -->
+<div class="space-y-gutter">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Nom entreprise</label>
+<div class="relative">
+<input class="w-full px-4 py-3 rounded-2xl border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 outline-none transition-all font-body-md text-body-md" placeholder="Ex: Global Tech Solutions" type="text"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-emerald-500 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Sigle</label>
+<input class="w-full px-4 py-3 rounded-2xl border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 outline-none transition-all font-body-md text-body-md" placeholder="Ex: GTS" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant">RCCM</label>
+<input class="w-full px-4 py-3 rounded-2xl border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 outline-none transition-all font-body-md text-body-md" placeholder="CI-ABJ-0000-B-000" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant">NCC</label>
+<input class="w-full px-4 py-3 rounded-2xl border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 outline-none transition-all font-body-md text-body-md" placeholder="0000000 X" type="text"/>
+</div>
+</div>
+</div>
+<!-- Section 2: Contact -->
+<div class="pt-stack-md border-t border-slate-100 space-y-gutter">
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-wider opacity-60">Coordonnées de contact</h3>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Email institutionnel</label>
+<input class="w-full px-4 py-3 rounded-2xl border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 outline-none transition-all font-body-md text-body-md" placeholder="contact@entreprise.com" type="email"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Téléphone</label>
+<div class="flex gap-2">
+<div class="w-24 px-3 py-3 bg-slate-50 border border-outline-variant rounded-2xl flex items-center justify-center text-body-sm text-slate-600">+225</div>
+<input class="flex-1 px-4 py-3 rounded-2xl border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 outline-none transition-all font-body-md text-body-md" placeholder="07 00 00 00 00" type="tel"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Adresse siège social</label>
+<input class="w-full px-4 py-3 rounded-2xl border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary-container/10 outline-none transition-all font-body-md text-body-md" placeholder="Abidjan, Plateau" type="text"/>
+</div>
+</div>
+</div>
+<!-- Information Alert -->
+<div class="bg-secondary-container/30 border border-secondary-container p-4 rounded-2xl flex gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="text-body-sm text-primary leading-relaxed">
+                                Les informations saisies doivent correspondre exactement aux documents légaux qui seront demandés à l'étape finale.
+                            </p>
+</div>
+<!-- Form Actions -->
+<div class="pt-8 flex items-center justify-between">
+<button class="px-8 py-3 rounded-2xl font-label-md text-label-md text-slate-500 hover:bg-slate-100 transition-all flex items-center gap-2" type="button">
+<span class="material-symbols-outlined">arrow_back</span>
+                                Précédent
+                            </button>
+<button class="bg-primary-container hover:bg-[#f39221] text-white px-10 py-4 rounded-2xl font-label-md text-label-md shadow-lg shadow-primary-container/20 transition-all duration-300 flex items-center gap-2 group" type="submit">
+                                Suivant
+                                <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Subtle Footer Branding -->
+<div class="mt-12 text-center">
+<p class="text-label-sm font-label-sm text-slate-400">© 2024 Institutional Registry Management System. Tous droits réservés.</p>
+</div>
+</div>
+</main>
+</div>
+<!-- Background Decorative Element -->
+<div class="fixed bottom-0 right-0 -z-10 opacity-5 pointer-events-none">
+<svg fill="none" height="400" viewbox="0 0 400 400" width="400" xmlns="http://www.w3.org/2000/svg">
+<circle cx="200" cy="200" r="180" stroke="#486458" stroke-width="40"></circle>
+<path d="M200 20L200 380" stroke="#486458" stroke-width="20"></path>
+<path d="M20 200L380 200" stroke="#486458" stroke-width="20"></path>
+</svg>
+</div>
+</body></html>

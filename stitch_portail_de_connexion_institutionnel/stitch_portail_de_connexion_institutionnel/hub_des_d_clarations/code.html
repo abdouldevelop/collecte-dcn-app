@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#603e3b",
+                        "inverse-on-surface": "#e9f2fb",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#5a6761",
+                        "tertiary": "#613f3c",
+                        "on-primary-fixed": "#042017",
+                        "error": "#ba1a1a",
+                        "primary-container": "#496559",
+                        "primary": "#324d42",
+                        "primary-fixed": "#caeada",
+                        "surface-tint": "#486458",
+                        "primary-fixed-dim": "#afcdbf",
+                        "on-surface": "#141d23",
+                        "background": "#f6faff",
+                        "secondary-fixed-dim": "#bccac2",
+                        "on-primary-fixed-variant": "#314c41",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#ffcfca",
+                        "surface-bright": "#f6faff",
+                        "secondary-container": "#d8e6de",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#7b5653",
+                        "secondary": "#54615b",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e0e9f2",
+                        "secondary-fixed": "#d8e6de",
+                        "tertiary-fixed": "#ffdad7",
+                        "surface-container-highest": "#dbe4ed",
+                        "on-surface-variant": "#424845",
+                        "surface-container-low": "#ecf5fe",
+                        "on-tertiary-fixed": "#2e1412",
+                        "inverse-primary": "#afcdbf",
+                        "surface": "#f6faff",
+                        "outline-variant": "#c1c8c3",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ebbbb7",
+                        "surface-container": "#e6eff8",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#121e19",
+                        "on-error-container": "#93000a",
+                        "outline": "#727974",
+                        "surface-dim": "#d2dbe4",
+                        "on-secondary-fixed-variant": "#3d4944",
+                        "inverse-surface": "#293138",
+                        "surface-variant": "#dbe4ed",
+                        "on-primary-container": "#c2e1d2",
+                        "on-background": "#141d23"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "container-max-width": "1280px",
+                        "margin": "32px",
+                        "unit": "8px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "headline-xl": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "label-md": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "headline-md": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-shadow { box-shadow: 0px 4px 20px rgba(73, 101, 89, 0.08); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background antialiased">
+<!-- SideNavBar -->
+<aside class="flex flex-col fixed left-0 top-0 h-full z-40 bg-white border-r border-slate-200 w-64">
+<div class="p-6">
+<h1 class="text-lg font-black text-emerald-900 font-headline-md">Institutional Data</h1>
+<p class="text-slate-500 font-label-sm">Officer Portal</p>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 bg-emerald-50 text-emerald-800 border-r-4 border-emerald-800 transition-all font-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-emerald-700 transition-all font-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="upload_file">upload_file</span>
+<span>Importation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-emerald-700 transition-all font-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="download_file">file_download</span>
+<span>Exportation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-emerald-700 transition-all font-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span>Reporting Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-emerald-700 transition-all font-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Archive</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-100 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:bg-slate-50 hover:text-emerald-700 transition-all font-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:bg-slate-50 hover:text-emerald-700 transition-all font-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-8 w-full bg-white border-b border-slate-200 shadow-sm sticky top-0 z-30">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold tracking-tight text-emerald-900 font-headline-md">Declarations Hub</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-slate-400" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-50 border-none rounded-xl text-body-sm w-64 focus:ring-2 focus:ring-primary-container/20" placeholder="Rechercher..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-slate-600">
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-slate-200">
+<img alt="User Profile Avatar" class="object-cover h-full w-full" data-alt="professional headshot of a middle-aged male officer in a formal grey suit with a clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkrxebQsGguvbPoVpG2yNNTTZ86w3F0fQrm8Rh1B_0Empveh8VG0QVLPXpCjw7ywUpynWft0ag624Bc6gYO9N8knW38cuKERdJTS0QWe8QJbnlBmS-NQ7qSkJd8uE-8UJu7T3umBLaELaA2BsKhMoQOB32wsHrMhFTKSwQV4zAKmj9hs8_1vBDpjJL9PHSIs3OqBUOPSQ8g9gOGVlujgg4PDwoYkqnMBgd3Sa8pdW4L8v_QMK67iHaRd5ROlWK4s6OnhY_-3LGHUsq"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<div class="p-8 max-w-[1280px] mx-auto">
+<div class="mb-10 flex justify-between items-end">
+<div>
+<h3 class="font-headline-lg text-primary mb-2">Centre de Déclarations</h3>
+<p class="font-body-md text-secondary">Gérez vos flux réglementaires pour la période en cours.</p>
+</div>
+<div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl custom-shadow border border-slate-100">
+<span class="material-symbols-outlined text-emerald-800" data-icon="event">event</span>
+<span class="font-label-md text-emerald-900 uppercase">Mai 2024</span>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Importation Card -->
+<div class="col-span-12 lg:col-span-8 bg-white rounded-xl custom-shadow border border-slate-100 p-stack-lg relative overflow-hidden flex flex-col justify-between h-[400px]">
+<div class="absolute top-0 right-0 w-32 h-32 bg-emerald-50/50 rounded-bl-full -mr-8 -mt-8"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="bg-primary-container p-3 rounded-xl text-white">
+<span class="material-symbols-outlined text-[32px]" data-icon="upload_file">upload_file</span>
+</div>
+<div>
+<h4 class="font-headline-md text-primary">Importation</h4>
+<p class="font-body-sm text-secondary">Données institutionnelles entrantes</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-amber-100 text-amber-800 text-label-sm rounded-full">Brouillon</span>
+</div>
+<div class="space-y-6 mt-12">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-secondary">Progression de la saisie</span>
+<span class="font-label-md text-primary">65%</span>
+</div>
+<div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-slate-500 font-body-sm">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+<span>Dernière modification : 14 Mai 2024, 15:42</span>
+</div>
+</div>
+</div>
+<div class="relative z-10 flex gap-4 mt-8">
+<button class="bg-primary-container text-white px-8 py-4 rounded-xl font-label-md hover:bg-primary transition-colors flex items-center gap-2 custom-shadow">
+                            Accéder à la déclaration
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="border-[1.5px] border-primary-container text-primary-container px-8 py-4 rounded-xl font-label-md hover:bg-slate-50 transition-colors">
+                            Voir le récapitulatif
+                        </button>
+</div>
+</div>
+<!-- Calendar Widget -->
+<div class="col-span-12 lg:col-span-4 bg-white rounded-xl custom-shadow border border-slate-100 p-stack-lg">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary-container" data-icon="calendar_today">calendar_today</span>
+<h4 class="font-label-md text-primary uppercase">Période Déclarative</h4>
+</div>
+<div class="mb-8">
+<div class="flex justify-between items-center mb-4">
+<span class="font-headline-md text-primary">Mai 2024</span>
+<div class="flex gap-2">
+<button class="p-1 hover:bg-slate-50 rounded text-slate-400"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<button class="p-1 hover:bg-slate-50 rounded text-slate-400"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center font-label-sm text-slate-400 mb-2">
+<div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div><div>D</div>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center font-body-sm text-slate-600">
+<!-- Simple Calendar Mockup -->
+<div class="py-2 text-slate-200">29</div><div class="py-2 text-slate-200">30</div><div class="py-2 bg-slate-50 rounded-lg">1</div><div class="py-2">2</div><div class="py-2">3</div><div class="py-2">4</div><div class="py-2">5</div>
+<div class="py-2">6</div><div class="py-2">7</div><div class="py-2">8</div><div class="py-2">9</div><div class="py-2">10</div><div class="py-2">11</div><div class="py-2">12</div>
+<div class="py-2">13</div><div class="py-2 bg-primary-container text-white rounded-lg">14</div><div class="py-2">15</div><div class="py-2">16</div><div class="py-2">17</div><div class="py-2">18</div><div class="py-2">19</div>
+<div class="py-2">20</div><div class="py-2">21</div><div class="py-2">22</div><div class="py-2">23</div><div class="py-2">24</div><div class="py-2">25</div><div class="py-2">26</div>
+<div class="py-2">27</div><div class="py-2">28</div><div class="py-2">29</div><div class="py-2 border-2 border-error text-error rounded-lg font-bold">30</div><div class="py-2">31</div>
+</div>
+</div>
+<div class="bg-error-container/20 p-4 rounded-xl border border-error/10">
+<div class="flex items-center gap-3 text-error">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<span class="font-label-md">Date limite : 30 Mai 2024</span>
+</div>
+<p class="text-body-sm text-on-error-container mt-1">Il vous reste 16 jours pour valider vos déclarations.</p>
+</div>
+</div>
+<!-- Exportation Card -->
+<div class="col-span-12 lg:col-span-6 bg-white rounded-xl custom-shadow border border-slate-100 p-stack-lg flex flex-col justify-between h-[360px]">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="bg-secondary-container p-3 rounded-xl text-primary-container">
+<span class="material-symbols-outlined text-[32px]" data-icon="download_file">file_download</span>
+</div>
+<div>
+<h4 class="font-headline-md text-primary">Exportation</h4>
+<p class="font-body-sm text-secondary">Rapports et flux sortants</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-slate-100 text-slate-500 text-label-sm rounded-full">Non commencé</span>
+</div>
+<div class="space-y-4 mt-8">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-secondary">Progression de la saisie</span>
+<span class="font-label-md text-primary">0%</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 0%"></div>
+</div>
+</div>
+<div class="text-slate-400 font-body-sm italic">Aucune modification récente</div>
+</div>
+</div>
+<button class="w-full border-[1.5px] border-primary-container text-primary-container py-4 rounded-xl font-label-md hover:bg-primary-container hover:text-white transition-all flex justify-center items-center gap-2 group">
+                        Accéder à la déclaration
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Action/Info Center -->
+<div class="col-span-12 lg:col-span-6 grid grid-cols-2 gap-gutter">
+<div class="bg-primary-container rounded-xl p-stack-md text-white flex flex-col justify-between">
+<span class="material-symbols-outlined text-4xl opacity-50" data-icon="shield">shield</span>
+<div>
+<h5 class="font-label-md mb-1">Intégrité des données</h5>
+<p class="text-body-sm opacity-80">Tous les flux sont chiffrés et vérifiés par le protocole institutionnel.</p>
+</div>
+</div>
+<div class="bg-white rounded-xl p-stack-md border border-slate-100 custom-shadow flex flex-col justify-between">
+<span class="material-symbols-outlined text-4xl text-primary-container" data-icon="auto_awesome">auto_awesome</span>
+<div>
+<h5 class="font-label-md text-primary mb-1">Analyse intelligente</h5>
+<p class="text-body-sm text-secondary">Détection automatique d'anomalies active sur vos brouillons.</p>
+</div>
+</div>
+<div class="col-span-2 bg-emerald-50 border border-emerald-100 rounded-xl p-stack-md flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-emerald-800" data-icon="info">info</span>
+<span class="text-body-sm text-emerald-900">Besoin d'assistance pour vos déclarations ?</span>
+</div>
+<a class="text-emerald-800 font-label-md underline underline-offset-4" href="#">Consulter le guide</a>
+</div>
+</div>
+</div>
+<!-- Footer Stats / Recent Activity -->
+<div class="mt-stack-lg bg-white rounded-xl custom-shadow border border-slate-100 overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+<h4 class="font-label-md text-primary">Activités Récentes</h4>
+<button class="text-primary-container text-label-sm font-semibold hover:underline">Voir tout l'historique</button>
+</div>
+<table class="w-full text-left">
+<thead>
+<tr class="text-label-sm text-slate-400 bg-slate-50/30">
+<th class="px-6 py-3 font-medium">Action</th>
+<th class="px-6 py-3 font-medium">Utilisateur</th>
+<th class="px-6 py-3 font-medium">Module</th>
+<th class="px-6 py-3 font-medium">Horodatage</th>
+<th class="px-6 py-3 font-medium">Statut</th>
+</tr>
+</thead>
+<tbody class="text-body-sm text-slate-600">
+<tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-lg" data-icon="edit">edit</span>
+                                Mise à jour des entrées
+                            </td>
+<td class="px-6 py-4">Jean Dupont</td>
+<td class="px-6 py-4">Importation</td>
+<td class="px-6 py-4 text-slate-400">14 Mai, 15:42</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs rounded-full">Succès</span>
+</td>
+</tr>
+<tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-lg" data-icon="visibility">visibility</span>
+                                Consultation du rapport
+                            </td>
+<td class="px-6 py-4">Marie Lefebvre</td>
+<td class="px-6 py-4">Reporting Calendar</td>
+<td class="px-6 py-4 text-slate-400">14 Mai, 14:10</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 bg-slate-100 text-slate-500 text-xs rounded-full">Consulté</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-600 text-lg" data-icon="upload">upload</span>
+                                Nouveau document ajouté
+                            </td>
+<td class="px-6 py-4">Système Automatique</td>
+<td class="px-6 py-4">Archive</td>
+<td class="px-6 py-4 text-slate-400">13 Mai, 09:00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs rounded-full">En attente</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</body></html>

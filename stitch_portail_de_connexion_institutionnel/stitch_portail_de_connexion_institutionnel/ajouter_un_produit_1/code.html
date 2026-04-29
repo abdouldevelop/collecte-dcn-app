@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#603e3b",
+                        "on-tertiary-fixed": "#2e1412",
+                        "surface-tint": "#486458",
+                        "surface-dim": "#d2dbe4",
+                        "secondary-container": "#d8e6de",
+                        "surface-bright": "#f6faff",
+                        "tertiary-fixed": "#ffdad7",
+                        "tertiary": "#613f3c",
+                        "primary": "#324d42",
+                        "secondary-fixed": "#d8e6de",
+                        "inverse-primary": "#afcdbf",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#042017",
+                        "primary-fixed": "#caeada",
+                        "secondary": "#54615b",
+                        "surface-container-high": "#e0e9f2",
+                        "on-primary": "#ffffff",
+                        "surface": "#f6faff",
+                        "on-secondary-container": "#5a6761",
+                        "on-primary-fixed-variant": "#314c41",
+                        "surface-container": "#e6eff8",
+                        "on-secondary-fixed-variant": "#3d4944",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#c2e1d2",
+                        "surface-container-highest": "#dbe4ed",
+                        "outline-variant": "#c1c8c3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "background": "#f6faff",
+                        "surface-container-low": "#ecf5fe",
+                        "primary-fixed-dim": "#afcdbf",
+                        "outline": "#727974",
+                        "inverse-surface": "#293138",
+                        "on-surface": "#141d23",
+                        "on-secondary-fixed": "#121e19",
+                        "surface-variant": "#dbe4ed",
+                        "primary-container": "#496559",
+                        "tertiary-container": "#7b5653",
+                        "on-tertiary-container": "#ffcfca",
+                        "on-surface-variant": "#424845",
+                        "inverse-on-surface": "#e9f2fb",
+                        "secondary-fixed-dim": "#bccac2",
+                        "on-background": "#141d23",
+                        "tertiary-fixed-dim": "#ebbbb7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin": "32px",
+                        "unit": "8px",
+                        "stack-lg": "32px",
+                        "container-max-width": "1280px",
+                        "stack-md": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "label-md": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "headline-md": ["Public Sans"],
+                        "body-sm": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "body-md": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-background min-h-screen">
+<!-- Sidebar Navigation Shell -->
+<aside class="flex flex-col gap-2 p-4 h-screen fixed left-0 top-0 z-40 bg-[#F8F9FA] dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 w-64">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="shield_with_house">shield_with_house</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-[#496559] leading-tight">Institutional Data</h2>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Field Operations v2.4</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200 ease-in-out font-['Public_Sans'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-900 text-[#496559] dark:text-emerald-400 shadow-sm rounded-lg font-['Public_Sans'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="add_box">add_box</span>
+<span>Data Entry</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200 ease-in-out font-['Public_Sans'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200 ease-in-out font-['Public_Sans'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span>Field Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200 ease-in-out font-['Public_Sans'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>System Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4 bg-primary-container/5 rounded-xl border border-primary-container/10">
+<p class="text-label-sm font-label-sm text-primary mb-2">Authenticated as</p>
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-primary-container/20" data-alt="professional portrait of a senior data administrator in a corporate office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUC2eVN5_Ih78_ruGX801Pcg7o0U8NiGcg-7DAT03bgJGLoaeko1VEvfiKYu-j2A47Ks0n9PHNUS-ixMb7dirKN1_vNfFgms06JMxxAZ8Sz7NzrHdCJLhQ_Wa1238udJVc1vM3trQP9NSgwWucQL-hFaCUhVIa4ENkp2t8zLNfHknHEOsvn4V-Zvw-B4WaSSB-CTDRwEWuIbNBGqYSVSp5GVlGNWtJ_hXHogci4aziuuwvs-72Lq6hyLbgaGPR48FphBQFE7zOrYQo"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold text-primary truncate">Admin. Marcus Chen</p>
+<p class="text-[10px] text-slate-500">Global Registry Unit</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar Shell -->
+<header class="sticky top-0 z-30 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-[0px_4px_20px_rgba(73,101,89,0.08)] h-16 w-full">
+<div class="flex justify-between items-center px-8 h-full max-w-[1280px] mx-auto">
+<div class="flex items-center gap-4">
+<h1 class="text-xl font-bold text-slate-900 dark:text-white font-['Public_Sans'] tracking-tight">DataRegistry Pro</h1>
+<div class="h-6 w-px bg-slate-200 mx-2"></div>
+<span class="text-label-md font-label-md text-primary bg-secondary-container px-3 py-1 rounded-full">New Product Entry</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</div>
+</header>
+<div class="max-w-[1280px] mx-auto p-gutter animate-fade-in">
+<!-- Header Section -->
+<div class="mb-stack-lg">
+<h2 class="text-headline-lg font-headline-lg text-primary">Nouveau Produit Institutionnel</h2>
+<p class="text-body-md font-body-md text-secondary mt-1">Enregistrez un nouveau produit industriel dans le registre centralisé pour le suivi des flux.</p>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left Column: Step Forms -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<!-- Step 1 & 2: Search & Selection -->
+<section class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(73,101,89,0.08)] border border-[#E9ECEF] p-stack-lg">
+<div class="flex items-center gap-3 mb-stack-md">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white text-sm font-bold">1</span>
+<h3 class="text-headline-md font-headline-md text-primary">Identification du Produit</h3>
+</div>
+<div class="relative">
+<label class="block text-label-md font-label-md text-secondary mb-stack-sm">Recherche Intelligente</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-white border border-[#DEE2E6] rounded-xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-body-md" placeholder="Entrez le nom ou le code HS..." type="text" value="Poly"/>
+</div>
+<!-- Dropdown Results -->
+<div class="absolute z-20 top-full left-0 w-full mt-2 bg-white border border-[#E9ECEF] rounded-xl shadow-lg overflow-hidden">
+<div class="px-4 py-2 bg-slate-50 border-b border-slate-100">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Résultats de la base industrielle</p>
+</div>
+<div class="divide-y divide-slate-100">
+<div class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer group bg-secondary-container/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="factory">factory</span>
+<div>
+<p class="text-sm font-bold text-primary">Polyéthylène Haute Densité (PEHD)</p>
+<p class="text-xs text-slate-500">HS Code: 3901.20.00 | Catégorie: Polymères</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400" data-icon="precision_manufacturing">precision_manufacturing</span>
+<div>
+<p class="text-sm font-semibold text-slate-700">Polyester Renforcé Fibres</p>
+<p class="text-xs text-slate-500">HS Code: 3907.91.00 | Catégorie: Composites</p>
+</div>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400" data-icon="science">science</span>
+<div>
+<p class="text-sm font-semibold text-slate-700">Polypropylène Glycol</p>
+<p class="text-xs text-slate-500">HS Code: 3907.20.00 | Catégorie: Chimiques</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Selected Item Details -->
+<div class="mt-stack-lg p-6 rounded-xl bg-slate-50 border-2 border-dashed border-slate-200">
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 rounded-lg bg-white border border-slate-200 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="inventory_2">inventory_2</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h4 class="text-body-lg font-bold text-primary">Polyéthylène Haute Densité (PEHD)</h4>
+<span class="text-label-sm text-green-700 bg-green-100 px-2 py-0.5 rounded-full">Vérifié par l'Institution</span>
+</div>
+<p class="text-body-sm text-secondary mt-1 max-w-lg">Polymère thermoplastique produit à partir du monomère éthylène. Connu pour son rapport résistance/densité élevé.</p>
+<div class="flex gap-4 mt-3">
+<div class="text-[11px] font-medium text-slate-500">RÉFÉRENCE: <span class="text-slate-900">IND-2024-001</span></div>
+<div class="text-[11px] font-medium text-slate-500">ORIGINE: <span class="text-slate-900">ZONE INDUSTRIELLE A</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 3: Flow Selection -->
+<section class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(73,101,89,0.08)] border border-[#E9ECEF] p-stack-lg">
+<div class="flex items-center gap-3 mb-stack-md">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white text-sm font-bold">2</span>
+<h3 class="text-headline-md font-headline-md text-primary">Sélection du Flux Logistique</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Radio Card 1 -->
+<label class="relative cursor-pointer group">
+<input checked="" class="sr-only peer" name="flow" type="radio"/>
+<div class="p-6 rounded-xl border-2 border-slate-100 bg-slate-50 transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary-container/5 hover:bg-white hover:shadow-md flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 text-slate-400 group-hover:text-primary transition-colors peer-checked:text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="south_east">south_east</span>
+</div>
+<p class="text-body-md font-bold text-slate-700 peer-checked:text-primary">Importation</p>
+<p class="text-[11px] text-slate-500 mt-2">Entrée sur le territoire national depuis l'extérieur.</p>
+</div>
+<div class="absolute top-3 right-3 opacity-0 peer-checked:opacity-100 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+</label>
+<!-- Radio Card 2 -->
+<label class="relative cursor-pointer group">
+<input class="sr-only peer" name="flow" type="radio"/>
+<div class="p-6 rounded-xl border-2 border-slate-100 bg-slate-50 transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary-container/5 hover:bg-white hover:shadow-md flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 text-slate-400 group-hover:text-primary transition-colors peer-checked:text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="north_east">north_east</span>
+</div>
+<p class="text-body-md font-bold text-slate-700 peer-checked:text-primary">Exportation</p>
+<p class="text-[11px] text-slate-500 mt-2">Sortie de produits fabriqués localement vers l'international.</p>
+</div>
+<div class="absolute top-3 right-3 opacity-0 peer-checked:opacity-100 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+</label>
+<!-- Radio Card 3 -->
+<label class="relative cursor-pointer group">
+<input class="sr-only peer" name="flow" type="radio"/>
+<div class="p-6 rounded-xl border-2 border-slate-100 bg-slate-50 transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary-container/5 hover:bg-white hover:shadow-md flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 text-slate-400 group-hover:text-primary transition-colors peer-checked:text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="swap_horiz">swap_horiz</span>
+</div>
+<p class="text-body-md font-bold text-slate-700 peer-checked:text-primary">Mixte</p>
+<p class="text-[11px] text-slate-500 mt-2">Flux combinés nécessitant un suivi bidirectionnel.</p>
+</div>
+<div class="absolute top-3 right-3 opacity-0 peer-checked:opacity-100 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+</label>
+</div>
+</section>
+</div>
+<!-- Right Column: Summary & Actions -->
+<div class="col-span-12 lg:col-span-4">
+<div class="sticky top-24 space-y-gutter">
+<!-- Summary Section -->
+<section class="bg-primary-container text-white rounded-xl shadow-lg p-stack-lg relative overflow-hidden">
+<!-- Abstract decoration -->
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="relative z-10">
+<h3 class="text-headline-md font-headline-md border-b border-white/20 pb-4 mb-6">Récapitulatif de l'Entrée</h3>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded bg-white/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm" data-icon="label">label</span>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-white/60 tracking-wider">PRODUIT SÉLECTIONNÉ</p>
+<p class="text-body-md font-bold mt-0.5">Polyéthylène Haute Densité (PEHD)</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded bg-white/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm" data-icon="sync_alt">sync_alt</span>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-white/60 tracking-wider">FLUX LOGISTIQUE</p>
+<p class="text-body-md font-bold mt-0.5">Importation</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded bg-white/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-white/60 tracking-wider">DATE D'ENREGISTREMENT</p>
+<p class="text-body-md font-bold mt-0.5">24 Mai 2024 (Aujourd'hui)</p>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-white/20 flex items-center justify-between">
+<p class="text-sm font-medium">Statut du dossier</p>
+<span class="px-2 py-1 bg-white/20 rounded text-[10px] font-bold">PRÊT</span>
+</div>
+</div>
+</section>
+<!-- Primary Action Button -->
+<button class="w-full bg-[#496559] hover:bg-[#3d554a] active:scale-[0.98] text-white py-5 px-6 rounded-xl shadow-md transition-all flex items-center justify-center gap-3 font-headline-md group">
+<span>Enregistrer le produit</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<p class="text-center text-body-sm text-slate-400 px-4">
+                            En confirmant, vous attestez de l'exactitude des données saisies conformément au protocole de régression industrielle.
+                        </p>
+<!-- Contextual Helper Card -->
+<div class="bg-white rounded-xl border border-slate-200 p-6">
+<h4 class="text-sm font-bold text-primary flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-sm" data-icon="info">info</span>
+                                Besoin d'aide ?
+                            </h4>
+<p class="text-body-sm text-secondary mb-4">Consultez notre guide de nomenclature pour les produits dérivés du pétrole ou contactez le support technique.</p>
+<a class="text-label-sm text-primary underline underline-offset-4 hover:text-[#496559]" href="#">Documentation Technique</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Background Decorative Gradient -->
+<div class="fixed top-0 right-0 -z-10 w-1/2 h-1/2 bg-gradient-to-bl from-primary/5 to-transparent blur-3xl opacity-50"></div>
+</body></html>
