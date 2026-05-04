@@ -72,6 +72,9 @@ export async function syncHistoricalRates(days = 365): Promise<{ synced: number;
   for (const currency of CURRENCIES) {
     const missing = datesToFetch.filter((d) => !existingSet.has(`${currency}_${d}`));
 
+    if (missing.length === 0) continue;
+
+    let syncedForCurrency = 0;
     for (const date of missing) {
       const result = await fetchRate(currency, date);
       if (!result) continue;
@@ -82,9 +85,10 @@ export async function syncHistoricalRates(days = 365): Promise<{ synced: number;
         update: { rate: result.rate, source: "fawazahmed0" },
       });
       synced++;
+      syncedForCurrency++;
     }
 
-    if (missing.length > 0 && synced === 0) {
+    if (syncedForCurrency === 0) {
       errors.push(`Aucune donnée historique importée pour ${currency}/XAF`);
     }
   }

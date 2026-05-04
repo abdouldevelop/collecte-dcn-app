@@ -176,7 +176,7 @@ export default function ExchangeRatesClient({ initialUSD, initialEUR, latestUSD,
       });
       const json = await res.json();
       if (!res.ok) { showMessage(json.error || "Erreur", "error"); return; }
-      showMessage(`Historique importé : ${json.data.synced} enregistrements`);
+      showMessage(json.data.message ?? `Historique importé : ${json.data.synced} enregistrement(s)`);
       await loadRates(period);
     } finally {
       setSyncingHistory(false);

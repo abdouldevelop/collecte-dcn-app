@@ -52,11 +52,15 @@ export async function POST(request: NextRequest) {
       result = await syncTodayRates();
     }
 
-    if (result.synced === 0 && result.errors.length > 0) {
+    if (result.errors.length > 0 && result.synced === 0) {
       return apiError(result.errors.join(", "), 502);
     }
 
-    return apiSuccess({ ...result, historical });
+    const message = result.synced === 0
+      ? "Toutes les données sont déjà à jour"
+      : `${result.synced} enregistrement(s) importé(s)`;
+
+    return apiSuccess({ ...result, historical, message });
   } catch (error) {
     return handleApiError(error);
   }
