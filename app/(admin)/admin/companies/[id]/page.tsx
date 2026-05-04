@@ -16,7 +16,7 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
   const company = await prisma.company.findUnique({
     where: { id },
     include: {
-      focalPoint: true,
+      focalPoints: { where: { isActive: true }, take: 1 },
       companyProducts: {
         include: { product: true },
         where: { isActive: true },
@@ -100,12 +100,12 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
               <Users className="w-5 h-5 text-[#496559]" />
               <h3 className="font-semibold text-[#1F2937]">Point Focal</h3>
             </div>
-            {company.focalPoint ? (
+            {company.focalPoints?.[0] ? (
               <div className="space-y-2">
-                <p className="font-medium text-[#1F2937]">{company.focalPoint.firstName} {company.focalPoint.lastName}</p>
-                <p className="text-sm text-[#6B7280]">{company.focalPoint.email}</p>
-                {company.focalPoint.phone && <p className="text-sm text-[#6B7280]">{company.focalPoint.phone}</p>}
-                {company.focalPoint.position && <p className="text-sm text-[#9CA3AF] italic">{company.focalPoint.position}</p>}
+                <p className="font-medium text-[#1F2937]">{company.focalPoints[0].firstName} {company.focalPoints[0].lastName}</p>
+                <p className="text-sm text-[#6B7280]">{company.focalPoints[0].email}</p>
+                {company.focalPoints[0].phone && <p className="text-sm text-[#6B7280]">{company.focalPoints[0].phone}</p>}
+                {company.focalPoints[0].position && <p className="text-sm text-[#9CA3AF] italic">{company.focalPoints[0].position}</p>}
               </div>
             ) : (
               <Badge variant="warning">Non défini</Badge>

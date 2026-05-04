@@ -11,7 +11,7 @@ export default async function AdminCompaniesPage() {
   const companies = await prisma.company.findMany({
     orderBy: { createdAt: "desc" },
     include: {
-      focalPoint: { select: { firstName: true, lastName: true, email: true } },
+      focalPoints: { where: { isActive: true }, take: 1, select: { firstName: true, lastName: true, email: true } },
       _count: {
         select: {
           importDeclarations: true,
@@ -51,7 +51,7 @@ export default async function AdminCompaniesPage() {
         isActive: c.isActive,
         isOnboarded: c.isOnboarded,
         createdAt: c.createdAt,
-        focalPoint: c.focalPoint,
+        focalPoint: c.focalPoints?.[0],
         productsCount: c._count.companyProducts,
         importStatus,
         exportStatus,

@@ -13,8 +13,8 @@ export async function GET(_request: NextRequest) {
     });
 
     // Get focal point
-    const focalPoint = await prisma.focalPoint.findUnique({
-      where: { companyId: session.id },
+    const focalPoint = await prisma.focalPoint.findFirst({
+      where: { companyId: session.id, isActive: true },
     });
 
     // Get current period declarations

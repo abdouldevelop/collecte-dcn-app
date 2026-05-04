@@ -60,6 +60,53 @@ export async function sendInvitationEmail(params: {
   });
 }
 
+export async function sendFocalPointInvitationEmail(params: {
+  to: string;
+  companyName: string;
+  firstName: string;
+  token: string;
+}): Promise<void> {
+  const url = `${APP_URL}/focal-point/onboarding?token=${params.token}`;
+  await transporter.sendMail({
+    from: `"Collecte DCN" <${FROM}>`,
+    to: params.to,
+    subject: `Invitation Point Focal — ${params.companyName}`,
+    html: `
+      <div style="font-family: 'Public Sans', Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: #496559; padding: 32px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 24px;">Collecte DCN</h1>
+        </div>
+        <div style="padding: 32px; background: #ffffff;">
+          <h2 style="color: #1F2937;">Vous êtes invité(e) comme Point Focal</h2>
+          <p style="color: #374151;">Bonjour ${params.firstName},</p>
+          <p style="color: #374151;">
+            Vous avez été désigné(e) comme point focal de l'entreprise
+            <strong>${params.companyName}</strong> sur la plateforme de collecte statistique.
+          </p>
+          <p style="color: #374151;">
+            Cliquez sur le bouton ci-dessous pour créer votre accès. Ce lien est valable 7 jours.
+          </p>
+          <div style="text-align: center; margin: 32px 0;">
+            <a href="${url}"
+               style="background: #f39221; color: white; padding: 12px 32px;
+                      border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;">
+              Créer mon accès Point Focal
+            </a>
+          </div>
+          <p style="color: #6B7280; font-size: 14px;">
+            Lien : <a href="${url}" style="color: #496559;">${url}</a>
+          </p>
+        </div>
+        <div style="padding: 16px 32px; background: #F8F9FA; text-align: center;">
+          <p style="color: #9CA3AF; font-size: 12px; margin: 0;">
+            Plateforme de collecte statistique — Accès réservé aux points focaux désignés.
+          </p>
+        </div>
+      </div>
+    `,
+  });
+}
+
 export async function sendPasswordResetEmail(params: {
   to: string;
   token: string;

@@ -19,7 +19,7 @@ export async function GET(
     const company = await prisma.company.findUnique({
       where: { id },
       include: {
-        focalPoint: true,
+        focalPoints: { where: { isActive: true }, take: 1 },
         companyProducts: {
           where: { isActive: true },
           include: {

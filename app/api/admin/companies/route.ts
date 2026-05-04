@@ -46,7 +46,9 @@ export async function GET(request: NextRequest) {
           isActive: true,
           isOnboarded: true,
           createdAt: true,
-          focalPoint: {
+          focalPoints: {
+            where: { isActive: true },
+            take: 1,
             select: {
               id: true,
               firstName: true,

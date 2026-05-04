@@ -19,7 +19,7 @@ async function getDashboardData(companyId: string) {
   const company = await prisma.company.findUnique({
     where: { id: companyId },
     include: {
-      focalPoint: true,
+      focalPoints: { where: { isActive: true }, take: 1 },
       companyProducts: { include: { product: true } },
       notifications: {
         where: { isRead: false },
@@ -130,7 +130,7 @@ export default async function DashboardPage() {
       )}
 
       {/* Alert: no focal point */}
-      {!company.focalPoint && (
+      {!company.focalPoints?.[0] && (
         <div className="flex items-center justify-between p-4 bg-[#F59E0B]/10 border border-[#F59E0B]/20 rounded-xl">
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-5 h-5 text-[#F59E0B]" />

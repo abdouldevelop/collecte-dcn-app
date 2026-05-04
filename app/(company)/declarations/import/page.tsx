@@ -18,29 +18,31 @@ export default async function ImportDeclarationPage() {
     );
   }
 
-  const units = await prisma.unit.findMany({ where: { isActive: true }, orderBy: { code: "asc" } });
-
-  const declaration = await prisma.importDeclaration.findUnique({
-    where: { companyId_periodId: { companyId: session.id, periodId: period.id } },
-    include: {
-      lines: {
-        include: {
-          companyProduct: { include: { product: true } },
-          unit: true,
+  const [units, declaration, companyProducts, companyCountries] = await Promise.all([
+    prisma.unit.findMany({ where: { isActive: true }, orderBy: { code: "asc" } }),
+    prisma.importDeclaration.findUnique({
+      where: { companyId_periodId: { companyId: session.id, periodId: period.id } },
+      include: {
+        lines: {
+          include: {
+            companyProduct: { include: { product: true } },
+            unit: true,
+            country: { select: { id: true, code: true, name: true } },
+          },
         },
       },
-    },
-  });
-
-  const companyProducts = await prisma.companyProduct.findMany({
-    where: {
-      companyId: session.id,
-      isActive: true,
-      product: { type: { in: ["IMPORT", "IMPORT_EXPORT"] } },
-    },
-    include: { product: true },
-    orderBy: { product: { code: "asc" } },
-  });
+    }),
+    prisma.companyProduct.findMany({
+      where: { companyId: session.id, isActive: true, product: { type: { in: ["IMPORT", "IMPORT_EXPORT"] } } },
+      include: { product: true },
+      orderBy: { product: { code: "asc" } },
+    }),
+    prisma.companyCountry.findMany({
+      where: { companyId: session.id, isActive: true, flowType: { in: ["IMPORT", "IMPORT_EXPORT"] } },
+      include: { country: { select: { id: true, code: true, name: true } } },
+      orderBy: { country: { name: "asc" } },
+    }),
+  ]);
 
   const lines = companyProducts.map((cp) => {
     const existingLine = declaration?.lines.find((l) => l.companyProductId === cp.id);
@@ -53,6 +55,7 @@ export default async function ImportDeclarationPage() {
       priceMax: existingLine?.priceMax ? Number(existingLine.priceMax) : null,
       quantity: existingLine?.quantity ? Number(existingLine.quantity) : null,
       unitId: existingLine?.unitId ?? null,
+      countryId: existingLine?.countryId ?? (companyCountries.length === 1 ? companyCountries[0].country.id : null),
       lastModified: existingLine?.updatedAt ?? null,
     };
   });
@@ -66,6 +69,9 @@ export default async function ImportDeclarationPage() {
       period={period}
       lines={lines}
       units={units.map((u) => ({ id: u.id, code: u.code, label: u.label }))}
+      countries={companyCountries.map((cc) => cc.country)}
+      freightAmount={declaration?.freightAmount ? Number(declaration.freightAmount) : null}
+      insuranceAmount={declaration?.insuranceAmount ? Number(declaration.insuranceAmount) : null}
     />
   );
 }

@@ -27,7 +27,14 @@
       "mcp__chrome-devtools__fill",
       "mcp__chrome-devtools__click",
       "mcp__chrome-devtools__list_network_requests",
-      "Bash(xargs grep *)"
+      "Bash(xargs grep *)",
+      "Bash(git push *)",
+      "Bash(cmd /c \"npx prisma migrate dev --name add_countries_focal_points_fret 2>&1\")",
+      "PowerShell(cd \"c:\\\\Users\\\\Dell\\\\Desktop\\\\collecte_dcn_app\"; $env:PRISMA_MIGRATE_SKIP_GENERATE=\"true\"; npx prisma migrate dev --name add_countries_focal_points_fret 2>&1)",
+      "Bash(docker cp *)",
+      "Bash(npx kill-port *)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(npx eslint *)"
     ]
   }
 }

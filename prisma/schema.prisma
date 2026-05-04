@@ -20,32 +20,35 @@ model Admin {
   auditLogs       AuditLog[]
   invitationsSent CompanyInvitation[]
   notifications   Notification[]
+  focalPointInvitations FocalPointInvitation[]
 
   @@map("admins")
 }
 
 model Company {
-  id                 String              @id @default(cuid())
-  name               String
-  email              String              @unique
-  passwordHash       String
-  rccm               String?
-  ncc                String?
-  phone              String?
-  address            String?
-  sector             String?
-  isActive           Boolean             @default(true)
-  isOnboarded        Boolean             @default(false)
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  auditLogs          AuditLog[]
-  invitation         CompanyInvitation?
-  companyProducts    CompanyProduct[]
-  exportDeclarations ExportDeclaration[]
-  focalPoint         FocalPoint?
-  importDeclarations ImportDeclaration[]
-  notifications      Notification[]
-  supportTickets     SupportTicket[]
+  id                   String                 @id @default(cuid())
+  name                 String
+  email                String                 @unique
+  passwordHash         String
+  rccm                 String?
+  ncc                  String?
+  phone                String?
+  address              String?
+  sector               String?
+  isActive             Boolean                @default(true)
+  isOnboarded          Boolean                @default(false)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  auditLogs            AuditLog[]
+  invitation           CompanyInvitation?
+  companyProducts      CompanyProduct[]
+  exportDeclarations   ExportDeclaration[]
+  focalPoints          FocalPoint[]
+  importDeclarations   ImportDeclaration[]
+  notifications        Notification[]
+  supportTickets       SupportTicket[]
+  companyCountries     CompanyCountry[]
+  focalPointInvitations FocalPointInvitation[]
 
   @@map("companies")
 }
@@ -71,19 +74,69 @@ model CompanyInvitation {
 }
 
 model FocalPoint {
-  id        String   @id @default(cuid())
-  firstName String
-  lastName  String
-  email     String
-  phone     String?
-  position  String?
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  companyId String   @unique
-  company   Company  @relation(fields: [companyId], references: [id])
+  id           String               @id @default(cuid())
+  firstName    String
+  lastName     String
+  email        String               @unique
+  passwordHash String?
+  phone        String?
+  position     String?
+  isActive     Boolean              @default(true)
+  isOnboarded  Boolean              @default(false)
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  companyId    String
+  company      Company              @relation(fields: [companyId], references: [id])
+  invitation   FocalPointInvitation?
 
   @@map("focal_points")
+}
+
+model FocalPointInvitation {
+  id           String           @id @default(cuid())
+  token        String           @unique @default(cuid())
+  email        String
+  status       InvitationStatus @default(PENDING)
+  expiresAt    DateTime
+  usedAt       DateTime?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  companyId    String
+  focalPointId String           @unique
+  sentByAdminId String?
+  company      Company          @relation(fields: [companyId], references: [id])
+  focalPoint   FocalPoint       @relation(fields: [focalPointId], references: [id])
+  sentByAdmin  Admin?           @relation(fields: [sentByAdminId], references: [id])
+
+  @@map("focal_point_invitations")
+}
+
+model Country {
+  id               String           @id @default(cuid())
+  code             String           @unique
+  name             String
+  isActive         Boolean          @default(true)
+  createdAt        DateTime         @default(now())
+  companyCountries CompanyCountry[]
+  importLines      ImportDeclarationLine[]
+  exportLines      ExportDeclarationLine[]
+
+  @@map("countries")
+}
+
+model CompanyCountry {
+  id        String      @id @default(cuid())
+  flowType  FlowType    @default(IMPORT_EXPORT)
+  isActive  Boolean     @default(true)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  companyId String
+  countryId String
+  company   Company     @relation(fields: [companyId], references: [id])
+  country   Country     @relation(fields: [countryId], references: [id])
+
+  @@unique([companyId, countryId])
+  @@map("company_countries")
 }
 
 model Unit {
@@ -147,16 +200,18 @@ model Period {
 }
 
 model ImportDeclaration {
-  id          String                  @id @default(cuid())
-  status      DeclarationStatus       @default(NOT_STARTED)
-  submittedAt DateTime?
-  createdAt   DateTime                @default(now())
-  updatedAt   DateTime                @updatedAt
-  companyId   String
-  periodId    String
-  lines       ImportDeclarationLine[]
-  company     Company                 @relation(fields: [companyId], references: [id])
-  period      Period                  @relation(fields: [periodId], references: [id])
+  id              String                  @id @default(cuid())
+  status          DeclarationStatus       @default(NOT_STARTED)
+  freightAmount   Decimal?                @db.Decimal(15, 2)
+  insuranceAmount Decimal?                @db.Decimal(15, 2)
+  submittedAt     DateTime?
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+  companyId       String
+  periodId        String
+  lines           ImportDeclarationLine[]
+  company         Company                 @relation(fields: [companyId], references: [id])
+  period          Period                  @relation(fields: [periodId], references: [id])
 
   @@unique([companyId, periodId])
   @@map("import_declarations")
@@ -172,9 +227,11 @@ model ImportDeclarationLine {
   declarationId    String
   companyProductId String
   unitId           String?
+  countryId        String?
   companyProduct   CompanyProduct    @relation(fields: [companyProductId], references: [id])
   declaration      ImportDeclaration @relation(fields: [declarationId], references: [id], onDelete: Cascade)
   unit             Unit?             @relation(fields: [unitId], references: [id])
+  country          Country?          @relation(fields: [countryId], references: [id])
 
   @@unique([declarationId, companyProductId])
   @@map("import_declaration_lines")
@@ -206,9 +263,11 @@ model ExportDeclarationLine {
   declarationId    String
   companyProductId String
   unitId           String?
+  countryId        String?
   companyProduct   CompanyProduct    @relation(fields: [companyProductId], references: [id])
   declaration      ExportDeclaration @relation(fields: [declarationId], references: [id], onDelete: Cascade)
   unit             Unit?             @relation(fields: [unitId], references: [id])
+  country          Country?          @relation(fields: [countryId], references: [id])
 
   @@unique([declarationId, companyProductId])
   @@map("export_declaration_lines")
@@ -294,6 +353,12 @@ enum DeclarationStatus {
 enum DeclarationType {
   IMPORT
   EXPORT
+}
+
+enum FlowType {
+  IMPORT
+  EXPORT
+  IMPORT_EXPORT
 }
 
 enum TicketStatus {

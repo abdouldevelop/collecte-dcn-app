@@ -5,12 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Package, FileInput, FileOutput, History,
-  HelpCircle, User, Users, LogOut, ChevronRight,
+  HelpCircle, User, Users, LogOut, ChevronRight, Globe,
 } from "lucide-react";
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Tableau de bord" },
   { href: "/products", icon: Package, label: "Produits" },
+  { href: "/countries", icon: Globe, label: "Pays partenaires" },
   {
     href: "/declarations",
     icon: FileInput,
