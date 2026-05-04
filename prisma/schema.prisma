@@ -115,6 +115,7 @@ model Country {
   id               String           @id @default(cuid())
   code             String           @unique
   name             String
+  continent        String           @default("Autre")
   isActive         Boolean          @default(true)
   createdAt        DateTime         @default(now())
   companyCountries CompanyCountry[]
