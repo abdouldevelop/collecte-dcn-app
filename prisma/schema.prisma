@@ -274,6 +274,18 @@ model ExportDeclarationLine {
   @@map("export_declaration_lines")
 }
 
+model ExchangeRate {
+  id        String   @id @default(cuid())
+  currency  String
+  rate      Decimal  @db.Decimal(15, 6)
+  date      DateTime @db.Date
+  source    String   @default("API")
+  createdAt DateTime @default(now())
+
+  @@unique([currency, date])
+  @@map("exchange_rates")
+}
+
 model Notification {
   id        String   @id @default(cuid())
   title     String

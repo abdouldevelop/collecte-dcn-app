@@ -4,13 +4,14 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard, Building2, FileText, Settings, LogOut, Users,
+  LayoutDashboard, Building2, FileText, Settings, LogOut, Users, TrendingUp,
 } from "lucide-react";
 
 const navItems = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Tableau de bord" },
   { href: "/admin/companies", icon: Building2, label: "Entreprises" },
   { href: "/admin/declarations", icon: FileText, label: "Déclarations" },
+  { href: "/admin/exchange-rates", icon: TrendingUp, label: "Taux de change" },
   { href: "/admin/admins", icon: Users, label: "Administrateurs", superAdmin: true },
   { href: "/admin/settings", icon: Settings, label: "Paramètres", superAdmin: true },
 ];
