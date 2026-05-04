@@ -1,61 +1,44 @@
 import { prisma } from "@/lib/prisma";
 
 const CURRENCIES = ["USD", "EUR"];
-const TARGET = "XAF";
-const API_BASE = "https://api.frankfurter.app";
+const TARGET = "xaf";
 
-interface FrankfurterResponse {
-  amount: number;
-  base: string;
-  date: string;
-  rates: Record<string, number>;
+// fawazahmed0/currency-api — free, no API key, supports XAF, daily historical
+// Primary CDN: jsdelivr, fallback: raw github
+function apiUrl(date: string, currency: string) {
+  const tag = date === "latest" ? "latest" : `@${date}`;
+  return `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api${tag}/v1/currencies/${currency.toLowerCase()}.json`;
 }
 
-async function fetchRateForDate(currency: string, date: string): Promise<number | null> {
+async function fetchRate(currency: string, date: string): Promise<{ rate: number; date: string } | null> {
   try {
-    const res = await fetch(`${API_BASE}/${date}?from=${currency}&to=${TARGET}`, {
-      next: { revalidate: 0 },
-    });
+    const res = await fetch(apiUrl(date, currency), { next: { revalidate: 0 } });
     if (!res.ok) return null;
-    const data: FrankfurterResponse = await res.json();
-    return data.rates[TARGET] ?? null;
+    const data = await res.json() as Record<string, unknown>;
+    const rates = data[currency.toLowerCase()] as Record<string, number> | undefined;
+    const rate = rates?.[TARGET];
+    if (!rate) return null;
+    return { rate, date: data.date as string ?? date };
   } catch {
     return null;
   }
 }
 
-async function fetchRatesRange(currency: string, from: string, to: string): Promise<Record<string, number>> {
-  try {
-    const res = await fetch(`${API_BASE}/${from}..${to}?from=${currency}&to=${TARGET}`, {
-      next: { revalidate: 0 },
-    });
-    if (!res.ok) return {};
-    const data = await res.json() as { rates: Record<string, Record<string, number>> };
-    const result: Record<string, number> = {};
-    for (const [date, rates] of Object.entries(data.rates)) {
-      if (rates[TARGET]) result[date] = rates[TARGET];
-    }
-    return result;
-  } catch {
-    return {};
-  }
-}
-
 export async function syncTodayRates(): Promise<{ synced: number; errors: string[] }> {
-  const today = new Date().toISOString().split("T")[0];
   let synced = 0;
   const errors: string[] = [];
 
   for (const currency of CURRENCIES) {
-    const rate = await fetchRateForDate(currency, "latest");
-    if (rate === null) {
-      errors.push(`Impossible de récupérer le taux ${currency}/${TARGET}`);
+    const result = await fetchRate(currency, "latest");
+    if (!result) {
+      errors.push(`Impossible de récupérer le taux ${currency}/XAF`);
       continue;
     }
+    const dateObj = new Date(result.date);
     await prisma.exchangeRate.upsert({
-      where: { currency_date: { currency, date: new Date(today) } },
-      create: { currency, rate, date: new Date(today), source: "API" },
-      update: { rate, source: "API" },
+      where: { currency_date: { currency, date: dateObj } },
+      create: { currency, rate: result.rate, date: dateObj, source: "fawazahmed0" },
+      update: { rate: result.rate, source: "fawazahmed0" },
     });
     synced++;
   }
@@ -64,28 +47,45 @@ export async function syncTodayRates(): Promise<{ synced: number; errors: string
 }
 
 export async function syncHistoricalRates(days = 365): Promise<{ synced: number; errors: string[] }> {
-  const to = new Date().toISOString().split("T")[0];
-  const fromDate = new Date();
-  fromDate.setDate(fromDate.getDate() - days);
-  const from = fromDate.toISOString().split("T")[0];
-
   let synced = 0;
   const errors: string[] = [];
 
-  for (const currency of CURRENCIES) {
-    const rates = await fetchRatesRange(currency, from, to);
-    if (Object.keys(rates).length === 0) {
-      errors.push(`Aucune donnée historique pour ${currency}/${TARGET}`);
-      continue;
-    }
+  // Build list of dates to fetch (skip weekends)
+  const today = new Date();
+  const datesToFetch: string[] = [];
+  for (let i = 0; i <= days; i++) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const dow = d.getDay();
+    if (dow === 0 || dow === 6) continue;
+    datesToFetch.push(d.toISOString().split("T")[0]);
+  }
 
-    for (const [date, rate] of Object.entries(rates)) {
+  // Check which (currency, date) pairs already exist
+  const fromDate = new Date(datesToFetch[datesToFetch.length - 1]);
+  const existing = await prisma.exchangeRate.findMany({
+    where: { currency: { in: CURRENCIES }, date: { gte: fromDate } },
+    select: { currency: true, date: true },
+  });
+  const existingSet = new Set(existing.map((r) => `${r.currency}_${r.date.toISOString().split("T")[0]}`));
+
+  for (const currency of CURRENCIES) {
+    const missing = datesToFetch.filter((d) => !existingSet.has(`${currency}_${d}`));
+
+    for (const date of missing) {
+      const result = await fetchRate(currency, date);
+      if (!result) continue;
+      const dateObj = new Date(date);
       await prisma.exchangeRate.upsert({
-        where: { currency_date: { currency, date: new Date(date) } },
-        create: { currency, rate, date: new Date(date), source: "API" },
-        update: { rate, source: "API" },
+        where: { currency_date: { currency, date: dateObj } },
+        create: { currency, rate: result.rate, date: dateObj, source: "fawazahmed0" },
+        update: { rate: result.rate, source: "fawazahmed0" },
       });
       synced++;
+    }
+
+    if (missing.length > 0 && synced === 0) {
+      errors.push(`Aucune donnée historique importée pour ${currency}/XAF`);
     }
   }
 

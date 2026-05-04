@@ -8,6 +8,11 @@ import { Eye, EyeOff, AlertCircle } from "lucide-react";
 import { loginSchema, LoginInput } from "@/validators";
 import { Button } from "@/components/ui/Button";
 
+const TEST_ACCOUNTS = [
+  { label: "Entreprise Demo SARL", email: "demo@entreprise.com", password: "Entreprise@2024!" },
+  { label: "SOTRACO Import-Export", email: "contact@sotraco.cg", password: "Entreprise@2024!" },
+];
+
 export function LoginForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
@@ -17,10 +22,33 @@ export function LoginForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
   });
+
+  const quickLogin = async (email: string, password: string) => {
+    setValue("email", email);
+    setValue("password", password);
+    setLoading(true);
+    setServerError("");
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) { setServerError(json.error ?? "Identifiants incorrects."); return; }
+      router.push("/dashboard");
+      router.refresh();
+    } catch {
+      setServerError("Erreur réseau. Veuillez réessayer.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const onSubmit = async (data: LoginInput) => {
     setLoading(true);
@@ -107,6 +135,24 @@ export function LoginForm() {
       <Button type="submit" loading={loading} className="w-full" size="lg">
         Se connecter
       </Button>
+
+      <div className="pt-4 border-t border-[#E5E7EB]">
+        <p className="text-xs text-[#9CA3AF] mb-2 font-medium">Accès de test</p>
+        <div className="flex flex-col gap-2">
+          {TEST_ACCOUNTS.map((acc) => (
+            <button
+              key={acc.email}
+              type="button"
+              onClick={() => quickLogin(acc.email, acc.password)}
+              disabled={loading}
+              className="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-[#E5E7EB] hover:border-[#496559] hover:bg-[#496559]/5 transition-all disabled:opacity-50 text-left"
+            >
+              <span className="text-xs font-semibold text-[#1F2937]">{acc.label}</span>
+              <span className="text-xs text-[#9CA3AF]">{acc.email}</span>
+            </button>
+          ))}
+        </div>
+      </div>
     </form>
   );
 }

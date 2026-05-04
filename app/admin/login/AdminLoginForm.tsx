@@ -7,15 +7,42 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff, AlertCircle } from "lucide-react";
 import { loginSchema, LoginInput } from "@/validators";
 
+const TEST_ACCOUNTS = [
+  { label: "Super Admin", email: "superadmin@collecte-dcn.gov", password: "Admin@123456" },
+  { label: "Admin", email: "admin@collecte-dcn.gov", password: "Admin@123456" },
+];
+
 export function AdminLoginForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [serverError, setServerError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
   });
+
+  const quickLogin = async (email: string, password: string) => {
+    setValue("email", email);
+    setValue("password", password);
+    setLoading(true);
+    setServerError("");
+    try {
+      const res = await fetch("/api/auth/admin-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) { setServerError(json.error ?? "Identifiants incorrects."); return; }
+      router.push("/admin/dashboard");
+      router.refresh();
+    } catch {
+      setServerError("Erreur réseau. Veuillez réessayer.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const onSubmit = async (data: LoginInput) => {
     setLoading(true);
@@ -94,6 +121,24 @@ export function AdminLoginForm() {
         {loading && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
         Se connecter
       </button>
+
+      <div className="pt-4 border-t border-[#E5E7EB]">
+        <p className="text-xs text-[#9CA3AF] mb-2 font-medium">Accès de test</p>
+        <div className="flex flex-col gap-2">
+          {TEST_ACCOUNTS.map((acc) => (
+            <button
+              key={acc.email}
+              type="button"
+              onClick={() => quickLogin(acc.email, acc.password)}
+              disabled={loading}
+              className="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-[#E5E7EB] hover:border-[#324d42] hover:bg-[#324d42]/5 transition-all disabled:opacity-50 text-left"
+            >
+              <span className="text-xs font-semibold text-[#1F2937]">{acc.label}</span>
+              <span className="text-xs text-[#9CA3AF]">{acc.email}</span>
+            </button>
+          ))}
+        </div>
+      </div>
     </form>
   );
 }
