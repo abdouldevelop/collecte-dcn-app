@@ -37,7 +37,21 @@
       "Bash(npx eslint *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3002/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3003/)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3003/)",
+      "PowerShell(Stop-Process -Name node -Force -ErrorAction SilentlyContinue)",
+      "Bash(grep -v \"^$\")",
+      "Bash(curl -s \"https://api.frankfurter.app/latest?from=USD&to=XAF\")",
+      "Bash(curl -v \"https://api.frankfurter.app/latest?from=USD&to=XAF\")",
+      "Bash(curl -s \"https://api.frankfurter.dev/v1/latest?from=USD&to=XAF\")",
+      "Bash(curl -s \"https://api.frankfurter.dev/v1/latest?from=USD\")",
+      "Bash(curl -s \"https://api.frankfurter.dev/v1/currencies\")",
+      "Bash(curl -s \"https://open.er-api.com/v6/latest/USD\")",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('XAF:', d.get\\('rates',{}\\).get\\('XAF'\\), 'EUR:', d.get\\('rates',{}\\).get\\('EUR'\\)\\)\")",
+      "Bash(curl -s \"https://api.exchangerate.host/convert?from=USD&to=XAF&date=2026-01-15&amount=1\")",
+      "Bash(curl -s \"https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2026-01-15/v1/currencies/usd.json\")",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('XAF:', d.get\\('usd',{}\\).get\\('xaf'\\)\\)\")",
+      "Bash(curl -s \"https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json\")",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('date:', d.get\\('date'\\), 'XAF:', d.get\\('usd',{}\\).get\\('xaf'\\)\\)\")"
     ]
   }
 }
