@@ -32,7 +32,7 @@ export const focalPointSchema = z.object({
 export const productSchema = z.object({
   code: z.string().min(1, "Code requis"),
   designation: z.string().min(1, "Désignation requise"),
-  type: z.enum(["IMPORT", "EXPORT", "IMPORT_EXPORT"]),
+  type: z.enum(["IMPORT", "EXPORT"]),
 });
 
 export const declarationLineSchema = z.object({
@@ -82,6 +82,62 @@ export const profileUpdateSchema = z.object({
   sector: z.string().optional(),
 });
 
+export const adminCreateSchema = z.object({
+  firstName: z.string().min(2, "Prénom requis").max(80),
+  lastName: z.string().min(2, "Nom requis").max(80),
+  email: z.string().email("Email invalide"),
+  password: z
+    .string()
+    .min(8, "Minimum 8 caractères")
+    .regex(/[A-Z]/, "Au moins une majuscule")
+    .regex(/[0-9]/, "Au moins un chiffre"),
+  role: z.enum(["ADMIN", "SUPER_ADMIN"]).default("ADMIN"),
+});
+
+export const periodCreateSchema = z.object({
+  year: z.number().int().min(2000).max(2100),
+  month: z.number().int().min(1).max(12),
+  label: z.string().min(1, "Label requis").max(50).optional(),
+  dueDate: z.string().datetime().optional(),
+  isActive: z.boolean().optional(),
+});
+
+export const periodUpdateSchema = z.object({
+  label: z.string().min(1).max(50).optional(),
+  dueDate: z.string().datetime().nullable().optional(),
+  isActive: z.boolean().optional(),
+});
+
+export const adminProfileSchema = z.object({
+  firstName: z.string().min(2).max(80).optional(),
+  lastName: z.string().min(2).max(80).optional(),
+  email: z.string().email().optional(),
+  currentPassword: z.string().optional(),
+  newPassword: z
+    .string()
+    .min(8, "Minimum 8 caractères")
+    .regex(/[A-Z]/, "Au moins une majuscule")
+    .regex(/[0-9]/, "Au moins un chiffre")
+    .optional(),
+}).refine(
+  (data) => !data.newPassword || !!data.currentPassword,
+  { message: "Mot de passe actuel requis pour changer le mot de passe", path: ["currentPassword"] }
+);
+
+export const adminUpdateSchema = z.object({
+  firstName: z.string().min(2).max(80).optional(),
+  lastName: z.string().min(2).max(80).optional(),
+  email: z.string().email().optional(),
+  role: z.enum(["ADMIN", "SUPER_ADMIN"]).optional(),
+  isActive: z.boolean().optional(),
+  password: z
+    .string()
+    .min(8)
+    .regex(/[A-Z]/)
+    .regex(/[0-9]/)
+    .optional(),
+});
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type OnboardingInput = z.infer<typeof onboardingSchema>;
 export type FocalPointInput = z.infer<typeof focalPointSchema>;
@@ -91,3 +147,8 @@ export type DeclarationSubmitInput = z.infer<typeof declarationSubmitSchema>;
 export type InvitationInput = z.infer<typeof invitationSchema>;
 export type SupportTicketInput = z.infer<typeof supportTicketSchema>;
 export type ProfileUpdateInput = z.infer<typeof profileUpdateSchema>;
+export type AdminCreateInput = z.infer<typeof adminCreateSchema>;
+export type AdminUpdateInput = z.infer<typeof adminUpdateSchema>;
+export type PeriodCreateInput = z.infer<typeof periodCreateSchema>;
+export type PeriodUpdateInput = z.infer<typeof periodUpdateSchema>;
+export type AdminProfileInput = z.infer<typeof adminProfileSchema>;

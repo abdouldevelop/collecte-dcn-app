@@ -45,10 +45,10 @@ async function getDashboardData(companyId: string) {
   }
 
   const importProducts = company.companyProducts.filter(
-    (cp) => cp.product.type === "IMPORT" || cp.product.type === "IMPORT_EXPORT"
+    (cp) => cp.product.type === "IMPORT"
   );
   const exportProducts = company.companyProducts.filter(
-    (cp) => cp.product.type === "EXPORT" || cp.product.type === "IMPORT_EXPORT"
+    (cp) => cp.product.type === "EXPORT"
   );
 
   const history = await prisma.period.findMany({

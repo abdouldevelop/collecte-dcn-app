@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 
-type ProductType = "IMPORT" | "EXPORT" | "IMPORT_EXPORT";
+type ProductType = "IMPORT" | "EXPORT";
 type ProductSource = "ADMIN" | "COMPANY";
 
 interface CompanyProductRow {
@@ -33,10 +33,9 @@ interface ProductsClientProps {
   availableAdminProducts: AdminProduct[];
 }
 
-const typeLabels: Record<ProductType, { label: string; variant: "info" | "success" | "accent" }> = {
+const typeLabels: Record<ProductType, { label: string; variant: "info" | "success" }> = {
   IMPORT: { label: "Import", variant: "info" },
   EXPORT: { label: "Export", variant: "success" },
-  IMPORT_EXPORT: { label: "Import & Export", variant: "accent" },
 };
 
 export function ProductsClient({ companyId: _companyId, companyProducts: initialProducts, availableAdminProducts: _availableAdminProducts }: ProductsClientProps) {
@@ -52,7 +51,7 @@ export function ProductsClient({ companyId: _companyId, companyProducts: initial
   const [addModal, setAddModal] = useState(false);
   const [newCode, setNewCode] = useState("");
   const [newDesignation, setNewDesignation] = useState("");
-  const [newType, setNewType] = useState<ProductType>("IMPORT_EXPORT");
+  const [newType, setNewType] = useState<ProductType>("IMPORT");
   const [adding, setAdding] = useState(false);
   const [addError, setAddError] = useState("");
 
@@ -112,7 +111,7 @@ export function ProductsClient({ companyId: _companyId, companyProducts: initial
       if (!res.ok) { setAddError(json.error ?? "Erreur"); return; }
       router.refresh();
       setAddModal(false);
-      setNewCode(""); setNewDesignation(""); setNewType("IMPORT_EXPORT");
+      setNewCode(""); setNewDesignation(""); setNewType("IMPORT");
     } finally {
       setAdding(false);
     }
@@ -171,7 +170,7 @@ export function ProductsClient({ companyId: _companyId, companyProducts: initial
             />
           </div>
           <div className="flex gap-2">
-            {["ALL", "IMPORT", "EXPORT", "IMPORT_EXPORT"].map((t) => (
+            {["ALL", "IMPORT", "EXPORT"].map((t) => (
               <button
                 key={t}
                 onClick={() => setTypeFilter(t)}
@@ -181,7 +180,7 @@ export function ProductsClient({ companyId: _companyId, companyProducts: initial
                     : "bg-[#F8F9FA] text-[#6B7280] hover:bg-[#E5E7EB]"
                 }`}
               >
-                {t === "ALL" ? "Tous" : t === "IMPORT_EXPORT" ? "Import & Export" : t}
+                {t === "ALL" ? "Tous" : t === "IMPORT" ? "Import" : "Export"}
               </button>
             ))}
           </div>
@@ -302,7 +301,6 @@ export function ProductsClient({ companyId: _companyId, companyProducts: initial
             >
               <option value="IMPORT">Import</option>
               <option value="EXPORT">Export</option>
-              <option value="IMPORT_EXPORT">Import & Export</option>
             </select>
           </div>
           <div className="flex gap-3 justify-end pt-2">

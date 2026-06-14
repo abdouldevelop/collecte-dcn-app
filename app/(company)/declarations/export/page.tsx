@@ -33,12 +33,12 @@ export default async function ExportDeclarationPage() {
       },
     }),
     prisma.companyProduct.findMany({
-      where: { companyId: session.id, isActive: true, product: { type: { in: ["EXPORT", "IMPORT_EXPORT"] } } },
+      where: { companyId: session.id, isActive: true, product: { type: "EXPORT" } },
       include: { product: true },
       orderBy: { product: { code: "asc" } },
     }),
     prisma.companyCountry.findMany({
-      where: { companyId: session.id, isActive: true, flowType: { in: ["EXPORT", "IMPORT_EXPORT"] } },
+      where: { companyId: session.id, isActive: true, flowType: "EXPORT" },
       include: { country: { select: { id: true, code: true, name: true } } },
       orderBy: { country: { name: "asc" } },
     }),

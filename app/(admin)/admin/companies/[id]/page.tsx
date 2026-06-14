@@ -175,7 +175,7 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
                       <tr key={cp.id} className="border-t border-[#E9ECEF] hover:bg-[#F8F9FA]">
                         <td className="px-3 py-2 text-sm font-mono text-[#496559] font-semibold">{cp.product.code}</td>
                         <td className="px-3 py-2 text-sm text-[#1F2937]">{cp.product.designation}</td>
-                        <td className="px-3 py-2"><Badge variant={cp.product.type === "IMPORT_EXPORT" ? "accent" : cp.product.type === "IMPORT" ? "info" : "success"}>{cp.product.type}</Badge></td>
+                        <td className="px-3 py-2"><Badge variant={cp.product.type === "IMPORT" ? "info" : "success"}>{cp.product.type}</Badge></td>
                         <td className="px-3 py-2"><Badge variant={cp.product.source === "ADMIN" ? "info" : "neutral"}>{cp.product.source}</Badge></td>
                       </tr>
                     ))}

@@ -21,9 +21,8 @@ interface ImportReport {
 
 function normalizeType(raw: string): ProductType {
   const upper = raw.toUpperCase().trim();
-  if (upper === "IMPORT") return "IMPORT";
   if (upper === "EXPORT") return "EXPORT";
-  return "IMPORT_EXPORT";
+  return "IMPORT";
 }
 
 async function parseCSV(text: string): Promise<ProductRow[]> {
@@ -35,7 +34,7 @@ async function parseCSV(text: string): Promise<ProductRow[]> {
   return result.data.map((row) => ({
     code: (row["code"] ?? "").trim(),
     designation: (row["designation"] ?? "").trim(),
-    type: (row["type"] ?? "IMPORT_EXPORT").trim(),
+    type: (row["type"] ?? "IMPORT").trim(),
   }));
 }
 
@@ -61,7 +60,7 @@ async function parseXLSX(buffer: ArrayBuffer): Promise<ProductRow[]> {
     rows.push({
       code: rowData["code"] ?? "",
       designation: rowData["designation"] ?? "",
-      type: rowData["type"] ?? "IMPORT_EXPORT",
+      type: rowData["type"] ?? "IMPORT",
     });
   });
 

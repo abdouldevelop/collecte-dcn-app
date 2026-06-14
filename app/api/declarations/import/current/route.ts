@@ -39,7 +39,7 @@ export async function GET(_request: NextRequest) {
     }
 
     const companyProducts = await prisma.companyProduct.findMany({
-      where: { companyId: session.id, isActive: true, product: { isActive: true, type: { in: ["IMPORT", "IMPORT_EXPORT"] } } },
+      where: { companyId: session.id, isActive: true, product: { isActive: true, type: "IMPORT" } },
       include: { product: { select: { id: true, code: true, designation: true, type: true, source: true } } },
       orderBy: { product: { code: "asc" } },
     });
@@ -47,7 +47,7 @@ export async function GET(_request: NextRequest) {
     const units = await prisma.unit.findMany({ where: { isActive: true }, orderBy: { code: "asc" } });
 
     const countries = await prisma.companyCountry.findMany({
-      where: { companyId: session.id, isActive: true, flowType: { in: ["IMPORT", "IMPORT_EXPORT"] } },
+      where: { companyId: session.id, isActive: true, flowType: "IMPORT" },
       include: { country: { select: { id: true, code: true, name: true } } },
       orderBy: { country: { name: "asc" } },
     });

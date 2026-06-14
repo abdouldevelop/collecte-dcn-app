@@ -7,7 +7,7 @@ import { FlowType } from "@prisma/client";
 
 const addCountrySchema = z.object({
   countryId: z.string().min(1),
-  flowType: z.enum(["IMPORT", "EXPORT", "IMPORT_EXPORT"]).default("IMPORT_EXPORT"),
+  flowType: z.enum(["IMPORT", "EXPORT"]).default("IMPORT"),
 });
 
 export async function GET() {
@@ -31,18 +31,24 @@ export async function POST(request: NextRequest) {
     const data = addCountrySchema.parse(body);
 
     const existing = await prisma.companyCountry.findUnique({
-      where: { companyId_countryId: { companyId: session.id, countryId: data.countryId } },
+      where: {
+        companyId_countryId_flowType: {
+          companyId: session.id,
+          countryId: data.countryId,
+          flowType: data.flowType as FlowType,
+        },
+      },
     });
     if (existing) {
       if (!existing.isActive) {
         const updated = await prisma.companyCountry.update({
           where: { id: existing.id },
-          data: { isActive: true, flowType: data.flowType as FlowType },
+          data: { isActive: true },
           include: { country: true },
         });
         return apiSuccess(updated);
       }
-      return apiError("Ce pays est déjà dans votre liste", 409);
+      return apiError("Ce pays est déjà associé à ce flux", 409);
     }
 
     const companyCountry = await prisma.companyCountry.create({

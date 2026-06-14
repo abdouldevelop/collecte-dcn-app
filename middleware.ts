@@ -29,6 +29,7 @@ export async function middleware(request: NextRequest) {
 
   // Skip API routes that are public
   if (pathname.startsWith("/api/auth")) return NextResponse.next();
+  if (pathname.startsWith("/api/invitations/validate")) return NextResponse.next();
   if (pathname.startsWith("/api/admin")) {
     const token = request.cookies.get("admin-token")?.value;
     if (!token) {
@@ -55,18 +56,17 @@ export async function middleware(request: NextRequest) {
   // Public pages
   if (isPublicPath(pathname)) {
     // Redirect authenticated users away from login pages
-    if (pathname === "/login") {
-      const token = request.cookies.get("company-token")?.value;
-      if (token) {
-        const session = await verifyCompanyToken(token);
-        if (session) return NextResponse.redirect(new URL("/dashboard", request.url));
-      }
-    }
-    if (pathname === "/admin/login") {
-      const token = request.cookies.get("admin-token")?.value;
-      if (token) {
-        const session = await verifyAdminToken(token);
+    if (pathname === "/login" || pathname === "/admin/login") {
+      // Admin cookie takes priority
+      const adminToken = request.cookies.get("admin-token")?.value;
+      if (adminToken) {
+        const session = await verifyAdminToken(adminToken);
         if (session) return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+      }
+      const companyToken = request.cookies.get("company-token")?.value;
+      if (companyToken) {
+        const session = await verifyCompanyToken(companyToken);
+        if (session) return NextResponse.redirect(new URL("/dashboard", request.url));
       }
     }
     return NextResponse.next();

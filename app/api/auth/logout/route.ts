@@ -1,7 +1,6 @@
-import { NextRequest } from "next/server";
-import { apiSuccess, handleApiError } from "@/lib/api";
+import { NextRequest, NextResponse } from "next/server";
+import { handleApiError, getClientIp } from "@/lib/api";
 import { clearCompanyCookie, getCompanySession, logAudit } from "@/lib/auth";
-import { getClientIp } from "@/lib/api";
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,7 +18,7 @@ export async function POST(request: NextRequest) {
 
     await clearCompanyCookie();
 
-    return apiSuccess({ message: "Déconnexion réussie" });
+    return NextResponse.redirect(new URL("/login", request.url), { status: 303 });
   } catch (error) {
     return handleApiError(error);
   }

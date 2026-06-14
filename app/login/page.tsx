@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { LoginForm } from "./LoginForm";
 
 export const metadata: Metadata = {
@@ -11,14 +12,18 @@ export default function LoginPage() {
       {/* Left panel - institutional */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#496559] flex-col justify-between p-12">
         <div>
-          <div className="flex items-center gap-3 mb-16">
-            <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold">DCN</span>
+          <div className="mb-16">
+            <div className="bg-white rounded-2xl px-5 py-4 inline-flex items-center justify-center shadow-lg">
+              <Image
+                src="/anstat-logo.png"
+                alt="ANSTAT - Agence Nationale de la Statistique"
+                width={3508}
+                height={1323}
+                priority
+                className="h-14 w-auto"
+              />
             </div>
-            <div>
-              <p className="text-white font-bold text-lg leading-tight">Collecte DCN</p>
-              <p className="text-white/60 text-sm">Portail Statistiques</p>
-            </div>
+            <p className="text-white/60 text-sm mt-3">Portail Collecte Statistiques</p>
           </div>
 
           <div className="max-w-sm">
@@ -58,18 +63,23 @@ export default function LoginPage() {
       <div className="flex-1 flex items-center justify-center p-6 lg:p-12 bg-[#F8F9FA]">
         <div className="w-full max-w-md">
           {/* Mobile logo */}
-          <div className="flex items-center gap-3 mb-8 lg:hidden">
-            <div className="w-9 h-9 bg-[#496559] rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-sm">DCN</span>
-            </div>
-            <p className="text-[#1F2937] font-bold">Collecte DCN</p>
+          <div className="flex items-center justify-center mb-8 lg:hidden">
+            <Image
+              src="/anstat-logo.png"
+              alt="ANSTAT - Agence Nationale de la Statistique"
+              width={3508}
+              height={1323}
+              priority
+              className="h-12 w-auto"
+            />
           </div>
 
           <div className="bg-white rounded-2xl border border-[#E5E7EB] shadow-[0px_4px_20px_rgba(73,101,89,0.08)] p-8">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-[#1F2937]">Connexion Entreprise</h2>
+              <h2 className="text-2xl font-bold text-[#1F2937]">Connexion</h2>
               <p className="text-[#6B7280] text-sm mt-2">
-                Accédez à votre espace sécurisé pour renseigner vos données mensuelles.
+                Identifiez-vous avec votre adresse professionnelle. Vous serez automatiquement
+                redirigé vers votre espace en fonction de votre rôle.
               </p>
             </div>
 

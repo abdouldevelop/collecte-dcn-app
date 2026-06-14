@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { Suspense } from "react";
 import { OnboardingForm } from "./OnboardingForm";
 
@@ -12,14 +13,18 @@ export default function OnboardingPage() {
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-5/12 bg-[#496559] flex-col justify-between p-12">
         <div>
-          <div className="flex items-center gap-3 mb-12">
-            <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold">DCN</span>
+          <div className="mb-12">
+            <div className="bg-white rounded-2xl px-5 py-4 inline-flex items-center justify-center shadow-lg">
+              <Image
+                src="/anstat-logo.png"
+                alt="ANSTAT - Agence Nationale de la Statistique"
+                width={3508}
+                height={1323}
+                priority
+                className="h-14 w-auto"
+              />
             </div>
-            <div>
-              <p className="text-white font-bold text-lg leading-tight">Collecte DCN</p>
-              <p className="text-white/60 text-sm">Portail Statistiques</p>
-            </div>
+            <p className="text-white/60 text-sm mt-3">Portail Collecte Statistiques</p>
           </div>
 
           <h1 className="text-3xl font-bold text-white leading-tight mb-4">

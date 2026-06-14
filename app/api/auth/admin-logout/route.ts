@@ -1,5 +1,5 @@
-import { NextRequest } from "next/server";
-import { apiSuccess, handleApiError, getClientIp } from "@/lib/api";
+import { NextRequest, NextResponse } from "next/server";
+import { handleApiError, getClientIp } from "@/lib/api";
 import { clearAdminCookie, getAdminSession, logAudit } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
 
     await clearAdminCookie();
 
-    return apiSuccess({ message: "Déconnexion administrateur réussie" });
+    return NextResponse.redirect(new URL("/login", request.url), { status: 303 });
   } catch (error) {
     return handleApiError(error);
   }

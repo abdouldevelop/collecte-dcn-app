@@ -57,14 +57,14 @@ async function main() {
 
   // Products (admin-loaded)
   const productsData = [
-    { code: "0101", designation: "Chevaux vivants", type: ProductType.IMPORT_EXPORT },
+    { code: "0101", designation: "Chevaux vivants", type: ProductType.IMPORT },
     { code: "0201", designation: "Viandes bovines fraîches", type: ProductType.IMPORT },
-    { code: "0301", designation: "Poissons vivants", type: ProductType.IMPORT_EXPORT },
+    { code: "0301", designation: "Poissons vivants", type: ProductType.IMPORT },
     { code: "0401", designation: "Lait et crème de lait", type: ProductType.IMPORT },
-    { code: "0701", designation: "Légumes frais", type: ProductType.IMPORT_EXPORT },
+    { code: "0701", designation: "Légumes frais", type: ProductType.IMPORT },
     { code: "0901", designation: "Café vert", type: ProductType.EXPORT },
     { code: "1001", designation: "Blé et méteil", type: ProductType.IMPORT },
-    { code: "1501", designation: "Huile de palme", type: ProductType.IMPORT_EXPORT },
+    { code: "1501", designation: "Huile de palme", type: ProductType.IMPORT },
     { code: "2701", designation: "Huiles brutes de pétrole", type: ProductType.IMPORT },
     { code: "8471", designation: "Machines de traitement de l'information", type: ProductType.IMPORT },
   ];

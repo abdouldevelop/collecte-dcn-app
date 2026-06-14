@@ -8,18 +8,22 @@ interface CompanyCountry { id: string; flowType: string; country: Country }
 const FLOW_LABELS: Record<string, string> = {
   IMPORT: "Import",
   EXPORT: "Export",
-  IMPORT_EXPORT: "Import & Export",
 };
 
 const FLOW_COLORS: Record<string, string> = {
   IMPORT: "bg-blue-100 text-blue-800",
   EXPORT: "bg-green-100 text-green-800",
-  IMPORT_EXPORT: "bg-orange-100 text-orange-800",
 };
 
-const CONTINENT_ORDER = ["Afrique", "Europe", "Asie", "Ameriques", "Oceanie", "Autre"];
+const CONTINENT_ORDER = ["Afrique", "Europe", "Asie", "Amériques", "Océanie", "Antarctique", "Autre"];
 const CONTINENT_FLAGS: Record<string, string> = {
-  Afrique: "🌍", Europe: "🌍", Asie: "🌏", Ameriques: "🌎", Oceanie: "🌏", Autre: "🌐",
+  Afrique: "🌍",
+  Europe: "🌍",
+  Asie: "🌏",
+  Amériques: "🌎",
+  Océanie: "🌏",
+  Antarctique: "❄️",
+  Autre: "🌐",
 };
 
 export default function CountriesClient({
@@ -32,17 +36,26 @@ export default function CountriesClient({
   const [companyCountries, setCompanyCountries] = useState(initialCompanyCountries);
   const [showModal, setShowModal] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [selectedFlow, setSelectedFlow] = useState("IMPORT_EXPORT");
+  const [selectedFlow, setSelectedFlow] = useState("IMPORT");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const alreadyAdded = useMemo(() => new Set(companyCountries.map((c) => c.country.id)), [companyCountries]);
+  // A country can be added once per flow. So "already added" depends on the flow currently selected.
+  const alreadyAddedForFlow = useMemo(
+    () =>
+      new Set(
+        companyCountries
+          .filter((c) => c.flowType === selectedFlow)
+          .map((c) => c.country.id)
+      ),
+    [companyCountries, selectedFlow]
+  );
 
-  const available = useMemo(() =>
-    allCountries.filter((c) => !alreadyAdded.has(c.id)),
-    [allCountries, alreadyAdded]
+  const available = useMemo(
+    () => allCountries.filter((c) => !alreadyAddedForFlow.has(c.id)),
+    [allCountries, alreadyAddedForFlow]
   );
 
   const filtered = useMemo(() =>
@@ -253,9 +266,8 @@ export default function CountriesClient({
                   onChange={(e) => setSelectedFlow(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#496559]"
                 >
-                  <option value="IMPORT_EXPORT">Import & Export</option>
-                  <option value="IMPORT">Import uniquement</option>
-                  <option value="EXPORT">Export uniquement</option>
+                  <option value="IMPORT">Import</option>
+                  <option value="EXPORT">Export</option>
                 </select>
               </div>
               <div className="flex gap-2 pt-4">
@@ -309,7 +321,6 @@ export default function CountriesClient({
                       >
                         <option value="IMPORT">Import</option>
                         <option value="EXPORT">Export</option>
-                        <option value="IMPORT_EXPORT">Import & Export</option>
                       </select>
                       <button onClick={() => handleRemove(cc.id)} className="text-red-300 hover:text-red-500 text-sm ml-1" title="Retirer">✕</button>
                     </div>

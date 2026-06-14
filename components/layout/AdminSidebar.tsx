@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Building2, FileText, Settings, LogOut, Users, TrendingUp,
@@ -32,15 +33,19 @@ export function AdminSidebar({ adminName, adminEmail, role }: AdminSidebarProps)
     <aside className="w-64 min-h-screen bg-[#324d42] flex flex-col">
       {/* Logo */}
       <div className="px-6 py-6 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center">
-            <span className="text-white font-bold text-sm">DCN</span>
-          </div>
-          <div>
-            <p className="text-white font-bold text-sm leading-tight">Administration</p>
-            <p className="text-white/60 text-xs">Collecte Statistiques</p>
-          </div>
+        <div className="bg-white rounded-xl px-3 py-2.5 flex items-center justify-center mb-3">
+          <Image
+            src="/anstat-logo.png"
+            alt="ANSTAT - Agence Nationale de la Statistique"
+            width={3508}
+            height={1323}
+            priority
+            className="h-10 w-auto"
+          />
         </div>
+        <p className="text-center text-white/80 text-xs font-semibold uppercase tracking-wider">
+          Administration
+        </p>
       </div>
 
       {/* Admin info */}

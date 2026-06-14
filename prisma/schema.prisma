@@ -127,7 +127,7 @@ model Country {
 
 model CompanyCountry {
   id        String      @id @default(cuid())
-  flowType  FlowType    @default(IMPORT_EXPORT)
+  flowType  FlowType    @default(IMPORT)
   isActive  Boolean     @default(true)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
@@ -136,7 +136,7 @@ model CompanyCountry {
   company   Company     @relation(fields: [companyId], references: [id])
   country   Country     @relation(fields: [countryId], references: [id])
 
-  @@unique([companyId, countryId])
+  @@unique([companyId, countryId, flowType])
   @@map("company_countries")
 }
 
@@ -157,7 +157,7 @@ model Product {
   id              String           @id @default(cuid())
   code            String           @unique
   designation     String
-  type            ProductType      @default(IMPORT_EXPORT)
+  type            ProductType      @default(IMPORT)
   source          ProductSource    @default(ADMIN)
   isActive        Boolean          @default(true)
   createdAt       DateTime         @default(now())
@@ -349,7 +349,6 @@ enum InvitationStatus {
 enum ProductType {
   IMPORT
   EXPORT
-  IMPORT_EXPORT
 }
 
 enum ProductSource {
@@ -371,7 +370,6 @@ enum DeclarationType {
 enum FlowType {
   IMPORT
   EXPORT
-  IMPORT_EXPORT
 }
 
 enum TicketStatus {

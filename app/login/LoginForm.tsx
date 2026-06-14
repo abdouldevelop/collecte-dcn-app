@@ -9,8 +9,10 @@ import { loginSchema, LoginInput } from "@/validators";
 import { Button } from "@/components/ui/Button";
 
 const TEST_ACCOUNTS = [
-  { label: "Entreprise Demo SARL", email: "demo@entreprise.com", password: "Entreprise@2024!" },
-  { label: "SOTRACO Import-Export", email: "contact@sotraco.cg", password: "Entreprise@2024!" },
+  { label: "Super Admin", email: "superadmin@collecte-dcn.gov", password: "Admin@123456" },
+  { label: "Admin", email: "admin@collecte-dcn.gov", password: "Admin@123456" },
+  { label: "Entreprise Demo SARL", email: "demo@entreprise.com", password: "Entreprise@123456" },
+  { label: "SOTRACO Import-Export", email: "contact@sotraco.cg", password: "Entreprise@123456" },
 ];
 
 export function LoginForm() {
@@ -41,7 +43,8 @@ export function LoginForm() {
       });
       const json = await res.json();
       if (!res.ok || !json.success) { setServerError(json.error ?? "Identifiants incorrects."); return; }
-      router.push("/dashboard");
+      const target = json.data?.redirectTo ?? "/dashboard";
+      router.push(target);
       router.refresh();
     } catch {
       setServerError("Erreur réseau. Veuillez réessayer.");
@@ -64,7 +67,8 @@ export function LoginForm() {
         setServerError(json.error ?? "Identifiants incorrects.");
         return;
       }
-      router.push("/dashboard");
+      const target = json.data?.redirectTo ?? "/dashboard";
+      router.push(target);
       router.refresh();
     } catch {
       setServerError("Erreur réseau. Veuillez réessayer.");

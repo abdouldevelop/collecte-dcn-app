@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
           }
         : {}),
       ...(source ? { source: source as "ADMIN" | "COMPANY" } : {}),
-      ...(type ? { type: type as "IMPORT" | "EXPORT" | "IMPORT_EXPORT" } : {}),
+      ...(type ? { type: type as "IMPORT" | "EXPORT" } : {}),
     };
 
     const [products, total] = await Promise.all([

@@ -6,7 +6,7 @@ import { z } from "zod";
 import { FlowType } from "@prisma/client";
 
 const updateSchema = z.object({
-  flowType: z.enum(["IMPORT", "EXPORT", "IMPORT_EXPORT"]),
+  flowType: z.enum(["IMPORT", "EXPORT"]),
 });
 
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -20,6 +20,22 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       where: { id, companyId: session.id },
     });
     if (!record) return apiError("Pays non trouvé", 404);
+
+    // Refuse if the target flow already exists for this (company, country) pair
+    if (record.flowType !== data.flowType) {
+      const conflict = await prisma.companyCountry.findUnique({
+        where: {
+          companyId_countryId_flowType: {
+            companyId: session.id,
+            countryId: record.countryId,
+            flowType: data.flowType as FlowType,
+          },
+        },
+      });
+      if (conflict && conflict.isActive) {
+        return apiError("Ce pays est déjà associé à ce flux", 409);
+      }
+    }
 
     const updated = await prisma.companyCountry.update({
       where: { id },
