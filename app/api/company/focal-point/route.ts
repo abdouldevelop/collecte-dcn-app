@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { v4 as uuidv4 } from "uuid";
+import { randomUUID } from "node:crypto";
 import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError, handleApiError } from "@/lib/api";
 import { requireCompanySession } from "@/lib/auth";
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     const existing = await prisma.focalPoint.findUnique({ where: { email: data.email } });
     if (existing) return apiError("Un point focal avec cet email existe déjà", 409);
 
-    const token = uuidv4();
+    const token = randomUUID();
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
     const focalPoint = await prisma.$transaction(async (tx) => {

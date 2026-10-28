@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
     // Validate invitation token
     const invitation = await prisma.companyInvitation.findUnique({
       where: { token: input.token },
+      include: { products: { select: { productId: true } } },
     });
 
     if (!invitation) {
@@ -22,6 +23,11 @@ export async function POST(request: NextRequest) {
     if (invitation.status !== "PENDING") {
       return apiError("Cette invitation a déjà été utilisée ou annulée", 400);
     }
+
+    if (!invitation.email) {
+      return apiError("Cette entreprise n’a pas encore d’adresse email configurée", 400);
+    }
+    const invitationEmail = invitation.email;
 
     if (invitation.expiresAt < new Date()) {
       await prisma.companyInvitation.update({
@@ -33,7 +39,7 @@ export async function POST(request: NextRequest) {
 
     // Check if company already exists with this email
     const existingCompany = await prisma.company.findUnique({
-      where: { email: invitation.email },
+      where: { email: invitationEmail },
     });
     if (existingCompany) {
       return apiError("Un compte existe déjà pour cet email", 400);
@@ -45,11 +51,11 @@ export async function POST(request: NextRequest) {
     const company = await prisma.$transaction(async (tx) => {
       const created = await tx.company.create({
         data: {
-          name: invitation.companyName,
-          email: invitation.email,
+          name: input.companyName,
+          email: invitationEmail,
           passwordHash,
-          rccm: invitation.rccm ?? null,
-          ncc: invitation.ncc ?? null,
+          rccm: input.rccm || null,
+          ncc: input.ncc || null,
           phone: input.phone ?? null,
           address: input.address ?? null,
           sector: input.sector ?? null,
@@ -57,6 +63,16 @@ export async function POST(request: NextRequest) {
           isActive: true,
         },
       });
+
+      if (invitation.products.length > 0) {
+        await tx.companyProduct.createMany({
+          data: invitation.products.map(({ productId }) => ({
+            companyId: created.id,
+            productId,
+          })),
+          skipDuplicates: true,
+        });
+      }
 
       await tx.companyInvitation.update({
         where: { id: invitation.id },

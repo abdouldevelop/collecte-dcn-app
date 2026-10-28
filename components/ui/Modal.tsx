@@ -46,8 +46,8 @@ export function Modal({ open, onClose, title, description, children, size = "md"
         aria-modal="true"
         aria-labelledby="modal-title"
         className={cn(
-          "relative bg-white rounded-2xl shadow-xl w-full",
-          "border border-[#E5E7EB] p-6",
+          "relative bg-white rounded-md shadow-xl w-full",
+          "border border-[#dfe5e1] border-t-[3px] border-t-[#49655a] p-6",
           sizes[size]
         )}
       >

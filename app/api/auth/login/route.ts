@@ -111,13 +111,17 @@ export async function POST(request: NextRequest) {
       ipAddress: getClientIp(request),
     });
 
+    // Vérifier si le changement de mot de passe est obligatoire
+    const redirectTo = company.mustChangePassword ? "/change-password" : "/dashboard";
+
     return apiSuccess({
       id: company.id,
       email: company.email,
       name: company.name,
       isOnboarded: company.isOnboarded,
       role: "COMPANY",
-      redirectTo: "/dashboard",
+      mustChangePassword: company.mustChangePassword,
+      redirectTo,
     });
   } catch (error) {
     return handleApiError(error);

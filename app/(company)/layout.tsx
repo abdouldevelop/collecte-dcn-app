@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getCompanySession } from "@/lib/auth";
 import { CompanySidebar } from "@/components/layout/CompanySidebar";
+import { AppShell } from "@/components/layout/AppShell";
 import { prisma } from "@/lib/prisma";
 
 export default async function CompanyLayout({
@@ -21,11 +22,8 @@ export default async function CompanyLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-[#F8F9FA]">
-      <CompanySidebar companyName={company.name} companyEmail={company.email} />
-      <main className="flex-1 overflow-auto">
-        {children}
-      </main>
-    </div>
+    <AppShell sidebar={<CompanySidebar companyName={company.name} companyEmail={company.email} />}>
+      {children}
+    </AppShell>
   );
 }

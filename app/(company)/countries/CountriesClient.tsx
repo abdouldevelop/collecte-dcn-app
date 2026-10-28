@@ -5,11 +5,6 @@ import { useState, useMemo } from "react";
 interface Country { id: string; code: string; name: string; continent: string }
 interface CompanyCountry { id: string; flowType: string; country: Country }
 
-const FLOW_LABELS: Record<string, string> = {
-  IMPORT: "Import",
-  EXPORT: "Export",
-};
-
 const FLOW_COLORS: Record<string, string> = {
   IMPORT: "bg-blue-100 text-blue-800",
   EXPORT: "bg-green-100 text-green-800",

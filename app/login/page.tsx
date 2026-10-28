@@ -8,98 +8,40 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex">
-      {/* Left panel - institutional */}
-      <div className="hidden lg:flex lg:w-1/2 bg-[#496559] flex-col justify-between p-12">
-        <div>
-          <div className="mb-16">
-            <div className="bg-white rounded-2xl px-5 py-4 inline-flex items-center justify-center shadow-lg">
+    <div className="min-h-screen bg-white">
+      <main className="grid min-h-screen border-t-4 border-[#f39323] lg:grid-cols-[58%_42%]">
+        <section className="relative hidden min-h-[calc(100vh-4px)] overflow-hidden lg:block">
+          <Image
+            src="/dcn-login-illustration.png"
+            alt="Professionnels analysant des données statistiques de commerce extérieur"
+            fill
+            priority
+            sizes="58vw"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-[#243d33]/10 to-transparent" />
+        </section>
+
+        <section className="flex items-center justify-center bg-white px-6 py-12 sm:px-12 lg:px-16">
+          <div className="w-full max-w-[420px] bg-white px-10 py-12 sm:px-12">
+            <div className="mb-10 flex justify-center">
               <Image
                 src="/anstat-logo.png"
-                alt="ANSTAT - Agence Nationale de la Statistique"
+                alt="ANStat - Agence Nationale de la Statistique"
                 width={3508}
                 height={1323}
                 priority
                 className="h-14 w-auto"
               />
             </div>
-            <p className="text-white/60 text-sm mt-3">Portail Collecte Statistiques</p>
-          </div>
-
-          <div className="max-w-sm">
-            <h1 className="text-4xl font-bold text-white leading-tight mb-4">
-              Plateforme de<br />
-              <span className="text-[#f39221]">Collecte Statistique</span>
-            </h1>
-            <p className="text-white/70 text-lg leading-relaxed">
-              Déclarez vos données mensuelles de commerce extérieur
-              Import / Export en toute sécurité.
+            <LoginForm />
+            <p className="mt-6 text-center text-xs leading-5 text-[#68746e]">
+              Connectez-vous avec vos identifiants pour accéder à votre espace de collecte DCN.
             </p>
           </div>
-        </div>
+        </section>
 
-        <div>
-          <div className="grid grid-cols-3 gap-4 mb-8">
-            {[
-              { label: "Entreprises actives", value: "150+" },
-              { label: "Déclarations traitées", value: "2,400+" },
-              { label: "Taux de conformité", value: "94%" },
-            ].map((stat) => (
-              <div key={stat.label} className="bg-white/10 rounded-xl p-4">
-                <p className="text-white font-bold text-xl">{stat.value}</p>
-                <p className="text-white/60 text-xs mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2 text-white/40 text-sm">
-            <div className="w-1.5 h-1.5 bg-[#16A34A] rounded-full" />
-            <span>Connexion sécurisée HTTPS</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Right panel - login form */}
-      <div className="flex-1 flex items-center justify-center p-6 lg:p-12 bg-[#F8F9FA]">
-        <div className="w-full max-w-md">
-          {/* Mobile logo */}
-          <div className="flex items-center justify-center mb-8 lg:hidden">
-            <Image
-              src="/anstat-logo.png"
-              alt="ANSTAT - Agence Nationale de la Statistique"
-              width={3508}
-              height={1323}
-              priority
-              className="h-12 w-auto"
-            />
-          </div>
-
-          <div className="bg-white rounded-2xl border border-[#E5E7EB] shadow-[0px_4px_20px_rgba(73,101,89,0.08)] p-8">
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-[#1F2937]">Connexion</h2>
-              <p className="text-[#6B7280] text-sm mt-2">
-                Identifiez-vous avec votre adresse professionnelle. Vous serez automatiquement
-                redirigé vers votre espace en fonction de votre rôle.
-              </p>
-            </div>
-
-            <LoginForm />
-
-            <div className="mt-6 pt-6 border-t border-[#E5E7EB] text-center">
-              <p className="text-sm text-[#6B7280]">
-                Avez-vous reçu une invitation ?{" "}
-                <a href="/onboarding" className="text-[#496559] font-semibold hover:underline">
-                  Créer mon compte
-                </a>
-              </p>
-            </div>
-          </div>
-
-          <p className="text-center text-xs text-[#9CA3AF] mt-6">
-            © {new Date().getFullYear()} Collecte DCN — Données confidentielles et sécurisées
-          </p>
-        </div>
-      </div>
+      </main>
     </div>
   );
 }

@@ -74,6 +74,17 @@ async function getDashboardData(companyId: string) {
 
 export default async function DashboardPage() {
   const session = await requireCompanySession();
+
+  // Vérifier si le changement de mot de passe est obligatoire
+  const companyCheck = await prisma.company.findUnique({
+    where: { id: session.id },
+    select: { mustChangePassword: true },
+  });
+
+  if (companyCheck?.mustChangePassword) {
+    redirect("/change-password");
+  }
+
   const data = await getDashboardData(session.id);
   if (!data) redirect("/login");
 

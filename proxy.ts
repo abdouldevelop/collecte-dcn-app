@@ -20,15 +20,17 @@ function isCompanyPath(pathname: string): boolean {
     pathname.startsWith("/declarations") ||
     pathname.startsWith("/history") ||
     pathname.startsWith("/support") ||
-    pathname.startsWith("/focal-point")
+    pathname.startsWith("/focal-point") ||
+    pathname.startsWith("/countries")
   );
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Skip API routes that are public
   if (pathname.startsWith("/api/auth")) return NextResponse.next();
+  if (pathname === "/api/health") return NextResponse.next();
   if (pathname.startsWith("/api/invitations/validate")) return NextResponse.next();
   if (pathname.startsWith("/api/admin")) {
     const token = request.cookies.get("admin-token")?.value;
@@ -89,6 +91,21 @@ export async function middleware(request: NextRequest) {
 
   // Company routes
   if (isCompanyPath(pathname)) {
+    const token = request.cookies.get("company-token")?.value;
+    if (!token) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+    const session = await verifyCompanyToken(token);
+    if (!session) {
+      const response = NextResponse.redirect(new URL("/login", request.url));
+      response.cookies.delete("company-token");
+      return response;
+    }
+    return NextResponse.next();
+  }
+
+  // Route de changement de mot de passe
+  if (pathname === "/change-password") {
     const token = request.cookies.get("company-token")?.value;
     if (!token) {
       return NextResponse.redirect(new URL("/login", request.url));

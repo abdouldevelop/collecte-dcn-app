@@ -4,16 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, AlertCircle } from "lucide-react";
+import { AlertCircle, Eye, EyeOff, LogIn } from "lucide-react";
 import { loginSchema, LoginInput } from "@/validators";
 import { Button } from "@/components/ui/Button";
-
-const TEST_ACCOUNTS = [
-  { label: "Super Admin", email: "superadmin@collecte-dcn.gov", password: "Admin@123456" },
-  { label: "Admin", email: "admin@collecte-dcn.gov", password: "Admin@123456" },
-  { label: "Entreprise Demo SARL", email: "demo@entreprise.com", password: "Entreprise@123456" },
-  { label: "SOTRACO Import-Export", email: "contact@sotraco.cg", password: "Entreprise@123456" },
-];
 
 export function LoginForm() {
   const router = useRouter();
@@ -24,34 +17,10 @@ export function LoginForm() {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
   });
-
-  const quickLogin = async (email: string, password: string) => {
-    setValue("email", email);
-    setValue("password", password);
-    setLoading(true);
-    setServerError("");
-    try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-      const json = await res.json();
-      if (!res.ok || !json.success) { setServerError(json.error ?? "Identifiants incorrects."); return; }
-      const target = json.data?.redirectTo ?? "/dashboard";
-      router.push(target);
-      router.refresh();
-    } catch {
-      setServerError("Erreur réseau. Veuillez réessayer.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const onSubmit = async (data: LoginInput) => {
     setLoading(true);
@@ -87,15 +56,15 @@ export function LoginForm() {
       )}
 
       <div>
-        <label className="block text-sm font-semibold text-[#1F2937] mb-1.5">
-          Adresse email <span className="text-[#DC2626]">*</span>
+        <label className="mb-2 block text-[11px] font-bold uppercase tracking-[0.08em] text-[#37433d]">
+          Nom d&apos;utilisateur
         </label>
         <input
           type="email"
-          placeholder="exemple@entreprise.com"
+          placeholder="Votre adresse e-mail"
           autoComplete="email"
           {...register("email")}
-          className="w-full bg-white border border-[#E5E7EB] rounded-xl px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#496559] focus:ring-2 focus:ring-[#496559]/10 transition-all"
+          className="w-full border border-[#cbd4cf] bg-white px-4 py-3 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] transition-all focus:border-[#496559] focus:outline-none focus:ring-1 focus:ring-[#496559]"
         />
         {errors.email && (
           <p className="mt-1 text-xs text-[#DC2626]">{errors.email.message}</p>
@@ -103,16 +72,10 @@ export function LoginForm() {
       </div>
 
       <div>
-        <div className="flex items-center justify-between mb-1.5">
-          <label className="block text-sm font-semibold text-[#1F2937]">
-            Mot de passe <span className="text-[#DC2626]">*</span>
+        <div className="flex items-center justify-between mb-2">
+          <label className="block text-[11px] font-bold uppercase tracking-[0.08em] text-[#37433d]">
+            Mot de passe
           </label>
-          <a
-            href="/forgot-password"
-            className="text-xs text-[#496559] hover:underline font-medium"
-          >
-            Mot de passe oublié ?
-          </a>
         </div>
         <div className="relative">
           <input
@@ -120,15 +83,16 @@ export function LoginForm() {
             placeholder="••••••••"
             autoComplete="current-password"
             {...register("password")}
-            className="w-full bg-white border border-[#E5E7EB] rounded-xl px-4 py-2.5 pr-11 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#496559] focus:ring-2 focus:ring-[#496559]/10 transition-all"
+            className="w-full border border-[#cbd4cf] bg-white px-4 py-3 pr-12 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] transition-all focus:border-[#496559] focus:outline-none focus:ring-1 focus:ring-[#496559]"
           />
           <button
             type="button"
-            onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-[#6B7280] transition-colors"
+            onClick={() => setShowPassword((visible) => !visible)}
+            className="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-[#71867d] transition-colors hover:text-[#496559]"
             aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+            aria-pressed={showPassword}
           >
-            {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
           </button>
         </div>
         {errors.password && (
@@ -136,27 +100,11 @@ export function LoginForm() {
         )}
       </div>
 
-      <Button type="submit" loading={loading} className="w-full" size="lg">
+      <Button type="submit" loading={loading} className="mt-2 w-full rounded-none bg-[#71867d] py-3 shadow-none hover:bg-[#496559]" size="lg">
+        {!loading && <LogIn className="h-4 w-4" />}
         Se connecter
       </Button>
 
-      <div className="pt-4 border-t border-[#E5E7EB]">
-        <p className="text-xs text-[#9CA3AF] mb-2 font-medium">Accès de test</p>
-        <div className="flex flex-col gap-2">
-          {TEST_ACCOUNTS.map((acc) => (
-            <button
-              key={acc.email}
-              type="button"
-              onClick={() => quickLogin(acc.email, acc.password)}
-              disabled={loading}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-[#E5E7EB] hover:border-[#496559] hover:bg-[#496559]/5 transition-all disabled:opacity-50 text-left"
-            >
-              <span className="text-xs font-semibold text-[#1F2937]">{acc.label}</span>
-              <span className="text-xs text-[#9CA3AF]">{acc.email}</span>
-            </button>
-          ))}
-        </div>
-      </div>
     </form>
   );
 }

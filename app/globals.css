@@ -2,24 +2,24 @@
 
 @layer base {
   :root {
-    --background: #F8F9FA;
-    --foreground: #1F2937;
-    --primary: #496559;
+    --background: #f7f9f8;
+    --foreground: #1b2920;
+    --primary: #49655a;
     --primary-foreground: #ffffff;
     --primary-dark: #324d42;
-    --accent: #f39221;
+    --accent: #f39323;
     --accent-foreground: #ffffff;
     --success: #16A34A;
     --warning: #F59E0B;
     --danger: #DC2626;
-    --border: #E5E7EB;
-    --input: #E5E7EB;
-    --ring: #496559;
+    --border: #dfe5e1;
+    --input: #dfe5e1;
+    --ring: #49655a;
     --card: #ffffff;
     --card-foreground: #1F2937;
     --muted: #F3F4F6;
     --muted-foreground: #6B7280;
-    --radius: 0.75rem;
+    --radius: 0.25rem;
   }
 
   * {
@@ -27,9 +27,63 @@
   }
 
   body {
-    background-color: #F8F9FA;
-    color: #1F2937;
-    font-family: 'Public Sans', system-ui, -apple-system, sans-serif;
+    background-color: #f7f9f8;
+    color: #1b2920;
+    font-family: Montserrat, "Segoe UI", Arial, system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
+
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(243, 147, 35, 0.25);
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+}
+
+@layer components {
+  .institutional-panel {
+    border: 1px solid #dfe5e1;
+    border-top: 3px solid #49655a;
+    background: #fff;
+    box-shadow: 0 8px 26px rgba(36, 61, 51, 0.07);
+  }
+
+  .institutional-heading {
+    position: relative;
+    padding-left: 0.9rem;
+  }
+
+  .institutional-heading::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: #f39323;
+    content: "";
+  }
+}
+
+@layer utilities {
+  .rounded-xl { border-radius: 0.25rem; }
+  .rounded-2xl { border-radius: 0.375rem; }
 }

@@ -85,6 +85,7 @@ describe("declarationLineSchema", () => {
 describe("onboardingSchema", () => {
   const validData = {
     token: "valid-token",
+    companyName: "Entreprise Test",
     password: "Password1",
     confirmPassword: "Password1",
   };

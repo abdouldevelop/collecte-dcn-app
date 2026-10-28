@@ -18,11 +18,11 @@ export default async function AdminDashboardPage() {
   ] = await Promise.all([
     prisma.company.count(),
     prisma.company.count({ where: { isActive: true } }),
-    prisma.companyInvitation.count({ where: { status: "PENDING" } }),
+    prisma.companyInvitation.count({ where: { OR: [{ status: "PENDING" }, { isDraft: true }] } }),
     prisma.unit.count({ where: { isActive: true } }),
     prisma.companyInvitation.findMany({
       orderBy: { createdAt: "desc" },
-      take: 10,
+      take: 200,
       include: { sentBy: { select: { firstName: true, lastName: true } } },
     }),
     prisma.period.findFirst({ where: { isActive: true } }),
@@ -76,6 +76,7 @@ export default async function AdminDashboardPage() {
         companyName: inv.companyName,
         email: inv.email,
         status: inv.status,
+        isDraft: inv.isDraft,
         expiresAt: inv.expiresAt,
         createdAt: inv.createdAt,
         sentBy: `${inv.sentBy.firstName} ${inv.sentBy.lastName}`,

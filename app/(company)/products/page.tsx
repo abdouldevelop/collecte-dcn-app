@@ -30,9 +30,9 @@ export default async function ProductsPage() {
       companyProducts={companyProducts.map((cp) => ({
         id: cp.id,
         productId: cp.productId,
-        code: cp.product.code,
-        designation: cp.product.designation,
-        type: cp.product.type,
+        code: cp.customCode ?? cp.product.code,
+        designation: cp.customDesignation ?? cp.product.designation,
+        type: cp.customType ?? cp.product.type,
         source: cp.product.source,
         observation: cp.observation,
       }))}

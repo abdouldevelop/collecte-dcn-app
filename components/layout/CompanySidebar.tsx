@@ -39,10 +39,10 @@ export function CompanySidebar({ companyName, companyEmail }: CompanySidebarProp
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <aside className="w-64 min-h-screen bg-[#496559] flex flex-col">
+    <aside className="w-72 min-h-screen h-full bg-[#49655a] flex flex-col">
       {/* Logo */}
       <div className="px-6 py-6 border-b border-white/10">
-        <div className="bg-white rounded-xl px-3 py-2.5 flex items-center justify-center">
+        <div className="bg-white px-4 py-3 flex items-center justify-center shadow-sm">
           <Image
             src="/anstat-logo.png"
             alt="ANSTAT - Agence Nationale de la Statistique"
@@ -56,7 +56,7 @@ export function CompanySidebar({ companyName, companyEmail }: CompanySidebarProp
 
       {/* Company info */}
       <div className="px-4 py-4 border-b border-white/10">
-        <div className="bg-white/10 rounded-xl px-3 py-2.5">
+        <div className="border-l-2 border-[#f39323] bg-white/[0.07] px-3 py-2.5">
           <p className="text-white text-sm font-semibold truncate">{companyName}</p>
           <p className="text-white/60 text-xs truncate">{companyEmail}</p>
         </div>
@@ -72,10 +72,10 @@ export function CompanySidebar({ companyName, companyEmail }: CompanySidebarProp
                 <Link
                   href={item.href}
                   className={cn(
-                    "flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150",
+                    "flex items-center justify-between gap-3 border-l-2 px-3 py-2.5 text-sm font-semibold transition-all duration-150",
                     isActive(item.href) || parentActive
-                      ? "text-white bg-white/20"
-                      : "text-white/70 hover:text-white hover:bg-white/10"
+                      ? "border-[#f39323] text-white bg-white/10"
+                      : "border-transparent text-white/70 hover:text-white hover:bg-white/[0.07]"
                   )}
                 >
                   <div className="flex items-center gap-3">
@@ -90,10 +90,10 @@ export function CompanySidebar({ companyName, companyEmail }: CompanySidebarProp
                       key={child.href}
                       href={child.href}
                       className={cn(
-                        "flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all duration-150",
+                        "flex items-center gap-3 border-l-2 px-3 py-2 text-xs font-medium transition-all duration-150",
                         isActive(child.href)
-                          ? "text-white bg-white/20"
-                          : "text-white/60 hover:text-white hover:bg-white/10"
+                          ? "border-[#f39323] text-white bg-white/10"
+                          : "border-transparent text-white/60 hover:text-white hover:bg-white/[0.07]"
                       )}
                     >
                       <child.icon className="w-3.5 h-3.5" />
@@ -110,10 +110,10 @@ export function CompanySidebar({ companyName, companyEmail }: CompanySidebarProp
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150",
+                "flex items-center gap-3 border-l-2 px-3 py-2.5 text-sm font-semibold transition-all duration-150",
                 isActive(item.href)
-                  ? "text-white bg-white/20 shadow-sm"
-                  : "text-white/70 hover:text-white hover:bg-white/10"
+                  ? "border-[#f39323] text-white bg-white/10"
+                  : "border-transparent text-white/70 hover:text-white hover:bg-white/[0.07]"
               )}
             >
               <item.icon className="w-4 h-4" />
@@ -128,7 +128,7 @@ export function CompanySidebar({ companyName, companyEmail }: CompanySidebarProp
         <form action="/api/auth/logout" method="POST">
           <button
             type="submit"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-all duration-150"
+            className="w-full flex items-center gap-3 border-l-2 border-transparent px-3 py-2.5 text-sm font-medium text-white/70 hover:border-[#f39323] hover:text-white hover:bg-white/[0.07] transition-all duration-150"
           >
             <LogOut className="w-4 h-4" />
             Se déconnecter

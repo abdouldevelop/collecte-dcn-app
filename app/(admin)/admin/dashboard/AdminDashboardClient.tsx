@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import {
   Building2, FileText, Clock, TrendingUp, Package,
   Plus, Upload, Send, RefreshCw, CheckCircle, AlertCircle,
+  Copy, Users,
 } from "lucide-react";
 import Link from "next/link";
 import { StatCard } from "@/components/ui/Card";
@@ -27,8 +28,9 @@ interface Stats {
 interface Invitation {
   id: string;
   companyName: string;
-  email: string;
+  email: string | null;
   status: string;
+  isDraft: boolean;
   expiresAt: Date;
   createdAt: Date;
   sentBy: string;
@@ -58,6 +60,8 @@ export function AdminDashboardClient({ stats, period, recentInvitations }: Admin
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [unitMessage, setUnitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [importMode, setImportMode] = useState(false);
+  const [draftEmails, setDraftEmails] = useState<Record<string, string>>({});
+  const [savingDraftId, setSavingDraftId] = useState<string | null>(null);
 
   const sendSingleInvitation = async () => {
     if (!singleInvite.companyName || !singleInvite.email) return;
@@ -89,7 +93,7 @@ export function AdminDashboardClient({ stats, period, recentInvitations }: Admin
       const res = await fetch("/api/admin/invitations/import", { method: "POST", body: fd });
       const json = await res.json();
       if (!res.ok) { setMessage({ type: "error", text: json.error ?? "Erreur" }); return; }
-      setMessage({ type: "success", text: `${json.data.created} invitation(s) envoyée(s).` });
+      setMessage({ type: "success", text: `${json.data.created} invitation(s), ${json.data.productsLinked ?? 0} produit(s) rattaché(s).` });
       setInviteFile(null);
       router.refresh();
     } finally {
@@ -118,6 +122,56 @@ export function AdminDashboardClient({ stats, period, recentInvitations }: Admin
   const resendInvitation = async (id: string) => {
     await fetch(`/api/admin/invitations/${id}/resend`, { method: "POST" });
     router.refresh();
+  };
+
+  const inviteDraft = async (id: string) => {
+    const email = (draftEmails[id] ?? "").trim();
+    if (!email) return;
+    setSavingDraftId(id);
+    setMessage(null);
+    try {
+      const res = await fetch(`/api/admin/invitations/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        setMessage({ type: "error", text: json.error ?? "Impossible d’envoyer l’invitation." });
+        return;
+      }
+      setMessage({ type: "success", text: `Invitation envoyée à ${email}.` });
+      router.refresh();
+    } finally {
+      setSavingDraftId(null);
+    }
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setMessage({ type: "success", text: "Copié dans le presse-papiers !" });
+    setTimeout(() => setMessage(null), 2000);
+  };
+
+  const testAccounts = {
+    admins: [
+      { email: "admin@collecte-dcn.gov", password: "Admin@123456", name: "Admin Principal" },
+    ],
+    companies: [
+      { email: "contact@congo-import.cd", password: "Company@123", name: "SARL CONGO IMPORT" },
+      { email: "info@minier-katanga.cd", password: "Company@123", name: "SOCIÉTÉ MINIÈRE DU KATANGA" },
+      { email: "export@cafe-rdc.cd", password: "Company@123", name: "EXPORT CAFÉ RDC" },
+    ],
+    focalPoints: [
+      { email: "j.kabongo@congo-import.cd", password: "Focal@123", name: "Jean Kabongo (Congo Import)" },
+      { email: "m.tshombe@congo-import.cd", password: "Focal@123", name: "Marie Tshombe (Congo Import)" },
+      { email: "a.mulamba@congo-import.cd", password: "Focal@123", name: "André Mulamba (Congo Import)" },
+      { email: "p.mwamba@minier-katanga.cd", password: "Focal@123", name: "Pierre Mwamba (Minière Katanga)" },
+      { email: "c.kabila@minier-katanga.cd", password: "Focal@123", name: "Christelle Kabila (Minière Katanga)" },
+      { email: "d.tshisekedi@minier-katanga.cd", password: "Focal@123", name: "Daniel Tshisekedi (Minière Katanga)" },
+      { email: "f.ngoy@cafe-rdc.cd", password: "Focal@123", name: "Fatima Ngoy (Café RDC)" },
+      { email: "j.kasongo@cafe-rdc.cd", password: "Focal@123", name: "Joseph Kasongo (Café RDC)" },
+    ],
   };
 
   return (
@@ -203,10 +257,152 @@ export function AdminDashboardClient({ stats, period, recentInvitations }: Admin
         </div>
       )}
 
+      {/* Test Accounts Section */}
+      {message && message.text.includes("Copié") && (
+        <div className="fixed top-4 right-4 z-50 bg-[#16A34A] text-white px-4 py-2 rounded-xl shadow-lg flex items-center gap-2">
+          <CheckCircle className="w-4 h-4" />
+          {message.text}
+        </div>
+      )}
+
+      {process.env.NODE_ENV !== "production" && <div className="bg-gradient-to-br from-[#496559] to-[#3d534a] rounded-2xl border border-[#496559] shadow-[0px_4px_20px_rgba(73,101,89,0.15)] p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <Users className="w-5 h-5 text-white" />
+          <h3 className="font-semibold text-white">Comptes de test</h3>
+          <span className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full">Démo</span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {/* Admins */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <h4 className="text-white font-semibold text-sm mb-3 flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#f39221] rounded-full"></div>
+              Administrateurs
+            </h4>
+            <div className="space-y-2">
+              {testAccounts.admins.map((account, idx) => (
+                <div key={idx} className="bg-white/5 rounded-lg p-3 space-y-2">
+                  <p className="text-white text-xs font-medium">{account.name}</p>
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 text-xs text-white/80 bg-black/20 px-2 py-1 rounded truncate">
+                      {account.email}
+                    </code>
+                    <button
+                      onClick={() => copyToClipboard(`${account.email}`)}
+                      className="p-1.5 hover:bg-white/10 rounded transition-colors"
+                      title="Copier l'email"
+                    >
+                      <Copy className="w-3.5 h-3.5 text-white/80" />
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 text-xs text-white/80 bg-black/20 px-2 py-1 rounded">
+                      {account.password}
+                    </code>
+                    <button
+                      onClick={() => copyToClipboard(`${account.email}\n${account.password}`)}
+                      className="p-1.5 hover:bg-white/10 rounded transition-colors"
+                      title="Copier tout"
+                    >
+                      <Copy className="w-3.5 h-3.5 text-white/80" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Companies */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <h4 className="text-white font-semibold text-sm mb-3 flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#f39221] rounded-full"></div>
+              Entreprises
+            </h4>
+            <div className="space-y-2">
+              {testAccounts.companies.map((account, idx) => (
+                <div key={idx} className="bg-white/5 rounded-lg p-3 space-y-2">
+                  <p className="text-white text-xs font-medium">{account.name}</p>
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 text-xs text-white/80 bg-black/20 px-2 py-1 rounded truncate">
+                      {account.email}
+                    </code>
+                    <button
+                      onClick={() => copyToClipboard(`${account.email}`)}
+                      className="p-1.5 hover:bg-white/10 rounded transition-colors"
+                      title="Copier l'email"
+                    >
+                      <Copy className="w-3.5 h-3.5 text-white/80" />
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 text-xs text-white/80 bg-black/20 px-2 py-1 rounded">
+                      {account.password}
+                    </code>
+                    <button
+                      onClick={() => copyToClipboard(`${account.email}\n${account.password}`)}
+                      className="p-1.5 hover:bg-white/10 rounded transition-colors"
+                      title="Copier tout"
+                    >
+                      <Copy className="w-3.5 h-3.5 text-white/80" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Focal Points */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <h4 className="text-white font-semibold text-sm mb-3 flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#f39221] rounded-full"></div>
+              Points Focaux (8)
+            </h4>
+            <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+              {testAccounts.focalPoints.map((account, idx) => (
+                <div key={idx} className="bg-white/5 rounded-lg p-3 space-y-2">
+                  <p className="text-white text-xs font-medium">{account.name}</p>
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 text-xs text-white/80 bg-black/20 px-2 py-1 rounded truncate">
+                      {account.email}
+                    </code>
+                    <button
+                      onClick={() => copyToClipboard(`${account.email}`)}
+                      className="p-1.5 hover:bg-white/10 rounded transition-colors"
+                      title="Copier l'email"
+                    >
+                      <Copy className="w-3.5 h-3.5 text-white/80" />
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 text-xs text-white/80 bg-black/20 px-2 py-1 rounded">
+                      {account.password}
+                    </code>
+                    <button
+                      onClick={() => copyToClipboard(`${account.email}\n${account.password}`)}
+                      className="p-1.5 hover:bg-white/10 rounded transition-colors"
+                      title="Copier tout"
+                    >
+                      <Copy className="w-3.5 h-3.5 text-white/80" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4 bg-white/5 border border-white/10 rounded-xl p-3">
+          <p className="text-white/80 text-xs">
+            <strong className="text-white">Note :</strong> Ces comptes sont créés automatiquement par le seed pour faciliter les tests et démonstrations.
+            Cliquez sur l&apos;icône <Copy className="w-3 h-3 inline mx-0.5" /> pour copier les identifiants.
+          </p>
+        </div>
+      </div>}
+
       {/* Recent invitations */}
       <div className="bg-white rounded-2xl border border-[#E5E7EB] shadow-[0px_4px_20px_rgba(73,101,89,0.08)] overflow-hidden">
         <div className="px-6 py-4 border-b border-[#E5E7EB] flex items-center justify-between">
-          <h3 className="font-semibold text-[#1F2937]">Invitations récentes</h3>
+          <h3 className="font-semibold text-[#1F2937]">Entreprises à inviter</h3>
           <Link href="/admin/companies" className="text-xs text-[#496559] font-semibold hover:underline">
             Voir toutes →
           </Link>
@@ -227,14 +423,28 @@ export function AdminDashboardClient({ stats, period, recentInvitations }: Admin
               {recentInvitations.map((inv) => (
                 <tr key={inv.id} className="border-t border-[#E9ECEF] hover:bg-[#F8F9FA] transition-colors">
                   <td className="px-4 py-3 text-sm font-medium text-[#1F2937]">{inv.companyName}</td>
-                  <td className="px-4 py-3 text-sm text-[#6B7280]">{inv.email}</td>
+                  <td className="px-4 py-3 text-sm text-[#6B7280]">
+                    {inv.isDraft ? (
+                      <input
+                        type="email"
+                        placeholder="Ajouter l’email"
+                        value={draftEmails[inv.id] ?? ""}
+                        onChange={(event) => setDraftEmails((current) => ({ ...current, [inv.id]: event.target.value }))}
+                        className="w-56 border border-[#E5E7EB] rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-[#496559]"
+                      />
+                    ) : inv.email}
+                  </td>
                   <td className="px-4 py-3 text-sm text-[#6B7280]">{formatDate(inv.createdAt)}</td>
                   <td className="px-4 py-3 text-sm text-[#6B7280]">{formatDate(inv.expiresAt)}</td>
                   <td className="px-4 py-3">
-                    <InvitationStatusBadge status={inv.status} />
+                    <InvitationStatusBadge status={inv.isDraft ? "DRAFT" : inv.status} />
                   </td>
                   <td className="px-4 py-3">
-                    {inv.status === "PENDING" || inv.status === "EXPIRED" ? (
+                    {inv.isDraft ? (
+                      <Button size="sm" loading={savingDraftId === inv.id} onClick={() => inviteDraft(inv.id)} disabled={!draftEmails[inv.id]?.trim()}>
+                        <Send className="w-3.5 h-3.5" /> Ajouter et inviter
+                      </Button>
+                    ) : inv.status === "PENDING" || inv.status === "EXPIRED" ? (
                       <button
                         onClick={() => resendInvitation(inv.id)}
                         className="inline-flex items-center gap-1 text-xs text-[#496559] font-medium hover:underline"
@@ -315,8 +525,11 @@ export function AdminDashboardClient({ stats, period, recentInvitations }: Admin
           ) : (
             <div className="space-y-4">
               <p className="text-xs text-[#6B7280]">
-                Format requis : CSV ou XLSX avec colonnes <code className="bg-[#F1F3F5] px-1 rounded">nom_entreprise</code>, <code className="bg-[#F1F3F5] px-1 rounded">email</code>, rccm, ncc
+                Une ligne par produit : <code className="bg-[#F1F3F5] px-1 rounded">nom_entreprise</code>, <code className="bg-[#F1F3F5] px-1 rounded">email</code>, rccm, ncc, <code className="bg-[#F1F3F5] px-1 rounded">code_produit</code>, <code className="bg-[#F1F3F5] px-1 rounded">designation_produit</code>, type_produit
               </p>
+              <a href="/modeles/import-entreprises-produits.csv" download className="inline-block text-xs font-semibold text-[#496559] hover:underline">
+                Télécharger le modèle CSV
+              </a>
               <div
                 className="border-2 border-dashed border-[#E5E7EB] rounded-xl p-8 text-center cursor-pointer hover:border-[#496559] transition-colors"
                 onClick={() => document.getElementById("invite-file")?.click()}

@@ -20,6 +20,10 @@ export async function POST(
       return apiNotFound("Invitation");
     }
 
+    if (!invitation.email || invitation.isDraft) {
+      return apiError("Ajoutez d’abord l’adresse email de cette entreprise.", 400);
+    }
+
     if (invitation.status === "USED") {
       return apiError("Cette invitation a déjà été utilisée.", 400);
     }
@@ -28,8 +32,8 @@ export async function POST(
       return apiError("Cette invitation a été annulée.", 400);
     }
 
-    // Extend expiry by 7 days from now
-    const newExpiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    // A resend starts a fresh 72-hour validity window.
+    const newExpiresAt = new Date(Date.now() + 72 * 60 * 60 * 1000);
 
     const updated = await prisma.companyInvitation.update({
       where: { id },

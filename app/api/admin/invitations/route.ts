@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { v4 as uuidv4 } from "uuid";
+import { randomUUID } from "node:crypto";
 import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError, handleApiError } from "@/lib/api";
 import { requireAdminSession, logAudit } from "@/lib/auth";
@@ -81,8 +81,8 @@ export async function POST(request: NextRequest) {
       return apiError("Un compte existe déjà pour cet email.", 400);
     }
 
-    const token = uuidv4();
-    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
+    const token = randomUUID();
+    const expiresAt = new Date(Date.now() + 72 * 60 * 60 * 1000);
 
     const invitation = await prisma.companyInvitation.create({
       data: {

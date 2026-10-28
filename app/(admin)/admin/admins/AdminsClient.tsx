@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { Badge } from "@/components/ui/Badge";
 import { formatDate } from "@/lib/utils";
-import { adminCreateSchema, type AdminCreateInput } from "@/validators";
+import { adminCreateSchema, type AdminCreateFormInput, type AdminCreateInput } from "@/validators";
 
 interface Admin {
   id: string;
@@ -41,7 +41,7 @@ export function AdminsClient({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<AdminCreateInput>({
+  } = useForm<AdminCreateFormInput, unknown, AdminCreateInput>({
     resolver: zodResolver(adminCreateSchema),
     defaultValues: { role: "ADMIN" },
   });

@@ -10,8 +10,7 @@ export function Card({ className, padding = "md", children, ...props }: CardProp
   return (
     <div
       className={cn(
-        "bg-white rounded-2xl border border-[#E5E7EB]",
-        "shadow-[0px_4px_20px_rgba(73,101,89,0.08)]",
+        "institutional-panel rounded-md",
         paddings[padding],
         className
       )}
@@ -32,7 +31,7 @@ export function CardHeader({ className, children, ...props }: HTMLAttributes<HTM
 
 export function CardTitle({ className, children, ...props }: HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h3 className={cn("text-base font-semibold text-[#1F2937]", className)} {...props}>
+    <h3 className={cn("institutional-heading text-base font-bold text-[#1b2920]", className)} {...props}>
       {children}
     </h3>
   );
@@ -68,15 +67,15 @@ export function StatCard({
   };
 
   return (
-    <Card>
+    <Card className="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:bg-[#f39323]">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm text-[#6B7280] font-medium">{title}</p>
-          <p className="text-3xl font-bold text-[#1F2937] mt-1">{value}</p>
+          <p className="text-3xl font-bold text-[#1b2920] mt-1">{value}</p>
           {subtitle && <p className="text-xs text-[#9CA3AF] mt-1">{subtitle}</p>}
         </div>
         {icon && (
-          <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center", colors[color])}>
+          <div className={cn("w-12 h-12 rounded-md flex items-center justify-center", colors[color])}>
             {icon}
           </div>
         )}

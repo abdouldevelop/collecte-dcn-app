@@ -30,10 +30,10 @@ export function AdminSidebar({ adminName, adminEmail, role }: AdminSidebarProps)
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <aside className="w-64 min-h-screen bg-[#324d42] flex flex-col">
+    <aside className="w-72 min-h-screen h-full bg-[#243d33] flex flex-col">
       {/* Logo */}
       <div className="px-6 py-6 border-b border-white/10">
-        <div className="bg-white rounded-xl px-3 py-2.5 flex items-center justify-center mb-3">
+        <div className="bg-white px-4 py-3 flex items-center justify-center mb-3 shadow-sm">
           <Image
             src="/anstat-logo.png"
             alt="ANSTAT - Agence Nationale de la Statistique"
@@ -50,7 +50,7 @@ export function AdminSidebar({ adminName, adminEmail, role }: AdminSidebarProps)
 
       {/* Admin info */}
       <div className="px-4 py-4 border-b border-white/10">
-        <div className="bg-white/10 rounded-xl px-3 py-2.5">
+        <div className="border-l-2 border-[#f39323] bg-white/[0.07] px-3 py-2.5">
           <div className="flex items-center gap-2">
             <p className="text-white text-sm font-semibold truncate flex-1">{adminName}</p>
             {isSuperAdmin && (
@@ -72,10 +72,10 @@ export function AdminSidebar({ adminName, adminEmail, role }: AdminSidebarProps)
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150",
+                "flex items-center gap-3 border-l-2 px-3 py-2.5 text-sm font-semibold transition-all duration-150",
                 isActive(item.href)
-                  ? "text-white bg-white/20 shadow-sm"
-                  : "text-white/70 hover:text-white hover:bg-white/10"
+                  ? "border-[#f39323] text-white bg-white/10"
+                  : "border-transparent text-white/70 hover:text-white hover:bg-white/[0.07]"
               )}
             >
               <item.icon className="w-4 h-4" />
@@ -89,7 +89,7 @@ export function AdminSidebar({ adminName, adminEmail, role }: AdminSidebarProps)
         <form action="/api/auth/admin-logout" method="POST">
           <button
             type="submit"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-all duration-150"
+            className="w-full flex items-center gap-3 border-l-2 border-transparent px-3 py-2.5 text-sm font-medium text-white/70 hover:border-[#f39323] hover:text-white hover:bg-white/[0.07] transition-all duration-150"
           >
             <LogOut className="w-4 h-4" />
             Se déconnecter

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { Package, Plus, Search, MessageSquare, Upload, Edit2 } from "lucide-react";
+import { Package, Plus, Search, MessageSquare, Upload, Edit2, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
@@ -54,6 +54,11 @@ export function ProductsClient({ companyId: _companyId, companyProducts: initial
   const [newType, setNewType] = useState<ProductType>("IMPORT");
   const [adding, setAdding] = useState(false);
   const [addError, setAddError] = useState("");
+  const [editModal, setEditModal] = useState<CompanyProductRow | null>(null);
+  const [editCode, setEditCode] = useState("");
+  const [editDesignation, setEditDesignation] = useState("");
+  const [editType, setEditType] = useState<ProductType>("IMPORT");
+  const [editing, setEditing] = useState(false);
 
   const [importModal, setImportModal] = useState(false);
   const [importFile, setImportFile] = useState<File | null>(null);
@@ -115,6 +120,39 @@ export function ProductsClient({ companyId: _companyId, companyProducts: initial
     } finally {
       setAdding(false);
     }
+  };
+
+  const openEdit = (product: CompanyProductRow) => {
+    setEditModal(product);
+    setEditCode(product.code);
+    setEditDesignation(product.designation);
+    setEditType(product.type);
+  };
+
+  const saveProduct = async () => {
+    if (!editModal || !editCode.trim() || !editDesignation.trim()) return;
+    setEditing(true);
+    try {
+      const res = await fetch(`/api/company/products/${editModal.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: editCode, designation: editDesignation, type: editType }),
+      });
+      if (res.ok) {
+        setProducts((current) => current.map((product) => product.id === editModal.id
+          ? { ...product, code: editCode, designation: editDesignation, type: editType }
+          : product));
+        setEditModal(null);
+      }
+    } finally {
+      setEditing(false);
+    }
+  };
+
+  const removeProduct = async (product: CompanyProductRow) => {
+    if (!window.confirm(`Supprimer ${product.code} — ${product.designation} de votre liste ?`)) return;
+    const res = await fetch(`/api/company/products/${product.id}`, { method: "DELETE" });
+    if (res.ok) setProducts((current) => current.filter((item) => item.id !== product.id));
   };
 
   const importProducts = async () => {
@@ -225,14 +263,17 @@ export function ProductsClient({ companyId: _companyId, companyProducts: initial
                       {p.observation || <span className="text-[#9CA3AF] italic">—</span>}
                     </td>
                     <td className="px-4 py-3">
-                      <button
-                        onClick={() => openObservation(p)}
-                        className="inline-flex items-center gap-1.5 text-xs text-[#496559] font-medium hover:underline"
-                        title="Ajouter/modifier observation"
-                      >
-                        <MessageSquare className="w-3.5 h-3.5" />
-                        {p.source === "ADMIN" ? "Observation" : <Edit2 className="w-3.5 h-3.5" />}
-                      </button>
+                      <div className="flex items-center gap-3">
+                        <button onClick={() => openEdit(p)} className="inline-flex items-center gap-1 text-xs text-[#496559] font-medium hover:underline" title="Modifier">
+                          <Edit2 className="w-3.5 h-3.5" /> Modifier
+                        </button>
+                        <button onClick={() => openObservation(p)} className="inline-flex items-center gap-1 text-xs text-[#496559] font-medium hover:underline" title="Observation">
+                          <MessageSquare className="w-3.5 h-3.5" /> Observation
+                        </button>
+                        <button onClick={() => removeProduct(p)} className="inline-flex items-center gap-1 text-xs text-[#DC2626] font-medium hover:underline" title="Supprimer">
+                          <Trash2 className="w-3.5 h-3.5" /> Supprimer
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -264,6 +305,29 @@ export function ProductsClient({ companyId: _companyId, companyProducts: initial
             <Button size="sm" loading={savingObs} onClick={saveObservation}>
               Enregistrer
             </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal open={!!editModal} onClose={() => setEditModal(null)} title="Modifier le produit" size="md">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-semibold text-[#1F2937] mb-1.5">Code produit *</label>
+            <input value={editCode} onChange={(e) => setEditCode(e.target.value)} className="w-full bg-white border border-[#E5E7EB] rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#496559]" />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-[#1F2937] mb-1.5">Désignation *</label>
+            <input value={editDesignation} onChange={(e) => setEditDesignation(e.target.value)} className="w-full bg-white border border-[#E5E7EB] rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#496559]" />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-[#1F2937] mb-1.5">Type *</label>
+            <select value={editType} onChange={(e) => setEditType(e.target.value as ProductType)} className="w-full bg-white border border-[#E5E7EB] rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#496559]">
+              <option value="IMPORT">Import</option><option value="EXPORT">Export</option>
+            </select>
+          </div>
+          <div className="flex gap-3 justify-end">
+            <Button variant="secondary" size="sm" onClick={() => setEditModal(null)}>Annuler</Button>
+            <Button size="sm" loading={editing} onClick={saveProduct}>Enregistrer</Button>
           </div>
         </div>
       </Modal>

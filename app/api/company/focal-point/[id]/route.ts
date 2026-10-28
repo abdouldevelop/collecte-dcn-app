@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { v4 as uuidv4 } from "uuid";
+import { randomUUID } from "node:crypto";
 import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError, handleApiError } from "@/lib/api";
 import { requireCompanySession } from "@/lib/auth";
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     });
     if (!fp) return apiError("Point focal non trouvé", 404);
 
-    const token = uuidv4();
+    const token = randomUUID();
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
     if (fp.invitation) {

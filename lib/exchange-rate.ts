@@ -1,9 +1,9 @@
 import { prisma } from "@/lib/prisma";
 
 const CURRENCIES = ["USD", "EUR"];
-const TARGET = "xaf";
+const TARGET = "xof"; // Franc CFA Ouest-Africain (Côte d'Ivoire)
 
-// fawazahmed0/currency-api — free, no API key, supports XAF, daily historical
+// fawazahmed0/currency-api — free, no API key, supports XOF, daily historical
 // Primary CDN: jsdelivr, fallback: raw github
 function apiUrl(date: string, currency: string) {
   const tag = date === "latest" ? "latest" : `@${date}`;
@@ -31,7 +31,7 @@ export async function syncTodayRates(): Promise<{ synced: number; errors: string
   for (const currency of CURRENCIES) {
     const result = await fetchRate(currency, "latest");
     if (!result) {
-      errors.push(`Impossible de récupérer le taux ${currency}/XAF`);
+      errors.push(`Impossible de récupérer le taux ${currency}/XOF`);
       continue;
     }
     const dateObj = new Date(result.date);
@@ -89,7 +89,7 @@ export async function syncHistoricalRates(days = 365): Promise<{ synced: number;
     }
 
     if (syncedForCurrency === 0) {
-      errors.push(`Aucune donnée historique importée pour ${currency}/XAF`);
+      errors.push(`Aucune donnée historique importée pour ${currency}/XOF`);
     }
   }
 

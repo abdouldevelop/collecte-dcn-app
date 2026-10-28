@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Settings as SettingsIcon,
@@ -421,7 +421,7 @@ function ProfileTab({ session, onChange }: { session: SessionInfo; onChange: () 
     register,
     handleSubmit,
     reset,
-    watch,
+    control,
     formState: { errors, isDirty },
   } = useForm<AdminProfileInput>({
     resolver: zodResolver(adminProfileSchema),
@@ -432,7 +432,7 @@ function ProfileTab({ session, onChange }: { session: SessionInfo; onChange: () 
     },
   });
 
-  const newPwd = watch("newPassword");
+  const newPwd = useWatch({ control, name: "newPassword" });
 
   const onSubmit = async (data: AdminProfileInput) => {
     setSubmitting(true);

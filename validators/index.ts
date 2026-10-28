@@ -7,6 +7,9 @@ export const loginSchema = z.object({
 
 export const onboardingSchema = z.object({
   token: z.string().min(1, "Token requis"),
+  companyName: z.string().trim().min(2, "Raison sociale requise").max(200),
+  ncc: z.string().trim().max(100).optional(),
+  rccm: z.string().trim().max(100).optional(),
   password: z
     .string()
     .min(8, "Minimum 8 caractères")
@@ -147,6 +150,7 @@ export type DeclarationSubmitInput = z.infer<typeof declarationSubmitSchema>;
 export type InvitationInput = z.infer<typeof invitationSchema>;
 export type SupportTicketInput = z.infer<typeof supportTicketSchema>;
 export type ProfileUpdateInput = z.infer<typeof profileUpdateSchema>;
+export type AdminCreateFormInput = z.input<typeof adminCreateSchema>;
 export type AdminCreateInput = z.infer<typeof adminCreateSchema>;
 export type AdminUpdateInput = z.infer<typeof adminUpdateSchema>;
 export type PeriodCreateInput = z.infer<typeof periodCreateSchema>;

@@ -36,3 +36,12 @@ next-env.d.ts
 
 # Uploads
 uploads/
+.gradle/
+android/.gradle/
+android/build/
+android/app/build/
+android/app/.cxx/
+*.apk
+*.aab
+*.zip
+*.tar.gz

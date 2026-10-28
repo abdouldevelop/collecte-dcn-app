@@ -50,6 +50,9 @@ export function OnboardingForm() {
       .then((json) => {
         if (json.success) {
           setInvitation(json.data);
+          setValue("companyName", json.data.companyName);
+          setValue("ncc", json.data.ncc ?? "");
+          setValue("rccm", json.data.rccm ?? "");
         } else {
           setInvitationError(json.error ?? "Invitation invalide ou expirée.");
         }
@@ -72,7 +75,8 @@ export function OnboardingForm() {
         setServerError(json.error ?? "Erreur lors de la création du compte.");
         return;
       }
-      router.push("/login?registered=1");
+      router.push("/dashboard");
+      router.refresh();
     } catch {
       setServerError("Erreur réseau. Veuillez réessayer.");
     } finally {
@@ -134,6 +138,29 @@ export function OnboardingForm() {
           <span>{serverError}</span>
         </div>
       )}
+
+      <div className="border-t border-[#E5E7EB] pt-5 space-y-4">
+        <p className="text-xs font-semibold text-[#6B7280] uppercase tracking-wider">
+          Confirmez ou corrigez votre entreprise
+        </p>
+        <div>
+          <label className="block text-sm font-semibold text-[#1F2937] mb-1.5">
+            Raison sociale <span className="text-[#DC2626]">*</span>
+          </label>
+          <input type="text" {...register("companyName")} className="w-full bg-white border border-[#E5E7EB] rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#496559] focus:ring-2 focus:ring-[#496559]/10" />
+          {errors.companyName && <p className="mt-1 text-xs text-[#DC2626]">{errors.companyName.message}</p>}
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-semibold text-[#1F2937] mb-1.5">NCC</label>
+            <input type="text" {...register("ncc")} className="w-full bg-white border border-[#E5E7EB] rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#496559] focus:ring-2 focus:ring-[#496559]/10" />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-[#1F2937] mb-1.5">NRC / RCCM</label>
+            <input type="text" {...register("rccm")} className="w-full bg-white border border-[#E5E7EB] rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#496559] focus:ring-2 focus:ring-[#496559]/10" />
+          </div>
+        </div>
+      </div>
 
       <div>
         <label className="block text-sm font-semibold text-[#1F2937] mb-1.5">

@@ -32,9 +32,9 @@ export async function GET(_request: NextRequest) {
     const result = companyProducts.map((cp) => ({
       companyProductId: cp.id,
       productId: cp.product.id,
-      code: cp.product.code,
-      designation: cp.product.designation,
-      type: cp.product.type,
+      code: cp.customCode ?? cp.product.code,
+      designation: cp.customDesignation ?? cp.product.designation,
+      type: cp.customType ?? cp.product.type,
       source: cp.product.source,
       observation: cp.observation,
       isActive: cp.isActive,
@@ -58,7 +58,20 @@ export async function POST(request: NextRequest) {
     });
 
     if (existing) {
-      return apiError("Un produit avec ce code existe déjà", 400);
+      const companyProduct = await prisma.companyProduct.upsert({
+        where: { companyId_productId: { companyId: session.id, productId: existing.id } },
+        update: { isActive: true },
+        create: { companyId: session.id, productId: existing.id },
+      });
+      return apiSuccess({
+        companyProductId: companyProduct.id,
+        productId: existing.id,
+        code: existing.code,
+        designation: existing.designation,
+        type: existing.type,
+        source: existing.source,
+        observation: companyProduct.observation,
+      }, 201);
     }
 
     const result = await prisma.$transaction(async (tx) => {

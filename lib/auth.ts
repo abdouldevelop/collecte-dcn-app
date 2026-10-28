@@ -3,11 +3,14 @@ import { cookies } from "next/headers";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
-const COMPANY_SECRET = new TextEncoder().encode(
-  process.env.NEXTAUTH_SECRET ?? "fallback-secret-change-me"
-);
+const configuredSecret = process.env.NEXTAUTH_SECRET;
+if (!configuredSecret && process.env.NODE_ENV === "production") {
+  throw new Error("NEXTAUTH_SECRET must be configured in production");
+}
+const authSecret = configuredSecret ?? "development-only-secret";
+const COMPANY_SECRET = new TextEncoder().encode(authSecret);
 const ADMIN_SECRET = new TextEncoder().encode(
-  (process.env.NEXTAUTH_SECRET ?? "fallback-secret-change-me") + "-admin"
+  `${authSecret}-admin`
 );
 
 export interface CompanySession {
@@ -87,6 +90,7 @@ export async function requireAdminSession(): Promise<AdminSession> {
 
 export async function setCompanyCookie(token: string): Promise<void> {
   const cookieStore = await cookies();
+  cookieStore.delete("admin-token");
   cookieStore.set("company-token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -98,6 +102,7 @@ export async function setCompanyCookie(token: string): Promise<void> {
 
 export async function setAdminCookie(token: string): Promise<void> {
   const cookieStore = await cookies();
+  cookieStore.delete("company-token");
   cookieStore.set("admin-token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
